@@ -8,15 +8,17 @@
 	 “Start date” : “mm/dd/yyyy”,
 	 “Completed”: t/f,
 	 “short/long”: s/l ,
-  	 “FrequencyInterval”: "# of days between logs”,
-	 “Check in message”: “question of data to be logged”,
 	 “Logs on time”: [
 	 {DATE OBJECTS},
 	 {DATE OBJECTS}],
-	 “Logs missed”: “Array of dates missed”,
+	 “Logs missed”: [
+	 {DATE OBJECTS},
+	 {DATE OBJECTS}],
+	 “Good/bad”: “g/b”,
+	 "Habit" : {
+	 “FrequencyInterval”: "# of days between logs”,
 	 “endDate”: “N/A or mm/dd/yyyy”,
-	 “Good/bad”: “g/b”}
-	]}
+	 “Check in message”: “question of data to be logged”}}]}
 '''
 ### Category storage
 '''
