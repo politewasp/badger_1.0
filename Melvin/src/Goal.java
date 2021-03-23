@@ -33,6 +33,16 @@ public class Goal
         start = null;
         completed = false;
     }
+    //TODO Temporary for testing, will be removed
+    Goal(String name){
+        this.name = name;
+        description = "TBD";
+        categoryName = "TBD";
+        isShort = false;
+        isGood = false;
+        start = null;
+        completed = false;
+    }
     //Getter methods
 
     /**
