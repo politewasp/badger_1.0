@@ -33,6 +33,15 @@ public class Goal
         start = null;
         completed = false;
     }
+    Goal(String name){
+        this.name = name;
+        description = "TBD";
+        categoryName = "TBD";
+        isShort = false;
+        isGood = false;
+        start = null;
+        completed = false;
+    }
     //Getter methods
 
     /**
