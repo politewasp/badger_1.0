@@ -1,6 +1,6 @@
 ## Basic Json File Format
 ### Goal storage
-'''
+```
 {"GoalList": [
 	{“name” : “name of goal 1”
 	 “category” : “category from list”
@@ -28,12 +28,12 @@
 	 “Logs missed”: “# of times missed”
 	 “endDate”: “N/A or mm/dd/yyyy”
 	 “Good/bad”: “g/b”}]}
-'''
+```
 ### Category storage
-'''
+```
 {“CategoryList”:[
 	{“cat name” : “fitness”
 	 “Image” : “image data”}
 	{“cat name” : “money”
 	 “Image” : “image data”}]}
-'''
+```
