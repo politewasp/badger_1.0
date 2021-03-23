@@ -33,6 +33,7 @@ public class Goal
         start = null;
         completed = false;
     }
+    //TODO Temporary for testing, will be removed
     Goal(String name){
         this.name = name;
         description = "TBD";

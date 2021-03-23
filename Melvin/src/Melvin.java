@@ -13,7 +13,7 @@ import java.awt.*;
 public class Melvin extends JFrame{
     JButton createButton = new JButton("+");
     GridLayout layout = new GridLayout(0,1,5,5);
-    //temporary until we have a storage system
+    //TODO temporary until we have a storage system
     static Goal[] goals = {new Goal("Goal 1"), new Goal("Goal 2"), new Goal("Goal 3")};
 
     public Melvin(){
