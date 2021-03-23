@@ -1,5 +1,6 @@
 ## Basic Json File Format
 ### Goal storage
+
 ```
 {"GoalList": [
 	{“name” : “name of goal 1”
@@ -37,3 +38,4 @@
 	{“cat name” : “money”
 	 “Image” : “image data”}]}
 ```
+
