@@ -117,10 +117,19 @@ public class Habit
 
     /**
      * sets the boolean checked if the log has been completed or not
+     * and adds the date to the corresponding array
      * @param checked boolean if logged
      */
     public void setChecked(boolean checked) {
         this.checked = checked;
+        if(checked)
+        {
+            checkedInSuccess.add(lastCheckIn);
+        }
+        else
+        {
+            checkedInFail.add(lastCheckIn);
+        }
     }
 
     /**
