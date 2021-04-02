@@ -1,3 +1,7 @@
+import org.json.simple.parser.ParseException;
+
+import java.io.IOException;
+
 /**
  *  <h1>Melvin</h1>
  *  Driver class
@@ -10,8 +14,7 @@ final class Melvin{
     private Melvin(){
         // adding this method prevents instantiation of Melvin elsewhere as a safeguard
     }
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) throws IOException {
         new Window();
         Goal test = new Goal();
         test.setName("test");
@@ -24,5 +27,7 @@ final class Melvin{
         test.setDescription("test of data");
 
         System.out.println(test.toString());
+        Storage storage = new Storage();
+        storage.test();
     }
 }
