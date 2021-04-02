@@ -250,7 +250,7 @@ public class Goal
 
     }
 
-
-
-
+    public boolean equals(Goal goal) {
+        return this.getName().equals(goal.getName());
+    }
 }

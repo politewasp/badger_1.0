@@ -4,6 +4,15 @@ import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+/**
+ *  <h1>Storage interface</h1>
+ *  Driver class
+ *  Written Using Java 15
+ *  @author Maraiah Matson
+ *  @version 1.1
+ *  @since 2021-04-01
+ */
+
 public class Storage {
     // constants
     String goalKey = "Goals";
@@ -43,11 +52,16 @@ public class Storage {
         for(Goal g: goals){
             System.out.println(g.getName());
         }
+        delete(goals.get(0));
+        for(Goal g: goals){
+            System.out.println(g.getName());
+        }
+        write();
     }
     
-    public Boolean add(Goal goal){
+    public boolean add(Goal goal){
         for(Goal g: goals){
-            if(g.getName().equals(goal.getName())){
+            if(g.equals(goal)){
                 System.out.println("This Goal Name is taken. ");
                 return false;
             }
@@ -58,8 +72,10 @@ public class Storage {
     }
     
     public boolean delete(Goal goal){
+        boolean removed = goals.remove(goal);
+        System.out.println(removed);
         pack(goal, true);
-        return goals.remove(goal);
+        return removed;
 
     }
 
@@ -70,9 +86,15 @@ public class Storage {
         // convert single Goal to JSONObject
         JSONObject jsonGoal = toJSON(goal);
 
-        // add to JSONObject json['Goals']
-        JSONArray jsonarray = (JSONArray) json.get("Goals");
-        jsonarray.add(jsonGoal);
+        // add to/delete from JSONObject json['Goals']
+        JSONArray jsonarray = (JSONArray) json.get(goalKey);
+        if(delete){
+            jsonarray.remove(toJSON(goal));
+        }
+        else{
+            jsonarray.add(jsonGoal);
+        }
+
     }
 
     private void pack(Category category){
@@ -130,7 +152,6 @@ public class Storage {
             Goal goal = toGoal(o);
             goals.add(goal);
         }
-
         return json;
     }
 
@@ -148,7 +169,7 @@ public class Storage {
         outFile.close();
     }
 
-    private void goalMap(Goal goal, JSONObject o, String key, Boolean set){
+    private String goalMap(Goal goal, JSONObject o, String key, boolean set){
         // returns attribute by JSON key
         String keyValue;
 
@@ -192,5 +213,6 @@ public class Storage {
                 default -> throw new IllegalStateException("Unexpected value: " + key);
             }
         }
+        return keyValue;
     }
 }
