@@ -14,6 +14,9 @@ import org.json.simple.parser.ParseException;
  */
 
 public class Storage {
+    // debugger
+    Debug debug = Debug.getInstance();
+
     // constants
     String goalKey = "Goals";
     String categoryKey = "Categories";
@@ -55,7 +58,7 @@ public class Storage {
         write();
 
         for(Goal g: goals){
-            System.out.println(g.getName());
+            debug.print(g.getName());
         }
 //        delete(goals.get(0));
 //        for(Goal g: goals){
@@ -67,7 +70,7 @@ public class Storage {
     public boolean add(Goal goal){
         for(Goal g: goals){
             if(g.equals(goal)){
-                System.out.println("This Goal Name is taken. ");
+                debug.print("This Goal Name is taken. ");
                 return false;
             }
         }
@@ -79,7 +82,7 @@ public class Storage {
     public boolean add(Category category){
         for(Category c: categories){
             if(c.equals(category)){
-                System.out.println("This Category Name is taken. ");
+                debug.print("This Category Name is taken. ");
                 return false;
             }
         }
@@ -98,7 +101,7 @@ public class Storage {
 
     public boolean delete(Category c){
         boolean removed = categories.remove(c);
-        System.out.println(removed);
+        debug.print(removed);
         pack(c, true);
         return removed;
 
@@ -197,7 +200,7 @@ public class Storage {
             json.put(goalKey, new JSONArray());
             json.put(categoryKey, new JSONArray());
         }
-        System.out.println("json read");
+        debug.print("json read");
 
         // extracts arrays from json object
         jsonGoals = (JSONArray) json.get(goalKey);
@@ -205,13 +208,13 @@ public class Storage {
 
         // builds interface attributes from json
         for(Object object: jsonGoals){
-            System.out.println("reading goal object");
+            debug.print("reading goal object");
             JSONObject o = (JSONObject) object;
             Goal goal = JSONtoGoal(o);
             goals.add(goal);
         }
         for(Object object: jsonCategories){
-            System.out.println("reading category object");
+            debug.print("reading category object");
             JSONObject o = (JSONObject) object;
             Category c = JSONtoCategory(o);
             categories.add(c);
