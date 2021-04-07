@@ -162,7 +162,7 @@ public class Habit
      */
     public String toString()
     {
-        return "frequency "  + frequency + " message: " + message + " start " + lastCheckIn + " next checkIn " + getNextCheckIn();
+        return "frequency "  + frequency + " message: " + message + " start " + lastCheckIn + " next checkIn " + nextCheckIn + "isChecked: "+ checked;
     }
 
 

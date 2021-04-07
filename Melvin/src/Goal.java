@@ -50,6 +50,7 @@ public class Goal
         completed = false;
         end = null;
     }
+
     //Getter methods
 
     /**
@@ -208,7 +209,8 @@ public class Goal
      */
     public String toString()
     {
-        return "Name: " + name + " description: " + description + " category: " + categoryName + " start: " + start + " end: " + end + " " + habit1.toString();
+        return "Name: " + name + " description: " + description + " category: " + categoryName + " start: " + start + " end: " + end +  " isCompleted: " + completed + " isShort: " +isShort +
+         "isGood: " + isGood + habit1.toString();
     }
 
     /**
