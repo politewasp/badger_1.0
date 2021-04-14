@@ -46,7 +46,7 @@ public class Habit
      * Returns the frequency value for checkins
      * @return int days between
      */
-    public ArrayList<Integer> getFrequency() {
+    public ArrayList<Integer> getDaysOfWeek() {
         return daysOfWeek;
     }
 

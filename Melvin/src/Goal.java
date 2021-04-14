@@ -198,10 +198,15 @@ public class Goal
      * sets the frequency in which the check in will be done
      * @param days int value of days between checkins
      */
-    public void setFrequency(ArrayList<Integer> days)
+    public void setDaysOfWeek(ArrayList<Integer> days)
     {
         habit1.setFrequency(days);
     }
+    public ArrayList<Integer> getDaysOfWeek()
+    {
+        return habit1.getDaysOfWeek();
+    }
+
 
     /**
      * to string method for debugging
