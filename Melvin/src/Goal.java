@@ -256,3 +256,4 @@ public class Goal
         return this.getName().equals(goal.getName());
     }
 }
+
