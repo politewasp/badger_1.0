@@ -25,8 +25,14 @@ final class Melvin{
         test.setGoodBad(true);
         test.setShortLong(true);
         test.setDescription("test of data");
-
         System.out.println(test.toString());
+
+        // debug test
+        Debug debug = Debug.getInstance();
+        // CHANGE THIS VARIABLE TO TOGGLE DEBUGGING MODE
+        debug.active = false;
+
+        // storage test
         Storage storage = new Storage();
         storage.test();
     }
