@@ -27,7 +27,7 @@ final class Melvin{
         test.setDescription("test of data");
         System.out.println(test.toString());
 
-        // debug test
+        // debug example
         Debug debug = Debug.getInstance();
         // CHANGE THIS VARIABLE TO TOGGLE DEBUGGING MODE
         debug.active = false;
@@ -35,5 +35,6 @@ final class Melvin{
         // storage test
         Storage storage = new Storage();
         storage.test();
+
     }
 }
