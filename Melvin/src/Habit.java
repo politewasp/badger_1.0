@@ -103,7 +103,7 @@ public class Habit
      */
     public String toString()
     {
-        return "days of the week "  + daysOfWeek + " message: " + message + "isChecked: "+ checked;
+        return " days of the week "  + daysOfWeek + " message: " + message + "isChecked: "+ checked;
     }
 
 

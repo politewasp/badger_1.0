@@ -1,6 +1,7 @@
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *  <h1>Melvin</h1>
@@ -16,11 +17,14 @@ final class Melvin{
     }
     public static void main(String[] args) throws IOException {
         new Window();
+        ArrayList<Integer> days = new ArrayList<>();
+        days.add(0);
+        days.add(6);
         Goal test = new Goal();
         test.setName("test");
         test.setStart("2021-03-24");
         test.setEnd("2021-03-31");
-        test.setFrequency(1);
+        test.setDaysOfWeek(days);
         test.setMessage("i exist");
         test.setGoodBad(true);
         test.setShortLong(true);
@@ -30,7 +34,7 @@ final class Melvin{
         // debug test
         Debug debug = Debug.getInstance();
         // CHANGE THIS VARIABLE TO TOGGLE DEBUGGING MODE
-        debug.active = false;
+        debug.active = true;
 
         // storage test
         Storage storage = new Storage();

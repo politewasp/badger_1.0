@@ -215,7 +215,7 @@ public class Goal
     public String toString()
     {
         return "Name: " + name + " description: " + description + " category: " + categoryName + " start: " + start + " end: " + end +  " isCompleted: " + completed + " isShort: " +isShort +
-         "isGood: " + isGood + habit1.toString();
+         " isGood: " + isGood + habit1.toString();
     }
 
 
