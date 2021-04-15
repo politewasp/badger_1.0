@@ -9,6 +9,13 @@ import java.text.ParseException;
 public class DateManagement
 {
 
+    /**
+     *
+     * @param Goal Goal from goal
+     * @param month target month for dates
+     * @param year target year
+     * @return list of check in dates within month
+     */
     public ArrayList<Calendar> getMonth(Goal Goal, int month, int year)
     {
         ArrayList<Calendar> dates = new ArrayList<>();
