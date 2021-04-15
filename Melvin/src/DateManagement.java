@@ -26,9 +26,13 @@ public class DateManagement {
 
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        //c is main incremented date
         Calendar c = Calendar.getInstance();
+        //limit is the first day of the next month
         Calendar limit = Calendar.getInstance();
+        //start is the first day of target month
         Calendar start = Calendar.getInstance();
+        // end is the last date of the goal
         Calendar end = Calendar.getInstance();
 
         limit.set(year, month + 1, 1);
@@ -37,15 +41,26 @@ public class DateManagement {
             //sets first date to the first ever date
 
             c.setTime(sdf.parse(Goal.getStart()));
-            end.setTime((sdf.parse(Goal.getEnd())));
+            //checks if Goal has an end date if not sets end to Limit
+            if(Goal.getEnd() != null)
+            {
+                end.setTime((sdf.parse(Goal.getEnd())));
+            }
+            else
+            {
+                end = limit;
+            }
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        //checks if the start date of goal is before the start of the month if it is sets c to first of month
         if (c.before(start)) {
             c = start;
             for (int day : daysOfWeek) {
                 c.set(Calendar.DAY_OF_WEEK, day);
                 while (c.before(limit)) {
+                    //checks if c is before the last day of the goal
                     if(c.after(end))
                     {
                         break;
@@ -55,10 +70,12 @@ public class DateManagement {
                 }
             }
         }
-        else if(c.after(start) && c.before(limit)) {
+        //if start date is not before the first of the month then this checks if it is before the end of the month if not then there are no instances of this goal in this month
+        else if( c.before(limit)) {
             for (int day : daysOfWeek) {
                 c.set(Calendar.DAY_OF_WEEK, day);
                 while (c.before(limit)) {
+                    //checks if c is before the last day of the goal
                     if(c.after(end))
                     {
                         break;
