@@ -83,7 +83,7 @@ public class Habit
      * sets the frequency of checkins
      * @param days ArrayList of Integer representations of what days of the week
      */
-    public void setFrequency(ArrayList<Integer> days) {
+    public void setDaysOfWeek(ArrayList<Integer> days) {
         this.daysOfWeek = days;
     }
 

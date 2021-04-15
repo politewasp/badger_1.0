@@ -200,7 +200,7 @@ public class Goal
      */
     public void setDaysOfWeek(ArrayList<Integer> days)
     {
-        habit1.setFrequency(days);
+        habit1.setDaysOfWeek(days);
     }
     public ArrayList<Integer> getDaysOfWeek()
     {
