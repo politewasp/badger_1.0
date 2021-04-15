@@ -87,4 +87,24 @@ public class DateManagement {
         }
         return dates;
     }
+
+    /**
+     *gets all the check in dates for all the provided goals
+     * @param goals arrayList of all the goals to be on Calendar
+     * @param month target month
+     * @param year target year
+     * @return returns Arraylist of all goals date instances in target month
+     */
+    public ArrayList<Calendar> getAllMonth(ArrayList<Goal> goals, int month, int year)
+    {
+        ArrayList<Calendar> dates = new ArrayList<>();
+        for (Goal goal:goals) {
+            for (Calendar date: getMonth(goal,month,year)) {
+                dates.add(date);
+            }
+
+        }
+        return dates;
+    }
+
 }
