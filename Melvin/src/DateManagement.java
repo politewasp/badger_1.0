@@ -23,6 +23,7 @@ public class DateManagement {
         Calendar c = Calendar.getInstance();
         Calendar limit = Calendar.getInstance();
         Calendar start = Calendar.getInstance();
+        Calendar end = Calendar.getInstance();
 
         limit.set(year, month + 1, 1);
         start.set(year, month, 1);
@@ -30,6 +31,7 @@ public class DateManagement {
             //sets first date to the first ever date
 
             c.setTime(sdf.parse(Goal.getStart()));
+            end.setTime((sdf.parse(Goal.getEnd())));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -38,6 +40,10 @@ public class DateManagement {
             for (int day : daysOfWeek) {
                 c.set(Calendar.DAY_OF_WEEK, day);
                 while (c.before(limit)) {
+                    if(c.after(end))
+                    {
+                        break;
+                    }
                     dates.add(c);
                     c.add(Calendar.WEEK_OF_MONTH, 1);
                 }
@@ -47,6 +53,10 @@ public class DateManagement {
             for (int day : daysOfWeek) {
                 c.set(Calendar.DAY_OF_WEEK, day);
                 while (c.before(limit)) {
+                    if(c.after(end))
+                    {
+                        break;
+                    }
                     dates.add(c);
                     c.add(Calendar.WEEK_OF_MONTH, 1);
                 }
