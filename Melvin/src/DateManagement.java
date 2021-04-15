@@ -4,7 +4,12 @@ import java.util.Calendar;
 import java.text.ParseException;
 
 /**
- * This class is in charge of creating an array of date instances that a goal checkin happens
+ *  Date Management class
+ *  In charge of all dates and date calculations for the calendar
+ *  Written Using Java 15
+ *  @author Emily Wirth
+ *  @version 1.0
+ *  @since 2021-04-14
  */
 public class DateManagement {
 
