@@ -9,6 +9,7 @@ import java.text.ParseException;
 public class DateManagement {
 
     /**
+     * Populates an ArrayList of Calendar dates with in month for a goal's check in dates
      * @param Goal  Goal from goal
      * @param month target month for dates
      * @param year  target year
