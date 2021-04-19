@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 /**
  *  <h1>Window</h1>
@@ -12,18 +13,19 @@ import java.awt.event.WindowEvent;
  */
 public class Window extends JFrame{
     JButton createButton = new JButton("Create Goal");
+
     //GridLayout layout = new GridLayout(0,1,5,5);
     BorderLayout layout = new BorderLayout();
-    StoragePlaceholder storage;
+    Storage storage;
 
     //TODO once the storage system is complete, replace this
-    public Window(StoragePlaceholder storage){
+    public Window(){
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(500,500);
         setLocationRelativeTo(null);
         setTitle("Badger");
         setLayout(layout);
-        this.storage=storage;
+        this.storage=Storage.load();
         setVisible(true);
 
         //default behavior is to open to home page
@@ -38,7 +40,7 @@ public class Window extends JFrame{
 
     public void openHome(){
         //removeAll();
-        JScrollPane scrollPane = new JScrollPane(new HomeView(storage));
+        JScrollPane scrollPane = new JScrollPane(new HomeView(storage.goals));
         scrollPane.getVerticalScrollBar().setUnitIncrement(10);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         add(scrollPane, BorderLayout.CENTER);
@@ -48,7 +50,7 @@ public class Window extends JFrame{
 
     public void openCalendar(){
         removeAll();
-        add(new CalendarView(storage));
+        add(new CalendarView(storage.goals));
     }
 }
 
@@ -58,10 +60,11 @@ public class Window extends JFrame{
 class HomeView extends JPanel{
     JLabel title = new JLabel("Home");
     BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
-    public HomeView(StoragePlaceholder storage){
+    public HomeView(){
         setLayout(layout);
         add(title);
-        for(Goal g:storage.goals){
+        ArrayList goals = storage.goals;
+        for(Goal g:goals){
             add(new GoalView(g));
         }
     }
@@ -74,7 +77,7 @@ class CalendarView extends JPanel{
     JTable calendarTable;
 
 
-    public CalendarView(StoragePlaceholder storage){
+    public CalendarView(ArrayList<Goal> goals){
         this.add(title);
         //uh, y'know... make a calendar i guess
     }

@@ -14,8 +14,11 @@ final class Melvin{
     private Melvin(){
         // adding this method prevents instantiation of Melvin elsewhere as a safeguard
     }
+
     public static void main(String[] args) throws IOException {
-        new Window();
+        //StoragePlaceholder storage = new StoragePlaceholder(5);
+        Storage storage = Storage.load();
+        new Window(storage);
         Goal test = new Goal();
         test.setName("test");
         test.setStart("2021-03-24");
@@ -33,8 +36,8 @@ final class Melvin{
         debug.active = false;
 
         // storage test
-        Storage storage = new Storage();
-        storage.test();
+        //Storage storage = new Storage();
+        //storage.test();
 
     }
 }
