@@ -11,21 +11,24 @@ import java.awt.event.WindowEvent;
  *  @since 2021-03-16
  */
 public class Window extends JFrame{
-    JButton createButton = new JButton("+");
-    GridLayout layout = new GridLayout(0,1,5,5);
+    JButton createButton = new JButton("Create Goal");
+    //GridLayout layout = new GridLayout(0,1,5,5);
+    BorderLayout layout = new BorderLayout();
     StoragePlaceholder storage;
 
     //TODO once the storage system is complete, replace this
     public Window(StoragePlaceholder storage){
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(500,500);
-        this.setLocationRelativeTo(null);
-        this.setTitle("Badger");
-        this.setLayout(layout);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(500,500);
+        setLocationRelativeTo(null);
+        setTitle("Badger");
+        setLayout(layout);
+        this.storage=storage;
+        setVisible(true);
+
         //default behavior is to open to home page
         this.openHome();
-
-        this.setVisible(true);
+        //add(new HomeView(storage));
     }
 
     public void refresh(){
@@ -34,13 +37,18 @@ public class Window extends JFrame{
     }
 
     public void openHome(){
-        this.removeAll();
-        this.add(new HomeView(storage));
+        //removeAll();
+        JScrollPane scrollPane = new JScrollPane(new HomeView(storage));
+        scrollPane.getVerticalScrollBar().setUnitIncrement(10);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        add(scrollPane, BorderLayout.CENTER);
+        add(createButton, BorderLayout.PAGE_END);
+        refresh();
     }
 
     public void openCalendar(){
-        this.removeAll();
-        this.add(new CalendarView(storage));
+        removeAll();
+        add(new CalendarView(storage));
     }
 }
 
@@ -49,12 +57,12 @@ public class Window extends JFrame{
 //might be slightly better to pass just the array instead of the whole storage obj
 class HomeView extends JPanel{
     JLabel title = new JLabel("Home");
-    GridLayout layout = new GridLayout(0,1,5,5);
+    BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
     public HomeView(StoragePlaceholder storage){
-        this.setLayout(layout);
-        this.add(title);
+        setLayout(layout);
+        add(title);
         for(Goal g:storage.goals){
-            this.add(new GoalView(g));
+            add(new GoalView(g));
         }
     }
 }
@@ -80,19 +88,25 @@ class GoalView extends JPanel{
 
     //Eventually replace with full constructor that builds panel from a goal
     public GoalView(Goal goal){
-        this.setSize(600, 200);
-        this.setBorder(BorderFactory.createLineBorder(Color.black));
-        this.add(goalName);
+        setMaximumSize(new Dimension(1000,100));
+        setPreferredSize(new Dimension(200,100));
+        setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createEmptyBorder(5,10,5,10),
+            BorderFactory.createLineBorder(Color.black)
+        ));
+
+        add(goalName);
         goalName.setText(goal.getName());
         goalName.setFont(new Font(goalName.getFont().getName(), Font.PLAIN, 20));
-        this.add(new JLabel("in category"));
-        this.add(goalCat);
+
+        add(new JLabel("in category"));
+
+        add(goalCat);
         goalCat.setText(goal.getCategoryName());
         goalCat.setFont(new Font(goalCat.getFont().getName(), Font.BOLD, 14));
-        this.add(status);
+
+        add(status);
         //Need a function that determines if a goal has been logged for the day
         status.setText("Not yet logged!");
-
-
     }
 }
