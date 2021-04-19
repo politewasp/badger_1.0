@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowEvent;
-import java.util.ArrayList;
 
 /**
  *  <h1>Window</h1>
@@ -40,7 +38,7 @@ public class Window extends JFrame{
 
     public void openHome(){
         //removeAll();
-        JScrollPane scrollPane = new JScrollPane(new HomeView());
+        JScrollPane scrollPane = new JScrollPane(new HomePage());
         scrollPane.getVerticalScrollBar().setUnitIncrement(10);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         add(scrollPane, BorderLayout.CENTER);
@@ -50,6 +48,6 @@ public class Window extends JFrame{
 
     public void openCalendar(){
         removeAll();
-        add(new CalendarView(storage.goals));
+        add(new CalendarPage(storage.goals));
     }
 }

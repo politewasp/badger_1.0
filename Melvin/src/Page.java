@@ -7,10 +7,10 @@ public abstract class Page extends JPanel {
 }
 
 
-class HomeView extends Page{
+class HomePage extends Page{
     JLabel title = new JLabel("Home");
     BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
-    public HomeView(){
+    public HomePage(){
         setLayout(layout);
         add(title);
         ArrayList<Goal> goals = storage.goals;
@@ -20,14 +20,14 @@ class HomeView extends Page{
     }
 }
 
-class CalendarView extends Page{
+class CalendarPage extends Page{
     JLabel title = new JLabel("Calendar");
     JLabel labelM, labelY;
     JButton prevMonth, nextMonth;
     JTable calendarTable;
 
 
-    public CalendarView(ArrayList<Goal> goals){
+    public CalendarPage(ArrayList<Goal> goals){
         this.add(title);
         //uh, y'know... make a calendar i guess
     }
