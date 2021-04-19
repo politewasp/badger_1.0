@@ -15,10 +15,10 @@ final class Melvin{
         // adding this method prevents instantiation of Melvin elsewhere as a safeguard
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
         //StoragePlaceholder storage = new StoragePlaceholder(5);
         Storage storage = Storage.load();
-        new Window(storage);
+        new Window();
         Goal test = new Goal();
         test.setName("test");
         test.setStart("2021-03-24");
