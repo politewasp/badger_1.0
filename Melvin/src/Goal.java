@@ -23,7 +23,7 @@ public class Goal
     private String categoryName;
     private boolean isShort;
     private boolean isGood;
-    private String start;
+    private Calendar start;
     private boolean completed;
     private String end;
     Habit habit1 = new Habit("TBD","TBD");
@@ -35,7 +35,7 @@ public class Goal
         categoryName = "TBD";
         isShort = false;
         isGood = false;
-        start = null;
+        start = Calendar.getInstance();
         completed = false;
         end = null;
 
@@ -47,7 +47,7 @@ public class Goal
         categoryName = "TBD";
         isShort = false;
         isGood = false;
-        start = null;
+        start = Calendar.getInstance();
         completed = false;
         end = null;
     }
