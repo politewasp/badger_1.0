@@ -15,7 +15,7 @@ final class Melvin{
         // adding this method prevents instantiation of Melvin elsewhere as a safeguard
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
         //StoragePlaceholder storage = new StoragePlaceholder(5);
         Storage storage = Storage.load();
         new Window();
@@ -38,6 +38,7 @@ final class Melvin{
         // storage test
         //Storage storage = new Storage();
         //storage.test();
+        storage.close();
 
     }
 }
