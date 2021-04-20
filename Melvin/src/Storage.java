@@ -270,7 +270,7 @@ public class Storage {
             case "name" -> goal.getName();
             case "category" -> goal.getCategoryName();
             case "description" -> goal.getDescription();
-            case "start date" -> goal.getStart();
+            case "start date" -> goal.getStart().toString();
             case "completed" -> Boolean.toString(goal.getCompleted());
             case "short/long" -> Boolean.toString(goal.getShortLong());
             case "frequencypt1" -> "tbd";
@@ -302,7 +302,7 @@ public class Storage {
             case "name" -> goal.setName(keyValue);
             case "category" -> goal.setCategoryName(keyValue);
             case "description" -> goal.setDescription(keyValue);
-            case "start date" -> goal.setStart(keyValue);
+            case "start date" -> {}
             case "completed" -> goal.setCompleted(Boolean.parseBoolean(keyValue));
             case "short/long" -> goal.setShortLong(Boolean.parseBoolean(keyValue));
             case "frequencypt1" -> {}

@@ -98,7 +98,7 @@ public class Goal
      * Gets the start String of the Goal
      * @return String object
      */
-    public String getStart() {
+    public Calendar getStart() {
         return start;
     }
 
@@ -164,7 +164,7 @@ public class Goal
      * Sets the start String of Goal to start
      * @param start string date formatted "yyyy-mm-dd"
      */
-    public void setStart(String start) {
+    public void setStart(Calendar start) {
         this.start = start;
     }
 

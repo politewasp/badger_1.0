@@ -21,9 +21,9 @@ final class Melvin{
         new Window();
         Goal test = new Goal();
         test.setName("test");
-        test.setStart("2021-03-24");
-        test.setEnd("2021-03-31");
-        test.setFrequency(1);
+        //test.setStart("2021-03-24");
+        //test.setEnd("2021-03-31");
+        //test.setFrequency(1);
         test.setMessage("i exist");
         test.setGoodBad(true);
         test.setShortLong(true);
