@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.text.ParseException;
@@ -10,66 +11,43 @@ public class Habit
 {
     //TODO add logic to store dates into respective array if checked in or not
     //frequency aka number of days between check in
-    private ArrayList<String> checkedInSuccess = new ArrayList<>();
-    private ArrayList<String> checkedInFail = new ArrayList<>();
-    private int frequency;
+
+    private ArrayList<Integer> daysOfWeek;
     private String message;
     private boolean checked;
-    private String lastCheckIn;
-    private String nextCheckIn;
-
 
     /**
      * Default constructor
      */
     Habit()
     {
-        frequency = 1;
         message = "TBD";
         checked = false;
-        lastCheckIn = null;
-        nextCheckIn = null;
-
+        daysOfWeek = new ArrayList<>();
     }
 
     /**
      * Constructor that takes in all values needed
-     * @param freq integer number of days between checkins
      * @param mess message to user about the check in what they are supposed to do
      * @param start the start date of checkins
      */
-    Habit(int freq, String mess, String start)
+    Habit( String mess, String start)
     {
-        frequency = freq;
+
         message = mess;
         checked = false;
-        lastCheckIn = start;
-        nextCheckIn = null;
-
+        daysOfWeek = new ArrayList<>();
     }
 
-    /**
-     * returns arraylist of string dates that the user failed to check in
-     * @return string format "yyyy-mm-dd" dates failed
-     */
-    public ArrayList<String> getCheckedInFail() {
-        return checkedInFail;
-    }
 
-    /**
-     * returns string array list pf dates that the user successfully logged
-     * @return string format "yyyy-mm-dd" dates success
-     */
-    public ArrayList<String> getCheckedInSuccess() {
-        return checkedInSuccess;
-    }
+
 
     /**
      * Returns the frequency value for checkins
      * @return int days between
      */
-    public int getFrequency() {
-        return frequency;
+    public ArrayList<Integer> getFrequency() {
+        return daysOfWeek;
     }
 
     /**
@@ -89,31 +67,7 @@ public class Habit
         return checked;
     }
 
-    /**
-     * calculates the next checkInDate based on the lastCheckIn date
-     * @return string date of nextCheckIn
-     */
-    public String getNextCheckIn() {
 
-        //Specifying date format that matches the given date
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Calendar c = Calendar.getInstance();
-        Calendar endDay = Calendar.getInstance();
-        try{
-            //Setting the date to the given date
-            c.setTime(sdf.parse(lastCheckIn));
-        }catch(ParseException e){
-            e.printStackTrace();
-        }
-
-        c.add(Calendar.DAY_OF_MONTH, frequency);
-        //Date after adding the days to the given date
-        nextCheckIn = sdf.format(c.getTime());
-
-
-        lastCheckIn = nextCheckIn;
-        return nextCheckIn;
-    }
 
     /**
      * sets the boolean checked if the log has been completed or not
@@ -122,22 +76,15 @@ public class Habit
      */
     public void setChecked(boolean checked) {
         this.checked = checked;
-        if(checked)
-        {
-            checkedInSuccess.add(lastCheckIn);
-        }
-        else
-        {
-            checkedInFail.add(lastCheckIn);
-        }
+
     }
 
     /**
      * sets the frequency of checkins
-     * @param frequency int days between
+     * @param days ArrayList of Integer representations of what days of the week
      */
-    public void setFrequency(int frequency) {
-        this.frequency = frequency;
+    public void setFrequency(ArrayList<Integer> days) {
+        this.daysOfWeek = days;
     }
 
     /**
@@ -148,13 +95,7 @@ public class Habit
         this.message = message;
     }
 
-    /**
-     * Sets the lastCheckIn to initial value
-     * @param lastCheckIn string format date of last check in
-     */
-    public void setLastCheckIn(String lastCheckIn) {
-        this.lastCheckIn = lastCheckIn;
-    }
+
 
     /**
      * toString method for debugging
@@ -162,8 +103,10 @@ public class Habit
      */
     public String toString()
     {
-        return "frequency "  + frequency + " message: " + message + " start " + lastCheckIn + " next checkIn " + nextCheckIn + "isChecked: "+ checked;
+        return "days of the week "  + daysOfWeek + " message: " + message + "isChecked: "+ checked;
     }
+
+
 
 
 
