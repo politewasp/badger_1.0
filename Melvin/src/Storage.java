@@ -1,4 +1,5 @@
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
@@ -60,17 +61,17 @@ public class Storage {
     }
 
     public void test() throws IOException {
-        Goal goal = new Goal();
-        goal.setName("goal2");
-        goal.setDescription("this is another goal description");
-        add(goal);
-        Category c = new Category("cat1");
-        add(c);
-        write();
-
-        for(Goal g: goals){
-            debug.print(g.getName());
-        }
+//        Goal goal = new Goal();
+//        goal.setName("goal2");
+//        goal.setDescription("this is another goal description");
+//        add(goal);
+//        Category c = new Category("cat1");
+//        add(c);
+//        write();
+//
+//        for(Goal g: goals){
+//            debug.print(g.getName());
+//        }
 //        delete(goals.get(0));
 //        for(Goal g: goals){
 //            System.out.println(g.getName());
@@ -116,6 +117,22 @@ public class Storage {
         pack(c, true);
         return removed;
 
+    }
+
+    public ArrayList<String> getGoalNames(){
+        ArrayList<String> goalList = new ArrayList<>();
+        for(Goal g: goals){
+            goalList.add(g.getName());
+        }
+        return goalList;
+    }
+
+    public ArrayList<String> getCategoryNames(){
+        ArrayList<String> categoryList = new ArrayList<>();
+        for(Category c: categories){
+            categoryList.add(c.getName());
+        }
+        return categoryList;
     }
 
     private void pack(Goal goal, boolean delete){
@@ -312,4 +329,5 @@ public class Storage {
         }
         return keyValue;
     }
+    
 }
