@@ -18,7 +18,7 @@ final class Melvin{
     public static void main(String[] args){
         //StoragePlaceholder storage = new StoragePlaceholder(5);
         Storage storage = Storage.load();
-        new Window();
+        Window.load();
         Goal test = new Goal();
         test.setName("test");
         test.setStart("2021-03-24");
@@ -33,7 +33,7 @@ final class Melvin{
         // debug example
         Debug debug = Debug.getInstance();
         // CHANGE THIS VARIABLE TO TOGGLE DEBUGGING MODE
-        debug.active = false;
+        debug.active = true;
 
         // storage test
         //Storage storage = new Storage();

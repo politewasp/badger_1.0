@@ -1,18 +1,17 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 public abstract class Page extends JPanel {
     Storage storage = Storage.load();
 }
 
-
 class HomePage extends Page{
-    JLabel title = new JLabel("Home");
     BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
     public HomePage(){
         setLayout(layout);
-        add(title);
         ArrayList<Goal> goals = storage.goals;
         for(Goal g:goals){
             add(new GoalView(g));
@@ -21,14 +20,12 @@ class HomePage extends Page{
 }
 
 class CalendarPage extends Page{
-    JLabel title = new JLabel("Calendar");
     JLabel labelM, labelY;
     JButton prevMonth, nextMonth;
     JTable calendarTable;
 
 
-    public CalendarPage(ArrayList<Goal> goals){
-        this.add(title);
+    public CalendarPage(){
         //uh, y'know... make a calendar i guess
     }
 }
@@ -38,9 +35,29 @@ class GoalView extends Page{
     JLabel goalName = new JLabel();
     JLabel goalCat = new JLabel();
     JLabel status = new JLabel();
+    Goal sourceGoal;
 
-    //Eventually replace with full constructor that builds panel from a goal
+    //probs bad practice to have this listener defined within the the class
+    MouseListener ml = new MouseListener() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            new GoalModifyPopup(sourceGoal);
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {}
+
+        @Override
+        public void mouseReleased(MouseEvent e) {}
+
+        @Override
+        public void mouseEntered(MouseEvent e) {}
+
+        @Override
+        public void mouseExited(MouseEvent e) {}
+    };
     public GoalView(Goal goal){
+        sourceGoal = goal;
         setMaximumSize(new Dimension(1000,100));
         setPreferredSize(new Dimension(200,100));
         setBorder(BorderFactory.createCompoundBorder(
@@ -50,16 +67,17 @@ class GoalView extends Page{
 
         add(goalName);
         goalName.setText(goal.getName());
-        goalName.setFont(new Font(goalName.getFont().getName(), Font.PLAIN, 20));
+        goalName.setFont(new Font("Arial", Font.PLAIN, 20));
 
         add(new JLabel("in category"));
 
         add(goalCat);
         goalCat.setText(goal.getCategoryName());
-        goalCat.setFont(new Font(goalCat.getFont().getName(), Font.BOLD, 14));
+        goalCat.setFont(new Font("Arial", Font.BOLD, 14));
 
         add(status);
         //Need a function that determines if a goal has been logged for the day
         status.setText("Not yet logged!");
+        addMouseListener(ml);
     }
 }

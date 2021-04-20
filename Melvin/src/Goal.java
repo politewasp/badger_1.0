@@ -1,6 +1,8 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.TreeMap;
 
 /**
@@ -10,7 +12,7 @@ import java.util.TreeMap;
  *  @version 1.0
  *  @since 2021-03-22
  */
-public class Goal
+public class Goal implements Comparable<Goal>
 {
     /**
      * Goal class
@@ -27,8 +29,7 @@ public class Goal
     private String end;
     Habit habit1 = new Habit(1,"TBD","TBD");
 
-    Goal()
-    {
+    Goal(){
         name = "TBD";
         description = "TBD";
         categoryName = "TBD";
@@ -255,4 +256,27 @@ public class Goal
     public boolean equals(Goal goal) {
         return this.getName().equals(goal.getName());
     }
+    public int compareTo(Goal goal){
+        return this.getName().compareTo(goal.getName());
+    }
 }
+
+class GoalsByNextLogDate implements Comparator<Goal> {
+    public int compare(Goal goal1, Goal goal2){
+        return 0;
+        //compare by next date that goal will need to be logged once there is a function that informs when the next log date will be
+        //maybe just a func that returns how many days until next log date
+    }
+}
+
+class GoalsByCategoryThenName implements Comparator<Goal> {
+    public int compare(Goal goal1, Goal goal2){
+        if(goal2.getCategoryName().equals(goal1.getCategoryName())){
+            return goal2.getName().compareTo(goal1.getName());
+        } else {
+            return goal2.getCategoryName().compareTo(goal1.getCategoryName());
+        }
+    }
+}
+
+//could add comparators or start and end dates among other things
