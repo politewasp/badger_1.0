@@ -43,4 +43,10 @@ class Debug
             System.out.println(bool.toString());
         }
     }
+
+    public void print(int i){
+        if(active){
+            System.out.println(i);
+        }
+    }
 }
