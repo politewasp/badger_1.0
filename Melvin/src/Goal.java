@@ -1,5 +1,6 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TreeMap;
 
@@ -22,10 +23,10 @@ public class Goal
     private String categoryName;
     private boolean isShort;
     private boolean isGood;
-    private String start;
+    private Calendar start;
     private boolean completed;
     private String end;
-    Habit habit1 = new Habit(1,"TBD","TBD");
+    Habit habit1 = new Habit("TBD","TBD");
 
     Goal()
     {
@@ -34,7 +35,7 @@ public class Goal
         categoryName = "TBD";
         isShort = false;
         isGood = false;
-        start = null;
+        start = Calendar.getInstance();
         completed = false;
         end = null;
 
@@ -46,7 +47,7 @@ public class Goal
         categoryName = "TBD";
         isShort = false;
         isGood = false;
-        start = null;
+        start = Calendar.getInstance();
         completed = false;
         end = null;
     }
@@ -165,7 +166,6 @@ public class Goal
      */
     public void setStart(String start) {
         this.start = start;
-        habit1.setLastCheckIn(start);
     }
 
     /**
@@ -196,11 +196,11 @@ public class Goal
 
     /**
      * sets the frequency in which the check in will be done
-     * @param day int value of days between checkins
+     * @param days int value of days between checkins
      */
-    public void setFrequency(int day)
+    public void setFrequency(ArrayList<Integer> days)
     {
-        habit1.setFrequency(day);
+        habit1.setFrequency(days);
     }
 
     /**
@@ -213,44 +213,7 @@ public class Goal
          "isGood: " + isGood + habit1.toString();
     }
 
-    /**
-     * Gets the next check in date from habit and calculates if it ias after end date if it is marks goal as complete
-     * @return string version of date for next check in
-     */
-    public String getNextCheck()
-    {
-        String nextCheck = habit1.getNextCheckIn();
-        if(end == null)
-        {
-            return nextCheck;
-        }
-        else
-        {
 
-            //Specifying date format that matches the given date
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Calendar c = Calendar.getInstance();
-            Calendar endDay = Calendar.getInstance();
-            try{
-                c.setTime(sdf.parse(nextCheck));
-                endDay.setTime(sdf.parse(end));
-            }catch(ParseException e){
-                e.printStackTrace();
-            }
-
-            if(c.after(endDay))
-            {
-                completed = true;
-                return "Congratulations for completing a Goal!";
-            }
-            else
-            {
-                return nextCheck;
-            }
-
-        }
-
-    }
 
     public boolean equals(Goal goal) {
         return this.getName().equals(goal.getName());
