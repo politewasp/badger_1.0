@@ -17,6 +17,9 @@ public class Storage {
     // debugger
     Debug debug = Debug.getInstance();
 
+    // static variable single_instance of type Debug
+    private static Storage single_instance = null;
+
     // constants
     String goalKey = "Goals";
     String categoryKey = "Categories";
@@ -41,11 +44,19 @@ public class Storage {
     JSONArray jsonGoals;
     JSONArray jsonCategories;
 
-    public Storage() {
+    private Storage() {
         goals = new ArrayList<>();
         categories = new ArrayList<>();
         filename = "Melvin\\storage\\storage.json";
         json = unpack(filename);
+    }
+
+    public static Storage load()
+    {
+        if (single_instance == null)
+            single_instance = new Storage();
+
+        return single_instance;
     }
 
     public void test() throws IOException {
