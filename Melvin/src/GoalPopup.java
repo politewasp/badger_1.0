@@ -2,10 +2,22 @@ import javax.swing.*;
 
 public abstract class GoalPopup extends JOptionPane{
     //Poltergeist. Scary.
-
     Goal inputGoal;
     Storage storage = Storage.load();
     int saved;
+
+    //radio short/long
+    //radio good/bad
+
+    /*
+        Calendar testCal = Calendar.getInstance();
+        CalendarDateModel startDate = new CalendarDateModel(testCal);
+        JDatePanelImpl startDatePanel = new JDatePanelImpl(startDate, new Properties());
+        JDatePicker startDatePicker = new JDatePickerImpl(startDatePanel, new DateComponentFormatter());
+        UtilDateModel endDate = new UtilDateModel();
+        JDatePanelImpl endDatePanel = new JDatePanelImpl(startDate, new Properties());
+        JDatePicker endDatePicker = new JDatePickerImpl(startDatePanel, new DateComponentFormatter());
+    */
 
     JPanel paramDump = new JPanel();
     JTextField goalNameField;
@@ -15,7 +27,6 @@ public abstract class GoalPopup extends JOptionPane{
 }
 
 class GoalModifyPopup extends GoalPopup{
-
     public GoalModifyPopup(Goal goal){
         Object[] options = {"Save Goal", "Cancel", "Delete Goal"};
         inputGoal = goal;
@@ -24,18 +35,7 @@ class GoalModifyPopup extends GoalPopup{
 
         goalNameField = new JTextField(goal.getName());
         goalDescField = new JTextArea(goal.getDescription());
-        //radio short/long
-        //radio good/bad
 
-        /*
-        Calendar testCal = Calendar.getInstance();
-        CalendarDateModel startDate = new CalendarDateModel(testCal);
-        JDatePanelImpl startDatePanel = new JDatePanelImpl(startDate, new Properties());
-        JDatePicker startDatePicker = new JDatePickerImpl(startDatePanel, new DateComponentFormatter());
-        UtilDateModel endDate = new UtilDateModel();
-        JDatePanelImpl endDatePanel = new JDatePanelImpl(startDate, new Properties());
-        JDatePicker endDatePicker = new JDatePickerImpl(startDatePanel, new DateComponentFormatter());
-        */
 
         String[] daysOfTheWeek = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
         JComboBox daySelector = new JComboBox(daysOfTheWeek);
@@ -76,8 +76,9 @@ class GoalCreatePopup extends GoalPopup{
         paramDump.add(new JLabel("Reminder Day: "));
         paramDump.add(daySelector);
 
-        int saved = showOptionDialog(null, paramDump, "Goal Creation", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, "Cancel");
-
+    }
+    int launch(){
+        int buttonOption = showOptionDialog(null, paramDump, "Goal Creation", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, "Cancel");
         newGoal.setName(goalNameField.getText());
         newGoal.setDescription(goalDescField.getText());
         newGoal.setCategoryName(storage.getCategoryNames().get(CategoryPicker.getSelectedIndex()));
@@ -86,7 +87,6 @@ class GoalCreatePopup extends GoalPopup{
         //set start
         //set end
         //goal.setDayOfWeek(daySelector.getSelectedIndex());
-
-        Window.load().refresh();
+        return buttonOption;
     }
 }

@@ -1,13 +1,17 @@
-public class BadgerController {
-    Window window;
-    public BadgerController(){
-        window=Window.load();
+import javax.swing.*;
 
+public class BadgerController {
+    Storage storage = Storage.load();
+    public BadgerController(){
     }
     public void createGoal(){
-        Goal
+        GoalCreatePopup popup = new GoalCreatePopup();
+        int buttonPushed = popup.launch();
+        if(buttonPushed == JOptionPane.OK_OPTION){
+            storage.add(popup.newGoal);
+        }
     }
-    public void modifyGoal(){
+    public void modifyGoal(Goal goal){
 
     }
 
