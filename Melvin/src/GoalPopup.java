@@ -24,7 +24,7 @@ public abstract class GoalPopup extends JOptionPane{
     JTextArea goalDescField = new JTextArea(5, 10);
     String[] daysOfTheWeek = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
     JComboBox daySelector = new JComboBox(daysOfTheWeek);
-    JComboBox CategoryPicker = new JComboBox(storage.getCategoryNames().toArray());
+    JComboBox categoryPicker = new JComboBox(storage.getCategoryNames().toArray());
 
 
 }
@@ -43,12 +43,14 @@ class GoalModifyPopup extends GoalPopup{
         paramDump.add(goalDescField);
         paramDump.add(new JLabel("Reminder Day: "));
         paramDump.add(daySelector);
+        paramDump.add(new JLabel("Category: "));
+        paramDump.add(categoryPicker);
 
         int saved = showOptionDialog(null, paramDump, "Edit a Goal", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, "Cancel");
         if(saved==JOptionPane.OK_OPTION){
             goal.setName(goalNameField.getText());
             goal.setDescription(goalDescField.getText());
-            goal.setCategoryName(storage.getCategoryNames().get(CategoryPicker.getSelectedIndex()));
+            goal.setCategoryName(storage.getCategoryNames().get(categoryPicker.getSelectedIndex()));
             //set isShort
             //set isGood
             //set start
@@ -68,12 +70,14 @@ class GoalCreatePopup extends GoalPopup{
         paramDump.add(goalDescField);
         paramDump.add(new JLabel("Reminder Day: "));
         paramDump.add(daySelector);
+        paramDump.add(new JLabel("Category: "));
+        paramDump.add(categoryPicker);
     }
     int launch(){
         int buttonOption = showOptionDialog(null, paramDump, "Goal Creation", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, "Cancel");
         newGoal.setName(goalNameField.getText());
         newGoal.setDescription(goalDescField.getText());
-        newGoal.setCategoryName(storage.getCategoryNames().get(CategoryPicker.getSelectedIndex()));
+        newGoal.setCategoryName(storage.getCategoryNames().get(categoryPicker.getSelectedIndex()));
         //set start
         //set end
         //goal.setDayOfWeek(daySelector.getSelectedIndex());
