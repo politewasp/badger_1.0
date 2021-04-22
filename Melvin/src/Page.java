@@ -48,13 +48,13 @@ class GoalView extends Page{
 
         add(goalName);
         goalName.setText(goal.getName());
-        goalName.setFont(new Font("Arial", Font.PLAIN, 20));
+        goalName.setFont(new Font(new JLabel().getFont().getName(), Font.PLAIN, 20));
 
         add(new JLabel("in category"));
 
         add(goalCat);
         goalCat.setText(goal.getCategoryName());
-        goalCat.setFont(new Font("Arial", Font.BOLD, 14));
+        goalCat.setFont(new Font(new JLabel().getFont().getName(), Font.BOLD, 14));
 
 
 

@@ -23,8 +23,8 @@ public class Window extends JFrame {
     Storage storage;
     String currentState;
 
-    Font buttonFont = new Font("Arial", Font.PLAIN, 20);
-    Font titleFont = new Font("Arial", Font.BOLD, 40);
+    Font buttonFont = new Font(new JLabel().getFont().getName(), Font.PLAIN, 20);
+    Font titleFont = new Font(new JLabel().getFont().getName(), Font.BOLD, 40);
 
     ActionListener calClicked = e -> openCalendar();
 

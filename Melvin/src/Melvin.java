@@ -26,6 +26,12 @@ final class Melvin{
         // CHANGE THIS VARIABLE TO TOGGLE DEBUGGING MODE
         debug.active = true;
 
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
         //StoragePlaceholder storage = new StoragePlaceholder(5);
         Storage storage = Storage.load();
         Window.load();

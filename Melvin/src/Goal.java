@@ -25,7 +25,7 @@ public class Goal implements Comparable<Goal>
     private String categoryName;
     private Calendar start;
     private Calendar end;
-    private ArrayList<Integer> daysOfWeek;
+    private ArrayList<Integer> daysOfWeek = new ArrayList<>();
     private boolean completed;
     private String message;
 //TODO set DaysOfWeek back to null
@@ -135,11 +135,11 @@ public class Goal implements Comparable<Goal>
      * @param date string date formatted "yyyy-mm-dd"
      */
     public void setStart(Calendar date) {
-        date = start;
+        this.start = date;
     }
 
-    public void setEnd(Calendar end) {
-        this.end = end;
+    public void setEnd(Calendar date) {
+        this.end = date;
     }
 
     public void setDaysOfWeek(ArrayList<Integer> daysOfWeek) {

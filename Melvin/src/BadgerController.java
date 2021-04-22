@@ -14,6 +14,7 @@ public class BadgerController {
         if(buttonPushed == JOptionPane.OK_OPTION){
             storage.add(popup.newGoal);
         }
+        Window.load().refresh();
     }
     public void modifyGoal(Goal goal){
 
@@ -34,7 +35,7 @@ class CreateButtonListener implements ActionListener {
         }
         debug.print(popup.buttonChoice);
         debug.print("\nThis is a test\n");
-        //refresh();
+        Window.load().refresh();
     }
 }
 
@@ -45,6 +46,7 @@ class GoalSelectedListener implements MouseListener {
         GoalView eventSource = (GoalView)e.getSource();
         Goal goal = eventSource.sourceGoal;
         GoalModifyPopup popup = new GoalModifyPopup(goal);
+        Window.load().refresh();
     }
 
     @Override
