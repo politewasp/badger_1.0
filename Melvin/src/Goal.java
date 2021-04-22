@@ -33,6 +33,7 @@ public class Goal implements Comparable<Goal>
         description = "";
         categoryName = "";
         start = Calendar.getInstance();
+        end = null;
         message = "";
         completed = false;
 
@@ -93,6 +94,10 @@ public class Goal implements Comparable<Goal>
         return message;
     }
 
+    public Calendar getEnd() {
+        return end;
+    }
+
     //Setter Methods
 
     /**
@@ -123,8 +128,12 @@ public class Goal implements Comparable<Goal>
      * Sets the start String of Goal to start
      * @param date string date formatted "yyyy-mm-dd"
      */
-    public void setDate(Calendar date) {
-        this.date = date;
+    public void setStart(Calendar date) {
+        date = start;
+    }
+
+    public void setEnd(Calendar end) {
+        this.end = end;
     }
 
     /**
@@ -150,8 +159,8 @@ public class Goal implements Comparable<Goal>
      */
     public String toString()
     {
-        return "Name: " + name + " description: " + description + " category: " + categoryName + " date: " + date +  " isCompleted: " + completed +
-         " message: " + message;
+        return "Name: " + name + " description: " + description + " category: " + categoryName + " start: " + start +  " isCompleted: " + completed +
+         " message: " + message + " end: " + end;
     }
 
 
