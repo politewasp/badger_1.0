@@ -1,5 +1,6 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
@@ -25,7 +26,7 @@ public class Goal implements Comparable<Goal>
     private String categoryName;
     private Calendar start;
     private Calendar end;
-    private ArrayList<Integer> daysOfWeek;
+    private ArrayList<Integer> daysOfWeek = new ArrayList<>();
     private boolean completed;
     private String message;
 //TODO set DaysOfWeek back to null
@@ -45,6 +46,7 @@ public class Goal implements Comparable<Goal>
         this.name = name;
         description = "";
         categoryName = "";
+        daysOfWeek.add(2);
         start = Calendar.getInstance();
         completed = false;
     }
@@ -180,6 +182,13 @@ public class Goal implements Comparable<Goal>
     public int compareTo(Goal goal){
         return this.getName().compareTo(goal.getName());
     }
+
+    public int getDaysBetween(int year, int month, int day)
+    {
+        Calendar c = Calendar.getInstance();
+        c.set(year,month,day);
+        return 0;
+    }
 }
 
 class GoalsByNextLogDate implements Comparator<Goal> {
@@ -199,5 +208,6 @@ class GoalsByCategoryThenName implements Comparator<Goal> {
         }
     }
 }
+
 
 //could add comparators or start and end dates among other things
