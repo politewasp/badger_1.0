@@ -25,7 +25,7 @@ public class Storage {
     String goalKey = "Goals";
     String categoryKey = "Categories";
     String [] goalAttributes = new String [] {
-            "name", "category", "description", "start date", "completed",
+            "name", "description", "start date", "completed",
             "short/long", "good/bad"
     };
     String [] categoryAttributes = new String [] {
