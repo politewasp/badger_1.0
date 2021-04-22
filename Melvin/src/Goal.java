@@ -185,9 +185,22 @@ public class Goal implements Comparable<Goal>
 
     public int getDaysBetween(int year, int month, int day)
     {
+        int count = 0;
         Calendar c = Calendar.getInstance();
         c.set(year,month,day);
-        return 0;
+        Calendar week = Calendar.getInstance();
+        week.set(year,month,day);
+        for(Integer days: daysOfWeek)
+        {
+            week.set(Calendar.DAY_OF_WEEK,days);
+            if(week.equals(c))
+            {
+                return count;
+            }
+            count ++;
+        }
+
+        return count;
     }
 }
 

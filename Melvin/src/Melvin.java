@@ -43,8 +43,8 @@ final class Melvin{
         test.setMessage("i exist");
         test.setDescription("test of data");
         debug.print(test.toString());
-        //GoalDate today = new GoalDate(2021,4,22);
-        //System.out.println(today);
+        GoalDate today = new GoalDate(2021,4,22);
+        System.out.println(today);
 
 
         // storage test
