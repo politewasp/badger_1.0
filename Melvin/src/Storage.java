@@ -112,13 +112,15 @@ public class Storage {
     }
 
     private void populateDefaultCategories(){
+        Category blank = new Category();
         Category fitness = new Category("Fitness", "This habit is meant to keep you active!");
         Category health = new Category("Health", "This habit is meant to keep you healthy!");
         Category productivity = new Category("Productivity", "This habit is meant to keep you productive!");
 
-        categories.add(fitness);
-        categories.add(health);
-        categories.add(productivity);
+        add(blank);
+        add(fitness);
+        add(health);
+        add(productivity);
     }
 
 }
