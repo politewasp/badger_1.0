@@ -4,8 +4,8 @@ public class Category {
     String imageLink;
 
     public Category(){
-        this.name = "tbd";
-        this.description = "none";
+        this.name = "misc";
+        this.description = "uncategorized";
         this.imageLink = "none";
     }
 
