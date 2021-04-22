@@ -95,13 +95,11 @@ public class DateManagement {
      * @param year target year
      * @return returns Arraylist of all goals date instances in target month
      */
-    public ArrayList<Calendar> getAllMonth(ArrayList<Goal> goals, int month, int year)
+    public ArrayList<ArrayList> getAllMonth(ArrayList<Goal> goals, int month, int year)
     {
-        ArrayList<Calendar> dates = new ArrayList<>();
+        ArrayList<ArrayList> dates = new ArrayList<>();
         for (Goal goal:goals) {
-            for (Calendar date: getMonth(goal,month,year)) {
-                dates.add(date);
-            }
+            dates.add(getMonth(goal,month,year));
 
         }
         return dates;
