@@ -15,11 +15,15 @@ import java.util.Collections;
 public class Window extends JFrame {
     Debug debug = Debug.getInstance();
     JButton createButton = new JButton("Create Goal");
+    JButton homeButton = new JButton("Home");
+    JButton calendarButton = new JButton("Calendar");
     JLabel title = new JLabel("", SwingConstants.CENTER);
     //GridLayout layout = new GridLayout(0,1,5,5);
     BorderLayout layout = new BorderLayout();
     Storage storage;
     String currentState;
+
+    Font buttonFont = new Font("Arial", Font.PLAIN, 20);
 
     ActionListener createClicked = new ActionListener() {
         @Override
@@ -35,6 +39,20 @@ public class Window extends JFrame {
         }
     };
 
+    ActionListener calClicked = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            openCalendar();
+        }
+    };
+
+    ActionListener homeClicked = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            openHome();
+        }
+    };
+
     private static Window single_instance = null;
 
     private Window(){
@@ -47,14 +65,23 @@ public class Window extends JFrame {
         setLayout(layout);
         add(title, BorderLayout.PAGE_START);
         title.setFont(new Font("Arial", Font.BOLD, 50));
+
+        add(calendarButton, BorderLayout.PAGE_END);
+        calendarButton.setFont(buttonFont);
+        calendarButton.addActionListener(calClicked);
+
+        add(homeButton, BorderLayout.PAGE_END);
+        homeButton.setFont(buttonFont);
+        homeButton.addActionListener(homeClicked);
+
         add(createButton, BorderLayout.PAGE_END);
-        createButton.setFont(new Font("Arial", Font.PLAIN, 20));
+        createButton.setFont(buttonFont);
         createButton.addActionListener(createClicked);
+
         setVisible(true);
 
         //default behavior is to open to home page
         this.openHome();
-        //add(new HomeView(storage));
     }
 
     public void openHome(){
