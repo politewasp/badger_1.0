@@ -24,16 +24,37 @@ public abstract class GoalPopup extends JOptionPane{
     JLabel daysLabel = new JLabel("Days of the Week:");
     JLabel catLabel = new JLabel("Category: ");
     JLabel startLabel = new JLabel("Start Date: ");
-    JLabel endLabel = new JLabel("Enda Date: ");
+    JLabel endLabel = new JLabel("End Date: ");
+    JCheckBox checkSun = new JCheckBox();
+    JCheckBox checkMon = new JCheckBox();
+    JCheckBox checkTue = new JCheckBox();
+    JCheckBox checkWed = new JCheckBox();
+    JCheckBox checkThu = new JCheckBox();
+    JCheckBox checkFri = new JCheckBox();
+    JCheckBox checkSat = new JCheckBox();
 
-    JTextField goalNameField = new JTextField(10);
-    JTextArea goalDescField = new JTextArea(5, 10);
+    JTextField goalNameField = new JTextField(15);
+    JTextArea goalDescField = new JTextArea(5, 15);
     JScrollPane descPane = new JScrollPane(goalDescField);
     String[] daysOfTheWeek = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
-    JComboBox daySelector = new JComboBox(daysOfTheWeek);
+    JPanel daySelector = new JPanel();
+
+//    JComboBox daySelector = new JComboBox(daysOfTheWeek);
     JComboBox categoryPicker = new JComboBox(storage.getCategoryNames().toArray());
 
     public GoalPopup(){
+        daySelector.setLayout(new GridLayout(2, 7));
+        for(Character c:"SMTWTFS".toCharArray()){
+            daySelector.add(new JLabel(c.toString()));
+        }
+        daySelector.add(checkSun);
+        daySelector.add(checkMon);
+        daySelector.add(checkTue);
+        daySelector.add(checkWed);
+        daySelector.add(checkThu);
+        daySelector.add(checkFri);
+        daySelector.add(checkSat);
+
         goalDescField.setFont(new JLabel().getFont());
         goalDescField.setLineWrap(true);
         goalDescField.setWrapStyleWord(true);
@@ -59,28 +80,28 @@ public abstract class GoalPopup extends JOptionPane{
         paramDump.add(new JScrollPane(goalDescField), con);
 
         con.gridx = 0;
-        con.gridy = 2;
+        con.gridy = 0;
         paramDump.add(catLabel, con);
         con.gridx = 1;
         paramDump.add(categoryPicker);
 
-        con.gridx = 0;
-        con.gridy = 3;
+        con.gridx = 2;
+        con.gridy = 1;
         paramDump.add(startLabel, con);
-        con.gridx = 1;
+        con.gridx = 3;
         paramDump.add(new JLabel("Placeholder"));
 
-        con.gridx = 0;
-        con.gridy = 4;
+        con.gridx = 2;
+        con.gridy = 2;
         paramDump.add(endLabel, con);
-        con.gridx = 1;
+        con.gridx = 3;
         paramDump.add(new JLabel("Placeholder"));
 
-        con.gridx = 0;
-        con.gridy = 5;
+        con.gridx = 2;
+        con.gridy = 4;
         paramDump.add(daysLabel);
-        con.gridx = 1;
-        paramDump.add(new JLabel("Placeholder"));
+        con.gridx = 3;
+        paramDump.add(daySelector);
     }
 }
 

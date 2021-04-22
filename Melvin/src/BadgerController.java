@@ -20,41 +20,42 @@ public class BadgerController {
 
     }
 
-}
-
-
-class CreateButtonListener implements ActionListener {
-    Debug debug = Debug.getInstance();
-    Storage storage = Storage.load();
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        GoalCreatePopup popup = new GoalCreatePopup();
-        popup.launch();
-        if(popup.buttonChoice== JOptionPane.OK_OPTION){
-            storage.add(popup.newGoal);
+    static class CreateButtonListener implements ActionListener {
+        Debug debug = Debug.getInstance();
+        Storage storage = Storage.load();
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            GoalCreatePopup popup = new GoalCreatePopup();
+            popup.launch();
+            if(popup.buttonChoice== JOptionPane.OK_OPTION){
+                storage.add(popup.newGoal);
+            }
+            debug.print(popup.buttonChoice);
+            debug.print("\nThis is a test\n");
+            Window.load().refresh();
         }
-        debug.print(popup.buttonChoice);
-        debug.print("\nThis is a test\n");
-        Window.load().refresh();
-    }
-}
-
-class GoalSelectedListener implements MouseListener {
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        GoalView eventSource = (GoalView)e.getSource();
-        Goal goal = eventSource.sourceGoal;
-        GoalModifyPopup popup = new GoalModifyPopup(goal);
-        Window.load().refresh();
     }
 
-    @Override
-    public void mousePressed(MouseEvent e) { }
-    @Override
-    public void mouseReleased(MouseEvent e) { }
-    @Override
-    public void mouseEntered(MouseEvent e) { }
-    @Override
-    public void mouseExited(MouseEvent e) { }
+    static class GoalSelectedListener implements MouseListener {
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            GoalView eventSource = (GoalView)e.getSource();
+            Goal goal = eventSource.sourceGoal;
+            GoalModifyPopup popup = new GoalModifyPopup(goal);
+            Window.load().refresh();
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) { }
+        @Override
+        public void mouseReleased(MouseEvent e) { }
+        @Override
+        public void mouseEntered(MouseEvent e) { }
+        @Override
+        public void mouseExited(MouseEvent e) { }
+    }
+
+
 }
+

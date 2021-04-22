@@ -56,7 +56,7 @@ public class Window extends JFrame {
 
         bottomButtons.add(createButton);
         createButton.setFont(buttonFont);
-        createButton.addActionListener(new CreateButtonListener());
+        createButton.addActionListener(new BadgerController.CreateButtonListener());
 
         setVisible(true);
         add(new JPanel());

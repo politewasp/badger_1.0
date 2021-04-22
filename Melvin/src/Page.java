@@ -50,7 +50,7 @@ class GoalView extends Page{
         goalName.setText(goal.getName());
         goalName.setFont(new Font(new JLabel().getFont().getName(), Font.PLAIN, 20));
 
-        add(new JLabel("in category"));
+        add(new JLabel(" in "));
 
         add(goalCat);
         goalCat.setText(goal.getCategoryName());
@@ -61,6 +61,6 @@ class GoalView extends Page{
 //        add(status);
 //        //Need a function that determines if a goal has been logged for the day
 //        status.setText("Not yet logged!");
-        addMouseListener(new GoalSelectedListener());
+        addMouseListener(new BadgerController.GoalSelectedListener());
     }
 }
