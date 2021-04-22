@@ -23,34 +23,26 @@ public class Goal implements Comparable<Goal>
     private String name;
     private String description;
     private String categoryName;
-    private boolean isShort;
-    private boolean isGood;
-    private Calendar start;
+    private Calendar date;
     private boolean completed;
-    private String end;
-    Habit habit1 = new Habit("TBD","TBD");
+    private String message;
 
     public Goal(){
-        name = "TBD";
-        description = "TBD";
-        categoryName = "TBD";
-        isShort = false;
-        isGood = false;
-        start = Calendar.getInstance();
+        name = "";
+        description = "";
+        categoryName = "";
+        date = Calendar.getInstance();
+        message = "";
         completed = false;
-        end = null;
 
     }
     //TODO Temporary for testing, will be removed
     public Goal(String name){
         this.name = name;
-        description = "TBD";
-        categoryName = "TBD";
-        isShort = false;
-        isGood = false;
-        start = Calendar.getInstance();
+        description = "";
+        categoryName = "";
+        date = Calendar.getInstance();
         completed = false;
-        end = null;
     }
 
     //Getter methods
@@ -80,27 +72,11 @@ public class Goal implements Comparable<Goal>
     }
 
     /**
-     * Get whether the Goal is short or long term
-     * @return false if long true if short
+     * Gets the date Calendar object of the Goal
+     * @return Calendar object
      */
-    public boolean getShortLong() {
-        return isShort;
-    }
-
-    /**
-     * Get whether the goal is the creation of a good habit or a breaking of a bad habit
-     * @return false if bad true if good
-     */
-    public boolean getGoodBad() {
-        return isGood;
-    }
-
-    /**
-     * Gets the start String of the Goal
-     * @return String object
-     */
-    public Calendar getStart() {
-        return start;
+    public Calendar getDate() {
+        return date;
     }
 
     /**
@@ -112,13 +88,10 @@ public class Goal implements Comparable<Goal>
         return completed;
     }
 
-    /**
-     * Returns the end String of the object. Can be Null if the goal does not end.
-     * @return end
-     */
-    public String getEnd() {
-        return end;
+    public String getMessage() {
+        return message;
     }
+
     //Setter Methods
 
     /**
@@ -146,27 +119,11 @@ public class Goal implements Comparable<Goal>
     }
 
     /**
-     * Sets Goals isShort to short or long
-     * @param aShort  either short or long term short is true and long is false
-     */
-    public void setShortLong(boolean aShort) {
-        isShort = aShort;
-    }
-
-    /**
-     * Sets Goals isGood to good or bad
-     * @param gb sets whether the goal is good or bad good is true and bad is false
-     */
-    public void setGoodBad(boolean gb) {
-        isGood = gb;
-    }
-
-    /**
      * Sets the start String of Goal to start
-     * @param start string date formatted "yyyy-mm-dd"
+     * @param date string date formatted "yyyy-mm-dd"
      */
-    public void setStart(Calendar start) {
-        this.start = start;
+    public void setDate(Calendar date) {
+        this.date = date;
     }
 
     /**
@@ -178,30 +135,12 @@ public class Goal implements Comparable<Goal>
     }
 
     /**
-     * Sets the End String of the goal
-     * @param end String
-     */
-    public void setEnd(String end) {
-        this.end = end;
-
-    }
-
-    /**
      * Sets message to value
      * @param mess string going over what the habit is checking
      */
     public void setMessage(String mess)
     {
-        habit1.setMessage(mess);
-    }
-
-    /**
-     * sets the frequency in which the check in will be done
-     * @param days int value of days between checkins
-     */
-    public void setFrequency(ArrayList<Integer> days)
-    {
-        habit1.setFrequency(days);
+        message = mess;
     }
 
     /**
@@ -210,8 +149,8 @@ public class Goal implements Comparable<Goal>
      */
     public String toString()
     {
-        return "Name: " + name + " description: " + description + " category: " + categoryName + " start: " + start + " end: " + end +  " isCompleted: " + completed + " isShort: " +isShort +
-         "isGood: " + isGood + habit1.toString();
+        return "Name: " + name + " description: " + description + " category: " + categoryName + " date: " + date +  " isCompleted: " + completed +
+         " message: " + message;
     }
 
 

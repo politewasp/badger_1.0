@@ -31,8 +31,6 @@ final class Melvin{
         //test.setEnd("2021-03-31");
         //test.setFrequency(1);
         test.setMessage("i exist");
-        test.setGoodBad(true);
-        test.setShortLong(true);
         test.setDescription("test of data");
         debug.print(test.toString());
 

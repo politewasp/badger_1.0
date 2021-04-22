@@ -1,1 +1,35 @@
-{"Categories":[],"Goals":[{"start date":"java.util.GregorianCalendar[time=1619074715739,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id=\"America\/Chicago\",offset=-21600000,dstSavings=3600000,useDaylight=true,transitions=235,lastRule=java.util.SimpleTimeZone[id=America\/Chicago,offset=-21600000,dstSavings=3600000,useDaylight=true,startYear=0,startMode=3,startMonth=2,startDay=8,startDayOfWeek=1,startTime=7200000,startTimeMode=0,endMode=3,endMonth=10,endDay=1,endDayOfWeek=1,endTime=7200000,endTimeMode=0]],firstDayOfWeek=1,minimalDaysInFirstWeek=1,ERA=1,YEAR=2021,MONTH=3,WEEK_OF_YEAR=17,WEEK_OF_MONTH=4,DAY_OF_MONTH=22,DAY_OF_YEAR=112,DAY_OF_WEEK=5,DAY_OF_WEEK_IN_MONTH=4,AM_PM=0,HOUR=1,HOUR_OF_DAY=1,MINUTE=58,SECOND=35,MILLISECOND=739,ZONE_OFFSET=-21600000,DST_OFFSET=3600000]","short\/long":"false","name":"goal1","description":"this is a goal description","completed":"false","category":{"days":"tbd","end date":"tbd","message":"TBD"},"good\/bad":"false"},{"start date":"java.util.GregorianCalendar[time=1619074715774,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id=\"America\/Chicago\",offset=-21600000,dstSavings=3600000,useDaylight=true,transitions=235,lastRule=java.util.SimpleTimeZone[id=America\/Chicago,offset=-21600000,dstSavings=3600000,useDaylight=true,startYear=0,startMode=3,startMonth=2,startDay=8,startDayOfWeek=1,startTime=7200000,startTimeMode=0,endMode=3,endMonth=10,endDay=1,endDayOfWeek=1,endTime=7200000,endTimeMode=0]],firstDayOfWeek=1,minimalDaysInFirstWeek=1,ERA=1,YEAR=2021,MONTH=3,WEEK_OF_YEAR=17,WEEK_OF_MONTH=4,DAY_OF_MONTH=22,DAY_OF_YEAR=112,DAY_OF_WEEK=5,DAY_OF_WEEK_IN_MONTH=4,AM_PM=0,HOUR=1,HOUR_OF_DAY=1,MINUTE=58,SECOND=35,MILLISECOND=774,ZONE_OFFSET=-21600000,DST_OFFSET=3600000]","short\/long":"false","name":"goal2","description":"this is another goal description","completed":"false","category":{"days":"tbd","end date":"tbd","message":"TBD"},"good\/bad":"false"}]}
+{
+  "Categories": [],
+  "Goals": [
+    {
+      "short\/long": "false",
+      "check in message": "tbd",
+      "logs missed": "tbd",
+      "description": "this is a goal description",
+      "end date": null,
+      "completed": "false",
+      "start date": null,
+      "logs on time": "tbd",
+      "name": "goal1",
+      "category": "TBD",
+      "frequencypt1": "tbd",
+      "good\/bad": "false",
+      "frequencypt2": "tbd"
+    },
+    {
+      "short\/long": "false",
+      "check in message": "tbd",
+      "logs missed": "tbd",
+      "description": "this is another goal description",
+      "end date": null,
+      "completed": "false",
+      "start date": null,
+      "logs on time": "tbd",
+      "name": "goal2",
+      "category": "TBD",
+      "frequencypt1": "tbd",
+      "good\/bad": "false",
+      "frequencypt2": "tbd"
+    }
+  ]
+}
