@@ -56,9 +56,11 @@ class GoalView extends Page{
         goalCat.setText(goal.getCategoryName());
         goalCat.setFont(new Font("Arial", Font.BOLD, 14));
 
-        add(status);
-        //Need a function that determines if a goal has been logged for the day
-        status.setText("Not yet logged!");
+
+
+//        add(status);
+//        //Need a function that determines if a goal has been logged for the day
+//        status.setText("Not yet logged!");
         addMouseListener(new GoalSelectedListener());
     }
 }

@@ -59,7 +59,7 @@ class GoalModifyPopup extends GoalPopup{
 }
 
 class GoalCreatePopup extends GoalPopup{
-    Goal newGoal;
+    Goal newGoal = new Goal();
     Object[] options = {"Save Goal", "Cancel"};
     public GoalCreatePopup(){
         paramDump.add(new JLabel("Name: "));

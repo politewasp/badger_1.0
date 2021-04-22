@@ -26,22 +26,6 @@ public class Window extends JFrame {
     Font buttonFont = new Font("Arial", Font.PLAIN, 20);
     Font titleFont = new Font("Arial", Font.BOLD, 40);
 
-
-    //probably definitely bad practice to put these listeners here but that's a problem for future William
-    ActionListener createClicked = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            Goal tempGoal = new Goal();
-            GoalModifyPopup popup = new GoalModifyPopup(tempGoal);
-            if(popup.buttonChoice==JOptionPane.OK_OPTION){
-                storage.add(tempGoal);
-            }
-            debug.print(popup.buttonChoice);
-            debug.print("\nThis is a test\n");
-            refresh();
-        }
-    };
-
     ActionListener calClicked = e -> openCalendar();
 
     ActionListener homeClicked = e -> openHome();
@@ -72,7 +56,7 @@ public class Window extends JFrame {
 
         bottomButtons.add(createButton);
         createButton.setFont(buttonFont);
-        createButton.addActionListener(createClicked);
+        createButton.addActionListener(new CreateButtonListener());
 
         setVisible(true);
         add(new JPanel());
