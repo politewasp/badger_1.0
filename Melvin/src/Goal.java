@@ -25,6 +25,7 @@ public class Goal implements Comparable<Goal>
     private String categoryName;
     private Calendar start;
     private Calendar end;
+    private ArrayList<Integer> daysOfWeek;
     private boolean completed;
     private String message;
 
@@ -34,6 +35,7 @@ public class Goal implements Comparable<Goal>
         categoryName = "";
         start = Calendar.getInstance();
         end = null;
+        daysOfWeek = null;
         message = "";
         completed = false;
 
@@ -98,6 +100,10 @@ public class Goal implements Comparable<Goal>
         return end;
     }
 
+    public ArrayList<Integer> getDaysOfWeek() {
+        return daysOfWeek;
+    }
+
     //Setter Methods
 
     /**
@@ -134,6 +140,10 @@ public class Goal implements Comparable<Goal>
 
     public void setEnd(Calendar end) {
         this.end = end;
+    }
+
+    public void setDaysOfWeek(ArrayList<Integer> daysOfWeek) {
+        this.daysOfWeek = daysOfWeek;
     }
 
     /**

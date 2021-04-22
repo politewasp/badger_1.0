@@ -1,6 +1,7 @@
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *  <h1>Melvin</h1>
@@ -24,7 +25,9 @@ final class Melvin{
 
         //StoragePlaceholder storage = new StoragePlaceholder(5);
         Storage storage = Storage.load();
+
         Window.load();
+        /*
         Goal test = new Goal();
         test.setName("test");
         //test.setStart("2021-03-24");
@@ -33,7 +36,7 @@ final class Melvin{
         test.setMessage("i exist");
         test.setDescription("test of data");
         debug.print(test.toString());
-
+        */
 
 
         // storage test

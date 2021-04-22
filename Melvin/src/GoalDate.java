@@ -18,7 +18,10 @@ public class GoalDate {
     {
         System.out.println(goals);
         ArrayList<Goal> goals1 = new ArrayList<>();
+        for(Goal goal: goals)
+        {
 
+        }
         return goals1;
     }
 
