@@ -26,6 +26,7 @@ public class Storage {
         box = Box.load();
         goals = box.getGoals();
         categories = box.getCategories();
+        populateDefaultCategories();
     }
 
     public static Storage load()
@@ -108,6 +109,16 @@ public class Storage {
 
     public void close() throws IOException {
         box.close();
+    }
+
+    private void populateDefaultCategories(){
+        Category fitness = new Category("Fitness", "This habit is meant to keep you active!");
+        Category health = new Category("Health", "This habit is meant to keep you healthy!");
+        Category productivity = new Category("Productivity", "This habit is meant to keep you productive!");
+
+        categories.add(fitness);
+        categories.add(health);
+        categories.add(productivity);
     }
 
 }
