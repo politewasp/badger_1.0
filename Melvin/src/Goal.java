@@ -122,6 +122,15 @@ public class Goal implements Comparable<Goal>
     public String getEnd() {
         return end;
     }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public ArrayList<Integer> getDaysOfWeek() {
+        return daysOfWeek;
+    }
+
     //Setter Methods
 
     /**
