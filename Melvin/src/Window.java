@@ -33,10 +33,10 @@ public class Window extends JFrame {
         public void actionPerformed(ActionEvent e) {
             Goal tempGoal = new Goal();
             GoalModifyPopup popup = new GoalModifyPopup(tempGoal);
-            if(popup.saved==JOptionPane.OK_OPTION){
+            if(popup.buttonChoice==JOptionPane.OK_OPTION){
                 storage.add(tempGoal);
             }
-            debug.print(popup.saved);
+            debug.print(popup.buttonChoice);
             debug.print("\nThis is a test\n");
             refresh();
         }

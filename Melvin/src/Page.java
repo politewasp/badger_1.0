@@ -37,25 +37,6 @@ class GoalView extends Page{
     JLabel status = new JLabel();
     Goal sourceGoal;
 
-    //probs bad practice to have this listener defined within the the class
-    MouseListener ml = new MouseListener() {
-        @Override
-        public void mouseClicked(MouseEvent e) {
-            new GoalModifyPopup(sourceGoal);
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {}
-
-        @Override
-        public void mouseReleased(MouseEvent e) {}
-
-        @Override
-        public void mouseEntered(MouseEvent e) {}
-
-        @Override
-        public void mouseExited(MouseEvent e) {}
-    };
     public GoalView(Goal goal){
         sourceGoal = goal;
         setMaximumSize(new Dimension(1000,100));
@@ -78,6 +59,6 @@ class GoalView extends Page{
         add(status);
         //Need a function that determines if a goal has been logged for the day
         status.setText("Not yet logged!");
-        addMouseListener(ml);
+        addMouseListener(new GoalSelectedListener());
     }
 }

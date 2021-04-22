@@ -47,8 +47,6 @@ final class Melvin{
         storage.close();
 
     }
-
-
 }
 
 class CreateButtonListener implements ActionListener{
@@ -57,19 +55,30 @@ class CreateButtonListener implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         GoalCreatePopup popup = new GoalCreatePopup();
-        if(popup.saved== JOptionPane.OK_OPTION){
+        if(popup.buttonChoice== JOptionPane.OK_OPTION){
             storage.add(popup.newGoal);
         }
-        debug.print(popup.saved);
+        debug.print(popup.buttonChoice);
         debug.print("\nThis is a test\n");
         //refresh();
     }
 }
 
-//class GoalSelectedListener implements MouseListener {
-//
-//    @Override
-//    public void mouseClicked(MouseEvent e) {
-//
-//    }
-//}
+class GoalSelectedListener implements MouseListener {
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        GoalView eventSource = (GoalView)e.getSource();
+        Goal goal = eventSource.sourceGoal;
+        GoalModifyPopup popup = new GoalModifyPopup(goal);
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) { }
+    @Override
+    public void mouseReleased(MouseEvent e) { }
+    @Override
+    public void mouseEntered(MouseEvent e) { }
+    @Override
+    public void mouseExited(MouseEvent e) { }
+}
