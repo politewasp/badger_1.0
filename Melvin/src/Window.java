@@ -24,7 +24,10 @@ public class Window extends JFrame {
     String currentState;
 
     Font buttonFont = new Font("Arial", Font.PLAIN, 20);
+    Font titleFont = new Font("Arial", Font.BOLD, 40);
 
+
+    //probably definitely bad practice to put these listeners here but that's a problem for future William
     ActionListener createClicked = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -39,19 +42,9 @@ public class Window extends JFrame {
         }
     };
 
-    ActionListener calClicked = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            openCalendar();
-        }
-    };
+    ActionListener calClicked = e -> openCalendar();
 
-    ActionListener homeClicked = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            openHome();
-        }
-    };
+    ActionListener homeClicked = e -> openHome();
 
     private static Window single_instance = null;
 
@@ -64,29 +57,32 @@ public class Window extends JFrame {
 
         setLayout(layout);
         add(title, BorderLayout.PAGE_START);
-        title.setFont(new Font("Arial", Font.BOLD, 50));
+        title.setFont(titleFont);
 
-        add(calendarButton, BorderLayout.PAGE_END);
+        JPanel bottomButtons = new JPanel();
+        add(bottomButtons, BorderLayout.PAGE_END);
+
+        bottomButtons.add(calendarButton);
         calendarButton.setFont(buttonFont);
         calendarButton.addActionListener(calClicked);
 
-        add(homeButton, BorderLayout.PAGE_END);
+        bottomButtons.add(homeButton);
         homeButton.setFont(buttonFont);
         homeButton.addActionListener(homeClicked);
 
-        add(createButton, BorderLayout.PAGE_END);
+        bottomButtons.add(createButton);
         createButton.setFont(buttonFont);
         createButton.addActionListener(createClicked);
 
         setVisible(true);
-
+        add(new JPanel());
         //default behavior is to open to home page
-        this.openHome();
+        openHome();
     }
 
     public void openHome(){
+        remove(layout.getLayoutComponent(BorderLayout.CENTER));
         Collections.sort(storage.goals);
-        //removeAll();
         currentState = "home";
         JScrollPane scrollPane = new JScrollPane(new HomePage());
         scrollPane.getVerticalScrollBar().setUnitIncrement(10);
@@ -96,14 +92,15 @@ public class Window extends JFrame {
     }
 
     public void openCalendar(){
-        //removeAll();
+        remove(layout.getLayoutComponent(BorderLayout.CENTER));
         currentState = "cal";
         add(new CalendarPage(), BorderLayout.CENTER);
+        title.setText("Calendar");
     }
 
     public void refresh(){
         invalidate();
-        remove(layout.getLayoutComponent(BorderLayout.CENTER));
+        //remove(layout.getLayoutComponent(BorderLayout.CENTER));
         switch(currentState){
             case "home"->openHome();
             case "cal"->openCalendar();
