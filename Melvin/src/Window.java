@@ -35,6 +35,8 @@ public class Window extends JFrame {
         }
     };
 
+
+
     private static Window single_instance = null;
 
     private Window(){
@@ -59,24 +61,25 @@ public class Window extends JFrame {
 
     public void openHome(){
         Collections.sort(storage.goals);
-        //removeAll();
+        remove(layout.getLayoutComponent(BorderLayout.CENTER));
         currentState = "home";
         JScrollPane scrollPane = new JScrollPane(new HomePage());
         scrollPane.getVerticalScrollBar().setUnitIncrement(10);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         add(scrollPane, BorderLayout.CENTER);
         title.setText("Home");
+        refresh();
     }
 
     public void openCalendar(){
-        //removeAll();
+        remove(layout.getLayoutComponent(BorderLayout.CENTER));
         currentState = "cal";
         add(new CalendarPage(), BorderLayout.CENTER);
     }
 
     public void refresh(){
         invalidate();
-        remove(layout.getLayoutComponent(BorderLayout.CENTER));
+
         switch(currentState){
             case "home"->openHome();
             case "cal"->openCalendar();
