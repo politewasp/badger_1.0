@@ -23,6 +23,16 @@ public class GoalDate {
         date.of(year,month,day);
         goalsOnDay = getGoalsOnDate();
     }
+    GoalDate(int year,int month,int day, ArrayList<Goal> goal)
+    {
+        this.year = year;
+        this.month = month;
+        this.day = day;
+        date.of(year,month,day);
+        goalsOnDay = getGoalsOnDate();
+        goals = goal;
+    }
+
     public int toIndex(DayOfWeek day)
     {
          switch (day)

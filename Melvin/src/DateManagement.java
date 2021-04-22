@@ -60,11 +60,10 @@ public class DateManagement {
         ArrayList<GoalDate> dates = new ArrayList<>();
         while (toIndex(inMonth.getMonth()) != (month +1))
         {
-            for (Goal goal:goals) {
-                GoalDate days = new GoalDate(year,month, count);
+
+                GoalDate days = new GoalDate(year,month, count,goals);
                 dates.add(days);
 
-            }
             count++;
             inMonth = inMonth.plusDays(1);
         }
