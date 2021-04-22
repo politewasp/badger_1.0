@@ -21,6 +21,11 @@ final class Melvin{
     }
 
     public static void main(String[] args) throws IOException {
+        // debug example
+        Debug debug = Debug.getInstance();
+        // CHANGE THIS VARIABLE TO TOGGLE DEBUGGING MODE
+        debug.active = true;
+
         //StoragePlaceholder storage = new StoragePlaceholder(5);
         Storage storage = Storage.load();
         Window.load();
@@ -30,16 +35,11 @@ final class Melvin{
         //test.setEnd("2021-03-31");
         //test.setFrequency(1);
         test.setMessage("i exist");
-        test.setGoodBad(true);
-        test.setShortLong(true);
         test.setDescription("test of data");
+        debug.print(test.toString());
         storage.add(test);
-        System.out.println(test.toString());
 
-        // debug example
-        Debug debug = Debug.getInstance();
-        // CHANGE THIS VARIABLE TO TOGGLE DEBUGGING MODE
-        debug.active = true;
+
 
         // storage test
         //Storage storage = new Storage();

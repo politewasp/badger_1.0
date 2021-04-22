@@ -14,10 +14,10 @@ import org.json.simple.parser.ParseException;
  *  @since 2021-04-01
  */
 
+
 public class Storage {
     // debugger
     Debug debug = Debug.getInstance();
-
     // static variable single_instance of type Debug
     private static Storage single_instance = null;
 
@@ -25,14 +25,10 @@ public class Storage {
     String goalKey = "Goals";
     String categoryKey = "Categories";
     String [] goalAttributes = new String [] {
-            "name", "description", "start date", "completed",
-            "short/long", "good/bad"
+            "name", "description", "date", "completed", "message"
     };
     String [] categoryAttributes = new String [] {
             "name", "description", "image link"
-    };
-    String [] habitAttributes = new String [] {
-            "days", "message", "end date"
     };
 
     // interface attributes
@@ -207,10 +203,6 @@ public class Storage {
         // convert Goal object to JSONObject
         JSONObject o = new JSONObject();
 
-        // add habit JSONObject to Goal JSONObject
-        JSONObject oh = toJSON(goal.habit1);
-        o.put("category", oh);
-
         String value;
         for(String key: goalAttributes){
             value = goalMap(goal, key);
@@ -230,31 +222,11 @@ public class Storage {
         return o;
     }
 
-    private JSONObject toJSON(Habit h){
-        // convert Habit object to JSONObject
-        JSONObject o = new JSONObject();
-        String value;
-        for(String key: habitAttributes){
-            value = habitMap(h, key);
-            o.put(key, value);
-        }
-        return o;
-    }
-
     private Goal JSONtoGoal(JSONObject o){
         // convert JSONObject to Goal object
         Goal goal = new Goal();
         Habit habit = new Habit();
         JSONObject oh;
-
-        try {
-            oh = (JSONObject) o.get("category");
-            for(String key: habitAttributes){
-                populateHabitAttribute(habit, oh, key);
-            }
-        }
-        catch (Throwable ignored){ }
-        finally{ goal.habit1 = habit; }
 
         for(String key: goalAttributes){
             populateGoalAttribute(goal, o, key);
@@ -269,15 +241,6 @@ public class Storage {
             populateCategoryAttribute(c, o, key);
         }
         return c;
-    }
-
-    private Habit JSONtoHabit(JSONObject o){
-        // convert JSONObject to Category Object
-        Habit h = new Habit();
-        for(String key: habitAttributes){
-            populateHabitAttribute(h, o, key);
-        }
-        return h;
     }
 
     private JSONObject read() throws IOException, ParseException {
@@ -299,10 +262,9 @@ public class Storage {
         return switch (key) {
             case "name" -> goal.getName();
             case "description" -> goal.getDescription();
-            case "start date" -> goal.getStart().toString();
             case "completed" -> Boolean.toString(goal.getCompleted());
-            case "short/long" -> Boolean.toString(goal.getShortLong());
-            case "good/bad" -> Boolean.toString(goal.getGoodBad());
+            case "date" -> "";
+            case "message" -> goal.getMessage();
             default -> throw new IllegalStateException("Unexpected value: " + key);
         };
     }
@@ -317,16 +279,6 @@ public class Storage {
         };
     }
 
-    private String habitMap(Habit h, String key){
-        // backend method to return key from category
-        return switch(key){
-            case "days" -> "tbd";
-            case "message" -> h.getMessage();
-            case "end date" -> "tbd";
-            default -> throw new IllegalStateException("Unexpected value: " + key);
-        };
-    }
-
     private String populateGoalAttribute(Goal goal, JSONObject o, String key){
         // inputs goal, json object goal, and key
         // calls set method for goal attribute
@@ -335,16 +287,9 @@ public class Storage {
             case "name" -> goal.setName(keyValue);
             case "category" -> goal.setCategoryName(keyValue);
             case "description" -> goal.setDescription(keyValue);
-            case "start date" -> {}
+            case "date" -> {}
             case "completed" -> goal.setCompleted(Boolean.parseBoolean(keyValue));
-            case "short/long" -> goal.setShortLong(Boolean.parseBoolean(keyValue));
-            case "frequencypt1" -> {}
-            case "frequencypt2" -> {}
-            case "check in message" -> {}
-            case "logs on time" -> {}
-            case "logs missed" -> {}
-            case "end date" -> goal.setEnd(keyValue);
-            case "good/bad" -> goal.setGoodBad(Boolean.parseBoolean(keyValue));
+            case "message" -> {}
             default -> throw new IllegalStateException("Unexpected value: " + key);
         }
         return keyValue;
@@ -358,19 +303,6 @@ public class Storage {
             case "name" -> c.setName(keyValue);
             case "description" -> c.setDescription(keyValue);
             case "image link" -> c.setImageLink(keyValue);
-            default -> throw new IllegalStateException("Unexpected value: " + key);
-        }
-        return keyValue;
-    }
-
-    private String populateHabitAttribute(Habit h, JSONObject o, String key){
-        // inputs category, json object category, and key
-        // calls set method for category attribute
-        String keyValue = (String) o.get(key);
-        switch(key){
-            case "days" -> {}
-            case "message" -> h.setMessage(keyValue);
-            case "end date" -> {}
             default -> throw new IllegalStateException("Unexpected value: " + key);
         }
         return keyValue;
