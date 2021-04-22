@@ -19,7 +19,7 @@ public class Habit
     /**
      * Default constructor
      */
-    Habit()
+    public Habit()
     {
         message = "TBD";
         checked = false;
@@ -31,7 +31,7 @@ public class Habit
      * @param mess message to user about the check in what they are supposed to do
      * @param start the start date of checkins
      */
-    Habit( String mess, String start)
+    public Habit(String mess, String start)
     {
 
         message = mess;

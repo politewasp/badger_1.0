@@ -30,7 +30,7 @@ public class Goal implements Comparable<Goal>
     private String end;
     Habit habit1 = new Habit("TBD","TBD");
 
-    Goal(){
+    public Goal(){
         name = "TBD";
         description = "TBD";
         categoryName = "TBD";
@@ -42,7 +42,7 @@ public class Goal implements Comparable<Goal>
 
     }
     //TODO Temporary for testing, will be removed
-    Goal(String name){
+    public Goal(String name){
         this.name = name;
         description = "TBD";
         categoryName = "TBD";
