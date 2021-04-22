@@ -23,7 +23,8 @@ public class Goal implements Comparable<Goal>
     private String name;
     private String description;
     private String categoryName;
-    private Calendar date;
+    private Calendar start;
+    private Calendar end;
     private boolean completed;
     private String message;
 
@@ -31,7 +32,7 @@ public class Goal implements Comparable<Goal>
         name = "";
         description = "";
         categoryName = "";
-        date = Calendar.getInstance();
+        start = Calendar.getInstance();
         message = "";
         completed = false;
 
@@ -41,7 +42,7 @@ public class Goal implements Comparable<Goal>
         this.name = name;
         description = "";
         categoryName = "";
-        date = Calendar.getInstance();
+        start = Calendar.getInstance();
         completed = false;
     }
 
@@ -75,8 +76,8 @@ public class Goal implements Comparable<Goal>
      * Gets the date Calendar object of the Goal
      * @return Calendar object
      */
-    public Calendar getDate() {
-        return date;
+    public Calendar getStart() {
+        return start;
     }
 
     /**
