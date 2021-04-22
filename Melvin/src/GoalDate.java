@@ -9,7 +9,8 @@ public class GoalDate {
 
     GoalDate(int year, int month, int day)
     {
-
+        date.set(year,month,day);
+        goals = getGoalsOnDate();
     }
     private ArrayList<Goal> getGoalsOnDate()
     {
@@ -17,17 +18,16 @@ public class GoalDate {
 
         return goals1;
     }
-    private Calendar parseDate(int year,int month, int day)
-    {
-        Calendar c = Calendar.getInstance();
-        return c;
-    }
+
 
 
 
 
     public void setDate(Calendar date) {
         this.date = date;
+    }
+    public void setDate(int year, int month, int day) {
+        date.set(year,month,day);
     }
 
     public void setGoals(ArrayList<Goal> goals) {
