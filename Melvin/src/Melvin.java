@@ -66,10 +66,10 @@ class CreateButtonListener implements ActionListener{
     }
 }
 
-class GoalSelectedListener implements MouseListener {
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-
-    }
-}
+//class GoalSelectedListener implements MouseListener {
+//
+//    @Override
+//    public void mouseClicked(MouseEvent e) {
+//
+//    }
+//}
