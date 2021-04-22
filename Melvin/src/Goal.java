@@ -28,7 +28,8 @@ public class Goal implements Comparable<Goal>
     private Calendar start;
     private boolean completed;
     private String end;
-    Habit habit1 = new Habit("TBD","TBD");
+    private ArrayList<Integer> daysOfWeek;
+    private String message;
 
     public Goal(){
         name = "TBD";
@@ -37,6 +38,8 @@ public class Goal implements Comparable<Goal>
         isShort = false;
         isGood = false;
         start = Calendar.getInstance();
+        daysOfWeek = null;
+        message = "TBD";
         completed = false;
         end = null;
 
@@ -192,7 +195,7 @@ public class Goal implements Comparable<Goal>
      */
     public void setMessage(String mess)
     {
-        habit1.setMessage(mess);
+        message = mess;
     }
 
     /**
@@ -201,7 +204,7 @@ public class Goal implements Comparable<Goal>
      */
     public void setFrequency(ArrayList<Integer> days)
     {
-        habit1.setFrequency(days);
+        daysOfWeek = days;
     }
 
     /**
@@ -211,7 +214,7 @@ public class Goal implements Comparable<Goal>
     public String toString()
     {
         return "Name: " + name + " description: " + description + " category: " + categoryName + " start: " + start + " end: " + end +  " isCompleted: " + completed + " isShort: " +isShort +
-         "isGood: " + isGood + habit1.toString();
+         " isGood: " + isGood + " message: " + message + " days of week: " + daysOfWeek;
     }
 
 
