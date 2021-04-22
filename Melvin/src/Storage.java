@@ -14,10 +14,10 @@ import org.json.simple.parser.ParseException;
  *  @since 2021-04-01
  */
 
+
 public class Storage {
     // debugger
     Debug debug = Debug.getInstance();
-
     // static variable single_instance of type Debug
     private static Storage single_instance = null;
 

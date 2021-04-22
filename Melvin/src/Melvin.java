@@ -15,7 +15,13 @@ final class Melvin{
         // adding this method prevents instantiation of Melvin elsewhere as a safeguard
     }
 
+
     public static void main(String[] args) throws IOException {
+        // debug example
+        Debug debug = Debug.getInstance();
+        // CHANGE THIS VARIABLE TO TOGGLE DEBUGGING MODE
+        debug.active = true;
+
         //StoragePlaceholder storage = new StoragePlaceholder(5);
         Storage storage = Storage.load();
         Window.load();
@@ -26,12 +32,9 @@ final class Melvin{
         //test.setFrequency(1);
         test.setMessage("i exist");
         test.setDescription("test of data");
-        System.out.println(test.toString());
+        debug.print(test.toString());
 
-        // debug example
-        Debug debug = Debug.getInstance();
-        // CHANGE THIS VARIABLE TO TOGGLE DEBUGGING MODE
-        debug.active = true;
+
 
         // storage test
         //Storage storage = new Storage();
