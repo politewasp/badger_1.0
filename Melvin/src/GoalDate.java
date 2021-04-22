@@ -3,8 +3,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+
 public class GoalDate {
-    private ArrayList<Goal> goals;
+    Storage storage = Storage.load();
+    private ArrayList<Goal> goals = Storage.load().goals;
     private Calendar date = Calendar.getInstance();
 
     GoalDate(int year, int month, int day)
@@ -14,6 +16,7 @@ public class GoalDate {
     }
     private ArrayList<Goal> getGoalsOnDate()
     {
+        System.out.println(goals);
         ArrayList<Goal> goals1 = new ArrayList<>();
 
         return goals1;
