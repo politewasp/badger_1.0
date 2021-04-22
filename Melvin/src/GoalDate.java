@@ -1,3 +1,4 @@
+import javax.crypto.AEADBadTagException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -7,19 +8,39 @@ import java.util.Calendar;
 public class GoalDate {
     Storage storage = Storage.load();
     private ArrayList<Goal> goals = Storage.load().goals;
+    private ArrayList<Goal> goalsOnDay = new ArrayList<>();
     private Calendar date = Calendar.getInstance();
+    int month;
+    int year;
+    int day;
 
     GoalDate(int year, int month, int day)
     {
+        this.year = year;
+        this.month = month;
+        this.day = day;
         date.set(year,month,day);
-        goals = getGoalsOnDate();
+        goalsOnDay = getGoalsOnDate();
     }
     private ArrayList<Goal> getGoalsOnDate()
     {
-        System.out.println(goals);
+        Calendar c = Calendar.getInstance();
+        c.set(year,month,day);
         ArrayList<Goal> goals1 = new ArrayList<>();
         for(Goal goal: goals)
         {
+            for (Integer days: goal.getDaysOfWeek())
+            {
+                c.set(Calendar.DAY_OF_WEEK, days);
+                if(c.before(goal.getEnd()) && c.after(goal.getStart()))
+                {
+                    if(c.equals(date))
+                    {
+                        goalsOnDay.add(goal);
+                    }
+                }
+
+            }
 
         }
         return goals1;

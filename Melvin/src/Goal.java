@@ -28,14 +28,14 @@ public class Goal implements Comparable<Goal>
     private ArrayList<Integer> daysOfWeek;
     private boolean completed;
     private String message;
-
+//TODO set DaysOfWeek back to null
     public Goal(){
         name = "";
         description = "";
         categoryName = "";
         start = Calendar.getInstance();
         end = null;
-        daysOfWeek = null;
+        daysOfWeek.add(2);
         message = "";
         completed = false;
 
@@ -169,8 +169,7 @@ public class Goal implements Comparable<Goal>
      */
     public String toString()
     {
-        return "Name: " + name + " description: " + description + " category: " + categoryName + " start: " + start +  " isCompleted: " + completed +
-         " message: " + message + " end: " + end;
+        return "Name: " + name ;
     }
 
 

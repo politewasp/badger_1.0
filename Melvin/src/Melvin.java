@@ -2,6 +2,7 @@ import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  *  <h1>Melvin</h1>
@@ -27,16 +28,23 @@ final class Melvin{
         Storage storage = Storage.load();
 
         Window.load();
-        /*
+
         Goal test = new Goal();
         test.setName("test");
-        //test.setStart("2021-03-24");
-        //test.setEnd("2021-03-31");
-        //test.setFrequency(1);
+        Calendar start = Calendar.getInstance();
+        start.set(2021, 4,1);
+        Calendar end = Calendar.getInstance();
+        end.set(2021,4,31);
+        test.setStart(start);
+        test.setEnd(end);
+        ArrayList<Integer> test1 = new ArrayList<>();
+        test1.add(1);
+        test.setDaysOfWeek(test1);
         test.setMessage("i exist");
         test.setDescription("test of data");
         debug.print(test.toString());
-        */
+        GoalDate today = new GoalDate(2021,4,22);
+        System.out.println(today);
 
 
         // storage test
