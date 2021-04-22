@@ -1,15 +1,16 @@
 import javax.crypto.AEADBadTagException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.time.LocalDate;
 
 
 public class GoalDate {
     Storage storage = Storage.load();
     private ArrayList<Goal> goals = Storage.load().goals;
     private ArrayList<Goal> goalsOnDay = new ArrayList<>();
-    private Calendar date = Calendar.getInstance();
+    private LocalDate date = LocalDate.now();
     int month;
     int year;
     int day;
@@ -19,25 +20,55 @@ public class GoalDate {
         this.year = year;
         this.month = month;
         this.day = day;
-        date.set(year,month,day);
+        date.of(year,month,day);
         goalsOnDay = getGoalsOnDate();
     }
+    GoalDate(int year,int month,int day, ArrayList<Goal> goal)
+    {
+        this.year = year;
+        this.month = month;
+        this.day = day;
+        date.of(year,month,day);
+        goalsOnDay = getGoalsOnDate();
+        goals = goal;
+    }
+
+    public int toIndex(DayOfWeek day)
+    {
+         switch (day)
+         {
+            case  MONDAY:
+                return 1;
+            case TUESDAY:
+                return 2;
+            case WEDNESDAY:
+                return 3;
+            case THURSDAY:
+                return 4;
+            case FRIDAY:
+                return 5;
+            case SATURDAY:
+                return 6;
+            case SUNDAY:
+                return 7;
+        }
+        return -1;
+    }
+
     private ArrayList<Goal> getGoalsOnDate()
     {
-        Calendar c = Calendar.getInstance();
-        c.set(year,month,day);
+        LocalDate c = LocalDate.now();
+        c.of(year,month,day);
+        int date;
         ArrayList<Goal> goals1 = new ArrayList<>();
         for(Goal goal: goals)
         {
+            date = toIndex(c.getDayOfWeek());
             for (Integer days: goal.getDaysOfWeek())
             {
-                c.set(Calendar.DAY_OF_WEEK, days);
-                if(c.before(goal.getEnd()) && c.after(goal.getStart()))
+                if(date == days)
                 {
-                    if(c.equals(date))
-                    {
-                        goalsOnDay.add(goal);
-                    }
+                    goals1.add(goal);
                 }
 
             }
@@ -50,18 +81,18 @@ public class GoalDate {
 
 
 
-    public void setDate(Calendar date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
     public void setDate(int year, int month, int day) {
-        date.set(year,month,day);
+        date.of(year,month,day);
     }
 
     public void setGoals(ArrayList<Goal> goals) {
         this.goals = goals;
     }
 
-    public Calendar getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
