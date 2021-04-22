@@ -1,5 +1,6 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
@@ -23,15 +24,19 @@ public class Goal implements Comparable<Goal>
     private String name;
     private String description;
     private String categoryName;
-    private Calendar date;
+    private Calendar start;
+    private Calendar end;
+    private ArrayList<Integer> daysOfWeek = new ArrayList<>();
     private boolean completed;
     private String message;
-
+//TODO set DaysOfWeek back to null
     public Goal(){
         name = "";
         description = "";
         categoryName = "";
-        date = Calendar.getInstance();
+        start = Calendar.getInstance();
+        end = null;
+        daysOfWeek.add(2);
         message = "";
         completed = false;
 
@@ -41,7 +46,8 @@ public class Goal implements Comparable<Goal>
         this.name = name;
         description = "";
         categoryName = "";
-        date = Calendar.getInstance();
+        daysOfWeek.add(2);
+        start = Calendar.getInstance();
         completed = false;
     }
 
@@ -75,8 +81,8 @@ public class Goal implements Comparable<Goal>
      * Gets the date Calendar object of the Goal
      * @return Calendar object
      */
-    public Calendar getDate() {
-        return date;
+    public Calendar getStart() {
+        return start;
     }
 
     /**
@@ -90,6 +96,14 @@ public class Goal implements Comparable<Goal>
 
     public String getMessage() {
         return message;
+    }
+
+    public Calendar getEnd() {
+        return end;
+    }
+
+    public ArrayList<Integer> getDaysOfWeek() {
+        return daysOfWeek;
     }
 
     //Setter Methods
@@ -122,8 +136,16 @@ public class Goal implements Comparable<Goal>
      * Sets the start String of Goal to start
      * @param date string date formatted "yyyy-mm-dd"
      */
-    public void setDate(Calendar date) {
-        this.date = date;
+    public void setStart(Calendar date) {
+        date = start;
+    }
+
+    public void setEnd(Calendar end) {
+        this.end = end;
+    }
+
+    public void setDaysOfWeek(ArrayList<Integer> daysOfWeek) {
+        this.daysOfWeek = daysOfWeek;
     }
 
     /**
@@ -149,8 +171,7 @@ public class Goal implements Comparable<Goal>
      */
     public String toString()
     {
-        return "Name: " + name + " description: " + description + " category: " + categoryName + " date: " + date +  " isCompleted: " + completed +
-         " message: " + message;
+        return "Name: " + name ;
     }
 
 
@@ -160,6 +181,26 @@ public class Goal implements Comparable<Goal>
     }
     public int compareTo(Goal goal){
         return this.getName().compareTo(goal.getName());
+    }
+
+    public int getDaysBetween(int year, int month, int day)
+    {
+        int count = 0;
+        Calendar c = Calendar.getInstance();
+        c.set(year,month,day);
+        Calendar week = Calendar.getInstance();
+        week.set(year,month,day);
+        for(Integer days: daysOfWeek)
+        {
+            week.set(Calendar.DAY_OF_WEEK,days);
+            if(week.equals(c))
+            {
+                return count;
+            }
+            count ++;
+        }
+
+        return count;
     }
 }
 
@@ -180,5 +221,6 @@ class GoalsByCategoryThenName implements Comparator<Goal> {
         }
     }
 }
+
 
 //could add comparators or start and end dates among other things
