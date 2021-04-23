@@ -30,7 +30,7 @@ public class Goal implements Comparable<Goal>
     private ArrayList<Integer> daysOfWeek = new ArrayList<>();
     private boolean completed;
     private String message;
-//TODO set DaysOfWeek back to null
+
     public Goal(){
         name = "";
         description = "";
@@ -38,7 +38,7 @@ public class Goal implements Comparable<Goal>
         start = LocalDate.now();
         end = null;
         lastChecked = "";
-        daysOfWeek.add(2);
+        daysOfWeek = null;
         message = "";
         completed = false;
 
@@ -48,7 +48,7 @@ public class Goal implements Comparable<Goal>
         this.name = name;
         description = "";
         categoryName = "";
-        daysOfWeek.add(2);
+        daysOfWeek = null;
         lastChecked = "";
         start = LocalDate.now();
         completed = false;
@@ -97,21 +97,42 @@ public class Goal implements Comparable<Goal>
         return completed;
     }
 
+    /**
+     * Get the message attribute of goal
+     * @return string message
+     */
     public String getMessage() {
         return message;
     }
 
+    /**
+     *returns the end date
+     * @return LocalDate End
+     */
     public LocalDate getEnd() {
         return end;
     }
 
+    /**
+     * returns the days of the week that goal occurs on
+     * @return ArrayList days of week 1-7 1 = Monday 7=Sunday
+     */
     public ArrayList<Integer> getDaysOfWeek() {
         return daysOfWeek;
     }
 
+    /**
+     * Gets date of last checked
+     * @return String lastChecked string version of date
+     */
     public String getLastChecked() {
         return lastChecked;
     }
+
+    /**
+     * gets whether the goal has been logged or not
+     * @return boolean checked
+     */
     public boolean getChecked()
     {
         return checked;
@@ -152,10 +173,18 @@ public class Goal implements Comparable<Goal>
         date = start;
     }
 
+    /**
+     * Sets the end date
+     * @param end LocalDate
+     */
     public void setEnd(LocalDate end) {
         this.end = end;
     }
 
+    /**
+     * Sets the days of week goal occurs
+     * @param daysOfWeek ArrayList<Integer></Integer>
+     */
     public void setDaysOfWeek(ArrayList<Integer> daysOfWeek) {
         this.daysOfWeek = daysOfWeek;
     }
@@ -252,7 +281,13 @@ public class Goal implements Comparable<Goal>
     }
 
 
-
+    /**
+     * gets the days until next checkin from given date
+     * @param year int year
+     * @param month int month
+     * @param day int day
+     * @return
+     */
     public int getDaysBetween(int year, int month, int day)
     {
         int count = 0;
@@ -275,14 +310,11 @@ public class Goal implements Comparable<Goal>
     }
 }
 
-class GoalsByNextLogDate implements Comparator<Goal> {
-    public int compare(Goal goal1, Goal goal2){
-        return 0;
-        //compare by next date that goal will need to be logged once there is a function that informs when the next log date will be
-        //maybe just a func that returns how many days until next log date
-    }
-}
 
+
+/**
+ * sorts goals by category then by name
+ */
 class GoalsByCategoryThenName implements Comparator<Goal> {
     public int compare(Goal goal1, Goal goal2){
         if(goal2.getCategoryName().equals(goal1.getCategoryName())){
@@ -294,4 +326,4 @@ class GoalsByCategoryThenName implements Comparator<Goal> {
 }
 
 
-//could add comparators or start and end dates among other things
+

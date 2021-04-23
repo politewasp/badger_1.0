@@ -50,6 +50,10 @@ public class GoalDate {
         };
     }
 
+    /**
+     * Gets all the goals that happen on a specific day
+     * @return ArrayList of Goals
+     */
     private ArrayList<Goal> getGoalsOnDate()
     {
         ArrayList<Goal> temp = new ArrayList<>();
