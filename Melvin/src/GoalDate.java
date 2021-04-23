@@ -86,9 +86,7 @@ public class GoalDate {
      */
     public void checkIn(Goal goal)
     {
-        LocalDate today = LocalDate.now();
-        goal.setChecked(true);
-        goal.setLastChecked(today.toString());
+        goal.setCompleted(new GoalDate());
     }
 
     /**

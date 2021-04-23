@@ -75,4 +75,13 @@ public class DateManagement {
         return dates;
     }
 
+    public static LocalDate stringToDate(String str){
+        String [] arr = str.split("-");
+        int year = Integer.parseInt(arr[0]);
+        int month = Integer.parseInt(arr[1]);
+        int day = Integer.parseInt(arr[2]);
+        return LocalDate.of(year, month, day);
+    }
+
+
 }
