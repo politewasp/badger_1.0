@@ -91,6 +91,11 @@ public class Storage {
 
     }
 
+    public ArrayList<Goal> getGoals(){ return goals; }
+
+    public ArrayList<Category> getCategories(){ return categories; }
+
+
     public ArrayList<String> getGoalNames(){
         ArrayList<String> goalList = new ArrayList<>();
         for(Goal g: goals){

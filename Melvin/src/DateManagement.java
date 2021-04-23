@@ -19,41 +19,40 @@ public class DateManagement {
         switch (month)
         {
             case JANUARY:
-                return 1;
+                return 0;
             case FEBRUARY:
-                return 2;
+                return 1;
             case MARCH:
-                return 3;
+                return 2;
             case APRIL:
-                return 4;
+                return 3;
             case MAY:
-                return 5;
+                return 4;
             case JUNE:
-                return 6;
+                return 5;
             case JULY:
-                return 7;
+                return 6;
             case AUGUST:
-                return 8;
+                return 7;
             case SEPTEMBER:
-                return 9;
+                return 8;
             case OCTOBER:
-                return 10;
+                return 9;
             case NOVEMBER:
-                return 11;
+                return 10;
             case DECEMBER:
-                return 12;
+                return 11;
         }
         return -1;
     }
 
     /**
      *gets all the check in dates for all the provided goals
-     * @param goals arrayList of all the goals to be on LocalDate
      * @param month target month
      * @param year target year
      * @return returns Arraylist of all goals date instances in target month
      */
-    public ArrayList<GoalDate> getAllMonth(ArrayList<Goal> goals, int month, int year)
+    public ArrayList<GoalDate> getAllMonth(int month, int year)
     {
         LocalDate inMonth = LocalDate.of(year,month, 1);
         int count = 0;
@@ -61,7 +60,7 @@ public class DateManagement {
         while (toIndex(inMonth.getMonth()) != (month +1))
         {
 
-                GoalDate days = new GoalDate(year,month, count,goals);
+                GoalDate days = new GoalDate(year,month, count);
                 dates.add(days);
 
             count++;

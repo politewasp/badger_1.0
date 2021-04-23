@@ -1,15 +1,12 @@
 
-import java.text.SimpleDateFormat;
-import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.time.LocalDate;
 
 
 public class GoalDate {
     Storage storage = Storage.load();
-    private ArrayList<Goal> goals = Storage.load().goals;
-    private ArrayList<Goal> goalsOnDay = new ArrayList<>();
-    private LocalDate date = LocalDate.now();
+    private ArrayList<Goal> goalsToday;
+    private LocalDate date;
     int month;
     int year;
     int day;
@@ -19,61 +16,34 @@ public class GoalDate {
         this.year = year;
         this.month = month;
         this.day = day;
-        date.of(year,month,day);
-        goalsOnDay = getGoalsOnDate();
-    }
-    GoalDate(int year,int month,int day, ArrayList<Goal> goal)
-    {
-        this.year = year;
-        this.month = month;
-        this.day = day;
-        date.of(year,month,day);
-        goalsOnDay = getGoalsOnDate();
-        goals = goal;
+        this.date = LocalDate.of(year,month,day);
+        this.goalsToday = getGoalsOnDate();
     }
 
-    public int toIndex(DayOfWeek day)
+    public int toIndex()
     {
-         switch (day)
-         {
-            case  MONDAY:
-                return 1;
-            case TUESDAY:
-                return 2;
-            case WEDNESDAY:
-                return 3;
-            case THURSDAY:
-                return 4;
-            case FRIDAY:
-                return 5;
-            case SATURDAY:
-                return 6;
-            case SUNDAY:
-                return 7;
-        }
-        return -1;
+        return switch (date.getDayOfWeek()) {
+            case MONDAY -> 0;
+            case TUESDAY -> 1;
+            case WEDNESDAY -> 2;
+            case THURSDAY -> 3;
+            case FRIDAY -> 4;
+            case SATURDAY -> 5;
+            case SUNDAY -> 6;
+        };
     }
 
     private ArrayList<Goal> getGoalsOnDate()
     {
-        LocalDate c = LocalDate.now();
-        c.of(year,month,day);
-        int date;
-        ArrayList<Goal> goals1 = new ArrayList<>();
-        for(Goal goal: goals)
+        ArrayList<Goal> temp = new ArrayList<>();
+        for(Goal goal: storage.getGoals())
         {
-            date = toIndex(c.getDayOfWeek());
-            for (Integer days: goal.getDaysOfWeek())
+            if(toIndex() == day)
             {
-                if(date == days)
-                {
-                    goals1.add(goal);
-                }
-
+                temp.add(goal);
             }
-
         }
-        return goals1;
+        return temp;
     }
 
     public void checkIn(Goal goal)
@@ -83,18 +53,11 @@ public class GoalDate {
         goal.setLastChecked(today.toString());
     }
 
-
-
-
     public void setDate(LocalDate date) {
         this.date = date;
     }
     public void setDate(int year, int month, int day) {
-        date.of(year,month,day);
-    }
-
-    public void setGoals(ArrayList<Goal> goals) {
-        this.goals = goals;
+        date = LocalDate.of(year,month,day);
     }
 
     public LocalDate getDate() {
@@ -102,7 +65,7 @@ public class GoalDate {
     }
 
     public ArrayList<Goal> getGoals() {
-        return goals;
+        return goalsToday;
     }
     //function that will generate list of goals through them and add goals to its goal list
 
