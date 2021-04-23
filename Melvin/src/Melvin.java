@@ -1,63 +1,48 @@
-import org.json.simple.parser.ParseException;
-
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.text.*;
 
 /**
  *  <h1>Melvin</h1>
- *  Driver class
+ *  Driver class and controller
  *  Written Using Java 15
  *  @author Maraiah Matson, William Muhlbach
- *  @version 1.1
+ *  @version 2.1
  *  @since 2021-03-16
  */
 final class Melvin{
-    private Melvin(){
-        // adding this method prevents instantiation of Melvin elsewhere as a safeguard
-    }
-
 
     public static void main(String[] args) throws IOException {
-        // debug example
-        Debug debug = Debug.getInstance();
-        // CHANGE THIS VARIABLE TO TOGGLE DEBUGGING MODE
-        debug.active = true;
+        //Make Swing UI match the system UI if possible
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
-        //StoragePlaceholder storage = new StoragePlaceholder(5);
         Storage storage = Storage.load();
-
-        Window.load();
+        Debug debug = Debug.getInstance();
+        new BadgerController();
+        //StoragePlaceholder storage = new StoragePlaceholder(5);
 
         Goal test = new Goal();
         test.setName("test");
-        Calendar start = Calendar.getInstance();
-        start.set(2021, 4,1);
-        Calendar end = Calendar.getInstance();
-        end.set(2021,4,31);
-        //test.setStart(start);
-       // test.setEnd(end);
-        ArrayList<Integer> test1 = new ArrayList<>();
-        test1.add(1);
-        test.setDaysOfWeek(test1);
+        //test.setStart("2021-03-24");
+        //test.setEnd("2021-03-31");
+        //test.setFrequency(1);
         test.setMessage("i exist");
         test.setDescription("test of data");
         debug.print(test.toString());
-        //GoalDate today = new GoalDate(2021,4,22);
-        //System.out.println(today);
-       System.out.println(test.getDaysOfWeek());
-       System.out.println(test.getDaysBetween(2021,4,22));
-
-
-
+        storage.add(test);
 
 
         // storage test
         //Storage storage = new Storage();
         //storage.test();
         storage.close();
-
     }
 }
+
