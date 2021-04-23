@@ -8,12 +8,17 @@ import javax.swing.*;
  *  @version 1
  *  @since 2021-04-16
  */
+
 public class CategoryCreationPopup extends JOptionPane {
     JTextField catNameField = new JTextField(15);
     JLabel catLabel = new JLabel("Category Name: ");
     JPanel panel = new JPanel();
     Object[] options = {"Save Category","Cancel"};
     int buttonChoice;
+
+    /**
+     * Constructs a popup that allows a user to create a new Category
+     */
     public CategoryCreationPopup(){
         panel.add(catLabel);
         panel.add(catNameField);
