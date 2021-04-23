@@ -205,8 +205,6 @@ public class Box {
     private Goal JSONtoGoal(JSONObject o){
         // convert JSONObject to Goal object
         Goal goal = new Goal();
-        Habit habit = new Habit();
-        JSONObject oh;
 
         for(String key: goalAttributes){
             populateGoalAttribute(goal, o, key);

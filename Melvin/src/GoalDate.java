@@ -1,8 +1,15 @@
-
 import java.util.ArrayList;
 import java.time.LocalDate;
 
-//TODO ADD JAVADOC in GoalDate
+/**
+ *  <h1>GoalDate</h1>
+ *  Holds a date and all Goals that occur on that date
+ *  Written Using Java 15
+ *  @author Emily Wirth
+ *  @version 1.1
+ *  @since 2021-04-22
+ */
+
 public class GoalDate {
     Storage storage = Storage.load();
     private ArrayList<Goal> goalsToday;
@@ -11,6 +18,12 @@ public class GoalDate {
     int year;
     int day;
 
+    /**
+     * GoalDate Constructor
+     * @param year int year
+     * @param month int month
+     * @param day int day
+     */
     GoalDate(int year, int month, int day)
     {
         this.year = year;
@@ -20,6 +33,10 @@ public class GoalDate {
         this.goalsToday = getGoalsOnDate();
     }
 
+    /**
+     * Converts DayOfWeek enum constant to integer to pass to GUI
+     * @return int array index of day of the week
+     */
     public int toIndex()
     {
         return switch (date.getDayOfWeek()) {
@@ -46,6 +63,10 @@ public class GoalDate {
         return temp;
     }
 
+    /**
+     * Tells Goal object it has been logged for the day
+     * @param goal Goal object
+     */
     public void checkIn(Goal goal)
     {
         LocalDate today = LocalDate.now();
@@ -53,17 +74,36 @@ public class GoalDate {
         goal.setLastChecked(today.toString());
     }
 
+    /**
+     * Set LocalDate date object
+     * @param date LocalDate object
+     */
     public void setDate(LocalDate date) {
         this.date = date;
     }
+
+    /**
+     * Create LocalDate date object using year, month, and day
+     * @param year int year
+     * @param month int month
+     * @param day int day
+     */
     public void setDate(int year, int month, int day) {
         date = LocalDate.of(year,month,day);
     }
 
+    /**
+     * Get LocalDate date object
+     * @return LocalDate object
+     */
     public LocalDate getDate() {
         return date;
     }
 
+    /**
+     * Get list of Goals that occur on date
+     * @return ArrayList of Goal objects
+     */
     public ArrayList<Goal> getGoals() {
         return goalsToday;
     }

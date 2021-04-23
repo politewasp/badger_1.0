@@ -14,6 +14,10 @@ import java.time.LocalDate;
  */
 public class DateManagement {
 
+    /**
+     * Converts Month enum constant to integer to pass to GUI
+     * @return int array index of month
+     */
     public int toIndex(Month month)
     {
         switch (month)

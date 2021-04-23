@@ -178,7 +178,7 @@ public class Goal implements Comparable<Goal>
     }
 
     /**
-     * to string method for debugging
+     * To string method for debugging
      * @return string version of important fields in both goal and habit
      */
     public String toString()
@@ -186,21 +186,49 @@ public class Goal implements Comparable<Goal>
         return "Name: " + name ;
     }
 
+    /**
+     * Sets boolean for GUI to display Goal as completed for the day or not
+     * @param checked boolean checked
+     */
     public void setChecked(boolean checked) {
         this.checked = checked;
     }
 
+    /**
+     * Sets string to record last date checked. This allows for a way to
+     * check if this.checked needs to be reset for the day
+     * @param lastChecked String lastChecked
+     */
     public void setLastChecked(String lastChecked) {
         this.lastChecked = lastChecked;
     }
 
+    /**
+     * Compares two goals by name to check if they are the same
+     * @see Storage also to check if name is already taken when adding
+     * a new goal
+     * @param goal a different Goal object
+     * @return boolean
+     */
     public boolean equals(Goal goal) {
         return this.getName().equals(goal.getName());
     }
+
+    /**
+     * Compares two goals by name to check if they are the same
+     * or for use to sort them alphabetically
+     * @param goal a different Goal object
+     * @return boolean
+     */
     public int compareTo(Goal goal){
         return this.getName().compareTo(goal.getName());
     }
 
+    /**
+     * Converts DayOfWeek enum constant to integer to pass to GUI
+     * @param day DayOfWeek day
+     * @return int array index of day of the week
+     */
     public int toIndex(DayOfWeek day)
     {
         switch (day)
