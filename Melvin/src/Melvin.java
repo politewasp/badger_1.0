@@ -16,9 +16,16 @@ import java.io.IOException;
 final class Melvin{
 
     public static void main(String[] args) throws IOException {
+        //Make Swing UI match the system UI if possible
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
         Storage storage = Storage.load();
         Debug debug = Debug.getInstance();
-        BadgerController controller = new BadgerController();
+        new BadgerController();
         //StoragePlaceholder storage = new StoragePlaceholder(5);
 
         Goal test = new Goal();
