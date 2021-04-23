@@ -37,7 +37,7 @@ public class BadgerController {
 
         homeScrollPane.getVerticalScrollBar().setUnitIncrement(10);
         homeScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        window.addTab("Home", home);
+        window.addTab("Home", homeScrollPane);
         window.addTab("Calendar", cal);
 
     }
@@ -93,8 +93,15 @@ public class BadgerController {
             v.addMouseListener(new GoalClickedListener(g));
         }
     }
-    public void refreshHome(){
 
+    public void refreshHome(){
+        debug.print("Refresh called\n");
+        homeScrollPane.remove(home);
+        home = new HomePanel();
+        populateHomePanel(home);
+//        homeScrollPane.add(home);
+        window.revalidate();
+        window.repaint();
     }
     class GoalClickedListener implements MouseListener {
         Goal sourceGoal;
