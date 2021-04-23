@@ -1,4 +1,5 @@
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -266,7 +267,7 @@ public class Box {
             case "category" -> goal.getCategoryName();
             case "last completed" -> goal.getLastCompleted();
             case "message" -> goal.getMessage();
-            case "days of week" -> Arrays.toString(goal.getDaysOfWeek());
+            case "days of week" -> boolArrayToString(goal.getDaysOfWeek());
             case "logged" -> goal.getLogged();
             default -> throw new IllegalStateException("Unexpected value: " + key);
         };
@@ -305,9 +306,9 @@ public class Box {
                 case "category" -> goal.setCategoryName(keyValue);
                 case "description" -> goal.setDescription(keyValue);
                 case "last completed" -> goal.setLastCompleted(keyValue);
-                case "days of week" -> goal.getDaysOfWeek();
+                case "days of week" -> goal.setDaysOfWeek(stringToBoolArray(keyValue));
                 case "message" -> goal.setMessage(keyValue);
-                case "logged" -> goal.setLogged(keyValue.toString());
+                case "logged" -> goal.setLogged(keyValue);
                 default -> throw new IllegalStateException("Unexpected value: " + key);
             }
         }
@@ -332,6 +333,33 @@ public class Box {
             default -> throw new IllegalStateException("Unexpected value: " + key);
         }
         return keyValue;
+    }
+
+    private String boolArrayToString(boolean [] arr){
+        StringBuilder str = new StringBuilder();
+        for(boolean b: arr){
+            if(b){
+                str.append("1");
+            }
+            else{
+                str.append("0");
+            }
+        }
+        return String.valueOf(str);
+    }
+
+    private boolean [] stringToBoolArray(String str){
+        boolean [] arr = new boolean[7];
+
+        for(int i = 0; i < 7; i++){
+            if(str.charAt(i) == 0){
+                arr[i] = false;
+            }
+            else{
+                arr[i] = true;
+            }
+        }
+        return arr;
     }
 
 }
