@@ -22,11 +22,8 @@ public class BadgerController {
     CalendarPanel cal = new CalendarPanel();
     Debug debug = Debug.getInstance();
     public BadgerController() {
-
         window.getCreateCatButton().addActionListener(CreateCatButtonListener);
         window.getCreateGoalButton().addActionListener(CreateGoalButtonListener);
-        //do stuff to calendar if needed
-        window.setVisible(true);
         // CHANGE THIS VARIABLE TO TOGGLE DEBUGGING MODE
         debug.active = true;
 
@@ -38,7 +35,8 @@ public class BadgerController {
         homeScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
         window.addCenter(homeScrollPane);
-        window.addCenter(new JLabel("I exist!!!"));
+        //window.addCenter(new JLabel("I exist!!!"));
+        window.setVisible(true);
 
     }
     ActionListener CreateCatButtonListener = e -> createCat();
@@ -98,12 +96,13 @@ public class BadgerController {
         debug.print("Refresh called\n");
         window.invalidate();
         window.removeCenter();
-        homeScrollPane.remove(home);
+        homeScrollPane = new JScrollPane();
         home = new HomePanel();
         populateHomePanel(home);
         homeScrollPane.add(home);
         window.addCenter(homeScrollPane);
         window.validate();
+        window.setVisible(true);
 //        window.repaint();
     }
     class GoalClickedListener implements MouseListener {
