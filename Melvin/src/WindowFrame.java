@@ -11,7 +11,6 @@ import java.awt.*;
  */
 public class WindowFrame extends JFrame {
     Debug debug = Debug.getInstance();
-    JTabbedPane centerView = new JTabbedPane();
 
     JPanel bottomButtons = new JPanel();
     JButton createGoalButton = new JButton("+ Goal");
@@ -30,8 +29,6 @@ public class WindowFrame extends JFrame {
 
         setLayout(layout);
 
-        add(centerView, BorderLayout.CENTER);
-
         bottomButtons.add(createGoalButton);
         createGoalButton.setFont(buttonFont);
 
@@ -46,8 +43,11 @@ public class WindowFrame extends JFrame {
     public JButton getCreateCatButton(){
         return createCatButton;
     }
-    public void addTab(String t, Component c){
-        centerView.addTab(t, c);
+    public void addCenter(Component c){
+        add(c, BorderLayout.CENTER);
+    }
+    public void removeCenter(){
+        remove(layout.getLayoutComponent(BorderLayout.CENTER));
     }
 
 //
