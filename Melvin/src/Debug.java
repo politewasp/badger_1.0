@@ -23,7 +23,9 @@ class Debug
         active = true;
     }
 
-    // static method to create instance of Singleton class
+    /**
+     * Debug.getInstance() is used to load Debug instance
+     */
     public static Debug getInstance()
     {
         if (single_instance == null)
@@ -32,18 +34,27 @@ class Debug
         return single_instance;
     }
 
+    /**
+     * @param message String message to print to terminal
+     */
     public void print(String message){
         if(active){
             System.out.println(message);
         }
     }
 
+    /**
+     * @param bool Boolean value to print to terminal
+     */
     public void print(Boolean bool){
         if(active){
             System.out.println(bool.toString());
         }
     }
 
+    /**
+     * @param i int value to print to terminal
+     */
     public void print(int i){
         if(active){
             System.out.println(i);

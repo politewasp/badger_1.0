@@ -20,7 +20,10 @@ public class Box {
     // static variable single_instance of type Debug
     private static Box single_instance = null;
 
-    // constants
+    /**
+     * Contains list of JSON key constants
+     * for Goal and Category objects
+     */
     String goalKey = "Goals";
     String categoryKey = "Categories";
     String [] goalAttributes = new String [] {
@@ -31,7 +34,10 @@ public class Box {
             "name", "description", "image link"
     };
 
-    // interface attributes
+    /**
+     * ArrayLists are used to store Goal and Category
+     * objects to interface with Storage class
+     */
     ArrayList<Goal> goals;
     ArrayList<Category> categories;
 
@@ -43,6 +49,10 @@ public class Box {
     JSONArray jsonGoals;
     JSONArray jsonCategories;
 
+    /**
+     * Box Constructor is set to private so that
+     * only one instance of it can be created
+     */
     private Box() {
         goals = new ArrayList<>();
         categories = new ArrayList<>();
@@ -50,6 +60,9 @@ public class Box {
         json = unpack(filename);
     }
 
+    /**
+     * Box.load() is used to load Box instance
+     */
     public static Box load()
     {
         if (single_instance == null)
@@ -58,20 +71,32 @@ public class Box {
         return single_instance;
     }
 
+    /**
+     * @return goals read from JSON file
+     */
     public ArrayList<Goal> getGoals(){
         return goals;
     }
 
+    /**
+     * @return categories read from JSON file
+     */
     public ArrayList<Category> getCategories(){
         return categories;
     }
 
-
+    /**
+     * Writes all goals and categories to JSON file and closes filestream
+     */
     public void close() throws IOException {
         pack();
         write();
     }
 
+    /**
+     * Converts high-level Goal and Category objects
+     * into JSON format to prepare for file writing
+     */
     private void pack(){
         /* take list of goals and list of categories
            and reconstruct the high level JSONObject */
@@ -98,6 +123,10 @@ public class Box {
         json = jsonFinal;
     }
 
+    /**
+     * @param filename - uses Box filename attribute
+     * @return JSONObject read from JSON file
+     */
     private JSONObject unpack(String filename){
         /* take the high level JSONObject and construct
            the attributes goals and categories, should
@@ -138,6 +167,10 @@ public class Box {
         return json;
     }
 
+    /**
+     * @param goal - Goal object
+     * @return JSONObject converted from Goal object
+     */
     private JSONObject toJSON(Goal goal){
         // convert Goal object to JSONObject
         JSONObject o = new JSONObject();
@@ -150,6 +183,10 @@ public class Box {
         return o;
     }
 
+    /**
+     * @param c - Category object
+     * @return JSONObject converted from Category object
+     */
     private JSONObject toJSON(Category c){
         // convert Category object to JSONObject
         JSONObject o = new JSONObject();
@@ -161,6 +198,10 @@ public class Box {
         return o;
     }
 
+    /**
+     * @param o - JSONObject
+     * @return Goal object converted from JSON
+     */
     private Goal JSONtoGoal(JSONObject o){
         // convert JSONObject to Goal object
         Goal goal = new Goal();
@@ -173,6 +214,10 @@ public class Box {
         return goal;
     }
 
+    /**
+     * @param o - JSONObject
+     * @return Category object converted from JSON
+     */
     private Category JSONtoCategory(JSONObject o){
         // convert JSONObject to Category Object
         Category c = new Category();
@@ -182,6 +227,9 @@ public class Box {
         return c;
     }
 
+    /**
+     * @return JSONObject in lowest level form from file
+     */
     private JSONObject read() throws IOException, ParseException {
         inFile = new FileReader(filename);
         JSONParser parser = new JSONParser();
@@ -190,12 +238,21 @@ public class Box {
         return jsonObject;
     }
 
+    /**
+     * Writes packed JSONObject to JSON file
+     */
     private void write() throws IOException {
         outFile = new FileWriter(filename);
         outFile.write(json.toJSONString());
         outFile.close();
     }
 
+    /**
+     * Maps keys to Goal object get() methods
+     * @param goal Goal object
+     * @param key String key
+     * @return String value
+     */
     private String goalMap(Goal goal, String key){
         // backend method to return key from goal
         return switch (key) {
@@ -209,6 +266,12 @@ public class Box {
         };
     }
 
+    /**
+     * Maps keys to Category object get() methods
+     * @param c Category object
+     * @param key String key
+     * @return String value
+     */
     private String categoryMap(Category c, String key){
         // backend method to return key from category
         return switch(key){
@@ -219,6 +282,13 @@ public class Box {
         };
     }
 
+    /**
+     * Maps keys to Goal object set() methods
+     * @param goal Goal object
+     * @param o JSONObject
+     * @param key String key
+     * @return String value
+     */
     private String populateGoalAttribute(Goal goal, JSONObject o, String key){
         // inputs goal, json object goal, and key
         // calls set method for goal attribute
@@ -235,6 +305,13 @@ public class Box {
         return keyValue;
     }
 
+    /**
+     * Maps keys to Category object set() methods
+     * @param c Category object
+     * @param o JSONObject
+     * @param key String key
+     * @return String value
+     */
     private String populateCategoryAttribute(Category c, JSONObject o, String key){
         // inputs category, json object category, and key
         // calls set method for category attribute
