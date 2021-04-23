@@ -15,41 +15,63 @@ import java.util.Collections;
  */
 
 public class BadgerController {
-
     WindowFrame window = new WindowFrame();
     Storage storage = Storage.load();
-    HomePanel home = new HomePanel();
-
-    JScrollPane homeScrollPane = new JScrollPane();
-
+    JPanel home = new JPanel();
+    JScrollPane scrollPane = new JScrollPane();
+    BoxLayout homeLayout = new BoxLayout(home, BoxLayout.Y_AXIS);
     Debug debug = Debug.getInstance();
+
+//    WindowFrame window;
+//    Storage storage;
+//    JPanel home;
+//    JScrollPane homeScrollPane;
+//    BoxLayout homeLayout;
+//    Debug debug;
+
     public BadgerController() {
+//        window = new WindowFrame();
+//        storage = Storage.load();
+//        home = new JPanel();
+//        homeScrollPane = new JScrollPane();
+//        homeLayout = new BoxLayout(home, BoxLayout.Y_AXIS);
+//        debug = Debug.getInstance();
+
         window.getCreateCatButton().addActionListener(CreateCatButtonListener);
         window.getCreateGoalButton().addActionListener(CreateGoalButtonListener);
         // CHANGE THIS VARIABLE TO TOGGLE DEBUGGING MODE
         debug.active = true;
 
+
+        home.setLayout(homeLayout);
         populateHomePanel(home);
-        homeScrollPane.add(home);
+        scrollPane = new JScrollPane(home);
 
-        homeScrollPane.getVerticalScrollBar().setUnitIncrement(10);
-        homeScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        homeScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(10);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
-        window.addCenter(homeScrollPane);
+        window.addCenter(scrollPane);
         //window.addCenter(new JLabel("I exist!!!"));
         window.setVisible(true);
 
     }
     ActionListener CreateCatButtonListener = e -> createCat();
     ActionListener CreateGoalButtonListener = e -> createGoal();
-    public void openHome(){
+    public void refreshHome(){
+        debug.print("Refresh called\n");
+        window.invalidate();
         window.remove(window.layout.getLayoutComponent(BorderLayout.CENTER));
         Collections.sort(storage.goals);
-        JScrollPane scrollPane = new JScrollPane(new HomePanel());
+        home = new JPanel();
+        homeLayout = new BoxLayout(home, BoxLayout.Y_AXIS);
+        home.setLayout(homeLayout);
+        populateHomePanel(home);
+        scrollPane = new JScrollPane(home);
+
         scrollPane.getVerticalScrollBar().setUnitIncrement(10);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         window.add(scrollPane, BorderLayout.CENTER);
+        window.validate();
     }
     public void createCat(){
         CategoryCreationPopup popup = new CategoryCreationPopup();
@@ -89,32 +111,18 @@ public class BadgerController {
         debug.print(popup.buttonChoice);
         debug.print("\n");
     }
-    public void populateHomePanel(HomePanel p){
+    public void populateHomePanel(JPanel p){
         for (Goal g : storage.goals) {
             debug.print(g.getName());
             GoalViewPanel v = new GoalViewPanel();
             v.nameLabel.setText(g.getName());
             v.catLabel.setText(g.getCategoryName());
             //logic to ascertain if a goal is logged and the apply the proper message to status.
-            p.addGoalPanel(v);
+            p.add(v);
             v.addMouseListener(new GoalClickedListener(g));
         }
     }
 
-    public void refreshHome(){
-        debug.print("Refresh called\n");
-        window.invalidate();
-        openHome();
-//        window.removeCenter();
-//        homeScrollPane = new JScrollPane();
-//        home = new HomePanel();
-//        populateHomePanel(home);
-//        homeScrollPane.add(home);
-//        window.addCenter(homeScrollPane);
-        window.validate();
-        //window.setVisible(true);
-//        window.repaint();
-    }
     class GoalClickedListener implements MouseListener {
         Goal sourceGoal;
         public GoalClickedListener(Goal goal){
