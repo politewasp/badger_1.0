@@ -150,6 +150,11 @@ public class Goal implements Comparable<Goal>
     }
 
     /**
+     * Sets the days of week goal occurs
+     * @param daysOfWeek ArrayList<Integer></Integer>
+     */
+
+    /**
      * Sets completed status to true or false
      * @param today sets the goal to be complete or not
      */

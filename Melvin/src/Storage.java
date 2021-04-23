@@ -48,17 +48,17 @@ public class Storage {
     }
 
     public void test() throws IOException {
-        Goal goal = new Goal();
-        goal.setName("goal2");
-        goal.setDescription("this is another goal description");
-        add(goal);
-        Category c = new Category("cat1");
-        add(c);
-
-        for(Goal g: goals){
-            debug.print(g.getName());
-        }
-        close();
+//        Goal goal = new Goal();
+//        goal.setName("goal2");
+//        goal.setDescription("this is another goal description");
+//        add(goal);
+//        Category c = new Category("cat1");
+//        add(c);
+//
+//        for(Goal g: goals){
+//            debug.print(g.getName());
+//        }
+//        close();
     }
 
     /**
@@ -70,7 +70,7 @@ public class Storage {
     public boolean add(Goal goal){
         for(Goal g: goals){
             if(g.equals(goal)){
-                debug.print("This Goal Name is taken. ");
+//                debug.print("This Goal Name is taken. ");
                 return false;
             }
         }
@@ -87,7 +87,7 @@ public class Storage {
     public boolean add(Category category){
         for(Category c: categories){
             if(c.equals(category)){
-                debug.print("This Category Name is taken. ");
+//                debug.print("This Category Name is taken. ");
                 return false;
             }
         }
@@ -103,7 +103,6 @@ public class Storage {
      */
     public boolean delete(Goal goal){
         boolean removed = goals.remove(goal);
-        System.out.println(removed);
         return removed;
     }
 
@@ -115,7 +114,6 @@ public class Storage {
      */
     public boolean delete(Category c){
         boolean removed = categories.remove(c);
-        debug.print(removed);
         return removed;
 
     }
