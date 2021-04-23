@@ -1,7 +1,10 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Collections;
+
 /**
  *  <h1>BadgerController</h1>
  *  Controller
@@ -19,7 +22,6 @@ public class BadgerController {
 
     JScrollPane homeScrollPane = new JScrollPane();
 
-    CalendarPanel cal = new CalendarPanel();
     Debug debug = Debug.getInstance();
     public BadgerController() {
         window.getCreateCatButton().addActionListener(CreateCatButtonListener);
@@ -41,7 +43,14 @@ public class BadgerController {
     }
     ActionListener CreateCatButtonListener = e -> createCat();
     ActionListener CreateGoalButtonListener = e -> createGoal();
-
+    public void openHome(){
+        window.remove(window.layout.getLayoutComponent(BorderLayout.CENTER));
+        Collections.sort(storage.goals);
+        JScrollPane scrollPane = new JScrollPane(new HomePanel());
+        scrollPane.getVerticalScrollBar().setUnitIncrement(10);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        window.add(scrollPane, BorderLayout.CENTER);
+    }
     public void createCat(){
         CategoryCreationPopup popup = new CategoryCreationPopup();
         if(popup.buttonChoice==JOptionPane.OK_OPTION){
@@ -95,14 +104,15 @@ public class BadgerController {
     public void refreshHome(){
         debug.print("Refresh called\n");
         window.invalidate();
-        window.removeCenter();
-        homeScrollPane = new JScrollPane();
-        home = new HomePanel();
-        populateHomePanel(home);
-        homeScrollPane.add(home);
-        window.addCenter(homeScrollPane);
+        openHome();
+//        window.removeCenter();
+//        homeScrollPane = new JScrollPane();
+//        home = new HomePanel();
+//        populateHomePanel(home);
+//        homeScrollPane.add(home);
+//        window.addCenter(homeScrollPane);
         window.validate();
-        window.setVisible(true);
+        //window.setVisible(true);
 //        window.repaint();
     }
     class GoalClickedListener implements MouseListener {
