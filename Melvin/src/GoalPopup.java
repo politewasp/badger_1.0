@@ -55,6 +55,10 @@ public abstract class GoalPopup extends JOptionPane{
 
     JComboBox categoryPicker = new JComboBox(storage.getCategoryNames().toArray());
 
+    /**
+     * Constructs a Popup with a Panel containing user-editable
+     * fields for Goal data
+     */
     public GoalPopup(){
         daySelector.setLayout(new GridLayout(2, 7));
         for(Character c:"MTWTFSS".toCharArray()){
@@ -100,17 +104,17 @@ public abstract class GoalPopup extends JOptionPane{
 
 
 
-        con.gridx = 2;
-        con.gridy = 0;
-        paramDump.add(startLabel, con);
-        con.gridx = 3;
-        paramDump.add(new JLabel("Placeholder"), con);
-
-        con.gridx = 2;
-        con.gridy = 1;
-        paramDump.add(endLabel, con);
-        con.gridx = 3;
-        paramDump.add(new JLabel("Placeholder"), con);
+//        con.gridx = 2;
+//        con.gridy = 0;
+//        paramDump.add(startLabel, con);
+//        con.gridx = 3;
+//        paramDump.add(new JLabel("Placeholder"), con);
+//
+//        con.gridx = 2;
+//        con.gridy = 1;
+//        paramDump.add(endLabel, con);
+//        con.gridx = 3;
+//        paramDump.add(new JLabel("Placeholder"), con);
 
         con.gridx = 2;
         con.gridy = 2;
@@ -120,7 +124,15 @@ public abstract class GoalPopup extends JOptionPane{
     }
 }
 
+/**
+ * Specialized GoalPopup for modifying a Goal
+ */
 class GoalModifyPopup extends GoalPopup{
+    /**
+     * populates the fields of a standard GoalPopup with the
+     * data from the supplied Goal object
+     * @param goal Goal to be modified
+     */
     public GoalModifyPopup(Goal goal){
         Object[] options = {"Save Goal", "Cancel", "Delete Goal"};
         //inputGoal = goal;
@@ -133,9 +145,17 @@ class GoalModifyPopup extends GoalPopup{
     }
 }
 
+/**
+ * Specialized GoalPoppup for the creation of a new Goal object
+ */
 class GoalCreationPopup extends GoalPopup{
     Goal newGoal = new Goal();
     Object[] options = {"Save Goal", "Cancel"};
+
+    /**
+     * Creates and summons a GoalPopup, then passes the user entered
+     * information into a Goal object
+     */
     public GoalCreationPopup(){
         buttonChoice = showOptionDialog(null, paramDump, "Goal Creation", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, "Save Goal");
         newGoal.setName(goalNameField.getText());
