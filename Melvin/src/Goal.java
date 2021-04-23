@@ -193,8 +193,8 @@ public class Goal implements Comparable<Goal>
      * Sets completed status to true or false
      * @param completed sets the goal to be complete or not
      */
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
+    public void setCompleted(GoalDate d) {
+        this.lastChecked = d.toString();
     }
 
     /**

@@ -172,7 +172,7 @@ public class BadgerController {
             JOptionPane goalMenu = new JOptionPane();
             int buttonChoice = goalMenu.showOptionDialog(null, "What would you like to do?","Goal Options", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, "Log Goal");
             if(buttonChoice==JOptionPane.YES_OPTION){
-                sourceGoal.setCompleted(true);
+                sourceGoal.setCompleted(new GoalDate());
             }else if(buttonChoice==JOptionPane.NO_OPTION){
                 modifyGoal(sourceGoal);
             }
