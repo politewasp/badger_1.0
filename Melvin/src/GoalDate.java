@@ -20,6 +20,19 @@ public class GoalDate {
 
     /**
      * GoalDate Constructor
+     * Defaults to today
+     */
+    public GoalDate(){
+        this.date = LocalDate.now();
+        this.year = date.getYear();
+        this.month = date.getMonthValue();
+        this.day = date.getDayOfMonth();
+        this.goalsToday = getGoalsOnDate();
+    }
+
+
+    /**
+     * GoalDate Constructor
      * @param year int year
      * @param month int month
      * @param day int day

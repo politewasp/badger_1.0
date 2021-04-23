@@ -19,6 +19,10 @@ class GoalViewPanel extends JPanel {
     JLabel totalDaysLabel = new JLabel();
     JLabel currentDaysLabel = new JLabel();
 
+    /**
+     * Constructs a JPanel with fields for the data
+     * stored in a Goal
+     */
     public GoalViewPanel(){
         setMaximumSize(new Dimension(1000,100));
         setPreferredSize(new Dimension(200,100));
@@ -35,9 +39,14 @@ class GoalViewPanel extends JPanel {
         add(status);
     }
 
+    /**
+     * Sets the status message to be displayed on the Panel
+     * @param statusMessage String message to be displayed
+     */
     public void setStatus(String statusMessage){
         status.setText(statusMessage);
     }
+
     public void setCurrentDays(Integer days){
         currentDaysLabel.setText("Day "+days);
     }
