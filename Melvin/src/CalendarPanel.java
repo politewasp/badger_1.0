@@ -8,5 +8,6 @@ class CalendarPanel extends JPanel {
 
     public CalendarPanel(){
         //uh, y'know... make a calendar i guess
+        add(new JLabel("[insert calendar here]"));
     }
 }

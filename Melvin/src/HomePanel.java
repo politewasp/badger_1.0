@@ -1,11 +1,12 @@
 import javax.swing.*;
 
 class HomePanel extends JPanel {
-    BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
-    JPanel goalListPanel = new JPanel(layout);
+
+    JPanel goalListPanel = new JPanel();
+    BoxLayout layout = new BoxLayout(goalListPanel, BoxLayout.Y_AXIS);
     JScrollPane scrollPane = new JScrollPane(goalListPanel);
     public HomePanel(){
-        setLayout(layout);
+        goalListPanel.setLayout(layout);
         scrollPane.getVerticalScrollBar().setUnitIncrement(10);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
     }
