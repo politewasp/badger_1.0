@@ -22,47 +22,34 @@ class GoalViewPanel extends JPanel {
     JLabel totalDaysLabel = new JLabel();
     JLabel currentDaysLabel = new JLabel();
 
-    GridBagLayout layout = new GridBagLayout();
-    GridBagConstraints con = new GridBagConstraints();
+    BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
     /**
      * Constructs a JPanel with fields for the data
      * stored in a Goal
      */
     public GoalViewPanel(){
-        setMaximumSize(new Dimension(1000,100));
+        setMaximumSize(new Dimension(1000,200));
         setPreferredSize(new Dimension(200,100));
         setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createEmptyBorder(5,10,5,10),
                 BorderFactory.createLineBorder(Color.black, 3)
         ));
 
-        JPanel nameAndCatPanel = new JPanel();
-        nameAndCatPanel.add(nameLabel);
+        add(nameLabel);
         nameLabel.setFont(nameFont);
-        nameAndCatPanel.add(new JLabel(" in "));
-        nameAndCatPanel.add(catLabel);
+        add(new JLabel(" in "));
+        add(catLabel);
         catLabel.setFont(catFont);
 
-        JPanel loggedPanel = new JPanel();
-        loggedPanel.add(new JLabel("Logged "));
-        loggedPanel.add(logsLabel);
+        add(new JLabel("Logged "));
+        add(logsLabel);
         logsLabel.setFont(logsFont);
-        loggedPanel.add(new JLabel(" times."));
+        add(new JLabel(" times."));
 
-        setLayout(layout);
-
-        con.insets = new Insets(5, 5, 5, 5);
-        con.anchor = GridBagConstraints.SOUTHWEST;
-        con.gridx = 0;
-        con.gridy = 0;
-        add(nameAndCatPanel, con);
-        con.gridy = 1;
-        add(status, con);
-        con.gridy = 2;
-        add(loggedPanel, con);
+        add(status);
 
 
-//        setBackground(Color.MAGENTA);
+        //setBackground(Color.MAGENTA);
     }
 
     /**
@@ -77,8 +64,8 @@ class GoalViewPanel extends JPanel {
      * Updates the number of times the goal has been logged
      * @param timesLogged Integer number of time the goal has been logged
      */
-    public void setLogNum(Integer timesLogged){
-        logsLabel.setText(timesLogged.toString());
+    public void setLogNum(String timesLogged){
+        logsLabel.setText(timesLogged);
     }
 
     public void setCurrentDays(Integer days){
