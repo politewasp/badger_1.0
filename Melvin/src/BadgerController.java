@@ -41,7 +41,7 @@ public class BadgerController {
         window.getCreateCatButton().addActionListener(CreateCatButtonListener);
         window.getCreateGoalButton().addActionListener(CreateGoalButtonListener);
         // CHANGE THIS VARIABLE TO TOGGLE DEBUGGING MODE
-        debug.active = true;
+        debug.active = false;
 
 
         home.setLayout(homeLayout);

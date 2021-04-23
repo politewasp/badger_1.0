@@ -152,7 +152,6 @@ public class Box {
             json.put(goalKey, new JSONArray());
             json.put(categoryKey, new JSONArray());
         }
-        debug.print("json read");
 
         // extracts arrays from json object
         jsonGoals = (JSONArray) json.get(goalKey);
@@ -160,13 +159,11 @@ public class Box {
 
         // builds interface attributes from json
         for(Object object: jsonGoals){
-            debug.print("reading goal object");
             JSONObject o = (JSONObject) object;
             Goal goal = JSONtoGoal(o);
             goals.add(goal);
         }
         for(Object object: jsonCategories){
-            debug.print("reading category object");
             JSONObject o = (JSONObject) object;
             Category c = JSONtoCategory(o);
             categories.add(c);
