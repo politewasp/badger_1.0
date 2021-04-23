@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 
 /**
@@ -123,6 +124,7 @@ public class BadgerController {
             //set start
             //set end
             //goal.setDayOfWeek(daySelector.getSelectedIndex());
+            goal.setDaysOfWeek(popup.dayArray());
         } else if(popup.buttonChoice==JOptionPane.CANCEL_OPTION){
             storage.delete(goal);
         }
@@ -144,6 +146,7 @@ public class BadgerController {
             v.nameLabel.setText(g.getName());
             v.catLabel.setText(g.getCategoryName());
             //logic to ascertain if a goal is logged and the apply the proper message to status.
+            v.setLogNum(g.getLogged());
             if(g.getCompleted()){
                 v.setStatus("Goal completed today!😊");
             }else{

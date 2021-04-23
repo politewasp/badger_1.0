@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  *  <h1>GoalPopup</h1>
@@ -102,8 +103,6 @@ public abstract class GoalPopup extends JOptionPane{
         con.gridx = 1;
         paramDump.add(new JScrollPane(goalDescField), con);
 
-
-
 //        con.gridx = 2;
 //        con.gridy = 0;
 //        paramDump.add(startLabel, con);
@@ -121,6 +120,10 @@ public abstract class GoalPopup extends JOptionPane{
         paramDump.add(daysLabel, con);
         con.gridx = 3;
         paramDump.add(daySelector, con);
+    }
+    public boolean[] dayArray(){
+        boolean[] bArray = {checkMon.isSelected(), checkTue.isSelected(), checkWed.isSelected(), checkThu.isSelected(), checkFri.isSelected(), checkSat.isSelected(), checkSun.isSelected()};
+        return bArray;
     }
 }
 
@@ -146,7 +149,7 @@ class GoalModifyPopup extends GoalPopup{
 }
 
 /**
- * Specialized GoalPoppup for the creation of a new Goal object
+ * Specialized GoalPopup for the creation of a new Goal object
  */
 class GoalCreationPopup extends GoalPopup{
     Goal newGoal = new Goal();
