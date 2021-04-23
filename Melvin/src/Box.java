@@ -42,7 +42,7 @@ public class Box {
     ArrayList<Category> categories;
 
     // backend management attributes
-    String filename;
+    String filename = "Melvin\\storage\\storage.json";
     FileWriter outFile;
     FileReader inFile;
     JSONObject json;
@@ -56,7 +56,6 @@ public class Box {
     private Box() {
         goals = new ArrayList<>();
         categories = new ArrayList<>();
-        filename = "Melvin\\storage\\storage.json";
         json = unpack(filename);
     }
 
@@ -87,8 +86,12 @@ public class Box {
 
     /**
      * Writes all goals and categories to JSON file and closes filestream
+     * @param goals ArrayList of Goals
+     * @param categories ArrayList of Categories
      */
-    public void close() throws IOException {
+    public void close(ArrayList<Goal> goals, ArrayList<Category> categories) throws IOException {
+        this.goals = goals;
+        this.categories = categories;
         pack();
         write();
     }
