@@ -48,22 +48,17 @@ public class Storage {
     }
 
     public void test() throws IOException {
-//        Goal goal = new Goal();
-//        goal.setName("goal2");
-//        goal.setDescription("this is another goal description");
-//        add(goal);
-//        Category c = new Category("cat1");
-//        add(c);
-//        write();
-//
-//        for(Goal g: goals){
-//            debug.print(g.getName());
-//        }
-//        delete(goals.get(0));
-//        for(Goal g: goals){
-//            System.out.println(g.getName());
-//        }
-//        write();
+        Goal goal = new Goal();
+        goal.setName("goal2");
+        goal.setDescription("this is another goal description");
+        add(goal);
+        Category c = new Category("cat1");
+        add(c);
+
+        for(Goal g: goals){
+            debug.print(g.getName());
+        }
+        close();
     }
 
     /**
@@ -161,7 +156,7 @@ public class Storage {
      * Writes to JSON file and closes filewriter from Box
      */
     public void close() throws IOException {
-        box.close();
+        box.close(goals, categories);
     }
 
     /**
