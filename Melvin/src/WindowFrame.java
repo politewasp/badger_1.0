@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.util.Collections;
 
 /**
  *  <h1>Window</h1>
@@ -13,7 +11,6 @@ import java.util.Collections;
  */
 public class WindowFrame extends JFrame {
     Debug debug = Debug.getInstance();
-    JLabel title = new JLabel("", SwingConstants.CENTER);
     JTabbedPane centerView = new JTabbedPane();
 
     JPanel bottomButtons = new JPanel();
@@ -32,8 +29,8 @@ public class WindowFrame extends JFrame {
         setTitle("Badger");
 
         setLayout(layout);
-        add(title, BorderLayout.PAGE_START);
-        title.setFont(titleFont);
+
+        add(centerView, BorderLayout.CENTER);
 
         bottomButtons.add(createGoalButton);
         createGoalButton.setFont(buttonFont);
@@ -51,9 +48,6 @@ public class WindowFrame extends JFrame {
     }
     public void addTab(String t, Component c){
         centerView.addTab(t, c);
-    }
-    public void setTitle(String t){
-        title.setText(t);
     }
 
 //
