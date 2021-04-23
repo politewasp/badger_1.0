@@ -134,9 +134,10 @@ class GoalModifyPopup extends GoalPopup{
 }
 
 class GoalCreationPopup extends GoalPopup{
-    Goal newGoal = new Goal();
+    Goal newGoal;
     Object[] options = {"Save Goal", "Cancel"};
     public GoalCreationPopup(){
+        newGoal = new Goal();
         buttonChoice = showOptionDialog(null, paramDump, "Goal Creation", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, "Save Goal");
         newGoal.setName(goalNameField.getText());
         newGoal.setDescription(goalDescField.getText());

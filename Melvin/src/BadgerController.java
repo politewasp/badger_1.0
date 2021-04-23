@@ -80,6 +80,7 @@ public class BadgerController {
         debug.print("\n");
     }
     public void populateHomePanel(HomePanel p){
+        debug.print("populating HomePanel...");
         for (Goal g : storage.goals) {
             debug.print(g.getName());
             GoalViewPanel v = new GoalViewPanel();
@@ -89,6 +90,7 @@ public class BadgerController {
             p.addGoalPanel(v);
             v.addMouseListener(new GoalClickedListener(g));
         }
+        debug.print("");
     }
 
     public void refreshHome(){
@@ -99,8 +101,19 @@ public class BadgerController {
         populateHomePanel(home);
         homeScrollPane.add(home);
         window.validate();
+        window.repaint();
+
+//        debug.print("Refresh called\n");
+//        window.invalidate();
+//        homeScrollPane = new JScrollPane();
+//        home = new HomePanel();
+//        populateHomePanel(home);
+//        homeScrollPane.add(home);
+//        window.validate();
+//        window.setVisible(true);
 //        window.repaint();
     }
+
     class GoalClickedListener implements MouseListener {
         Goal sourceGoal;
         public GoalClickedListener(Goal goal){
