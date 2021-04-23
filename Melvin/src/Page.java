@@ -19,7 +19,7 @@ class HomePanel extends JPanel{
     }
 }
 
-class CalendarPanel extends Page{
+class CalendarPanel extends JPanel{
     JLabel labelM, labelY;
     JButton prevMonth, nextMonth;
     JTable calendarTable;
@@ -31,7 +31,7 @@ class CalendarPanel extends Page{
 }
 
 
-class GoalView extends JPanel{
+class GoalViewPanel extends JPanel{
     JLabel nameLabel = new JLabel();
     Font nameFont = new Font(new JLabel().getFont().getName(), Font.PLAIN, 20);
 
@@ -39,7 +39,7 @@ class GoalView extends JPanel{
     Font catFont = new Font(new JLabel().getFont().getName(), Font.BOLD, 14);
     JLabel status = new JLabel();
 
-    public GoalView(){
+    public GoalViewPanel(){
         setMaximumSize(new Dimension(1000,100));
         setPreferredSize(new Dimension(200,100));
         setBorder(BorderFactory.createCompoundBorder(

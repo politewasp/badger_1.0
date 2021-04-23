@@ -33,7 +33,7 @@ final class Melvin{
         }
 
         for(Goal g:storage.goals){
-            GoalView v = new GoalView();
+            GoalViewPanel v = new GoalViewPanel();
             v.nameLabel.setText(g.getName());
             v.catLabel.setText(g.getCategoryName());
             //logic to ascertain if a goal is logged and the apply the proper message to status.

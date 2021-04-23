@@ -79,7 +79,7 @@ public class BadgerController {
         Storage storage = Storage.load();
         @Override
         public void mouseClicked(MouseEvent e) {
-            GoalView eventSource = (GoalView)e.getSource();
+            GoalViewPanel eventSource = (GoalViewPanel)e.getSource();
             Goal goal = eventSource.sourceGoal;
             GoalModifyPopup popup = new GoalModifyPopup(goal);
             if(popup.buttonChoice==JOptionPane.OK_OPTION){
