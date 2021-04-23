@@ -1,5 +1,4 @@
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.time.*;
@@ -26,6 +25,8 @@ public class Goal implements Comparable<Goal>
     private String categoryName;
     private LocalDate start;
     private LocalDate end;
+    private String lastChecked;
+    private boolean checked;
     private ArrayList<Integer> daysOfWeek = new ArrayList<>();
     private boolean completed;
     private String message;
@@ -36,6 +37,7 @@ public class Goal implements Comparable<Goal>
         categoryName = "";
         start = LocalDate.now();
         end = null;
+        lastChecked = "";
         daysOfWeek.add(2);
         message = "";
         completed = false;
@@ -47,6 +49,7 @@ public class Goal implements Comparable<Goal>
         description = "";
         categoryName = "";
         daysOfWeek.add(2);
+        lastChecked = "";
         start = LocalDate.now();
         completed = false;
     }
@@ -105,6 +108,15 @@ public class Goal implements Comparable<Goal>
     public ArrayList<Integer> getDaysOfWeek() {
         return daysOfWeek;
     }
+
+    public String getLastChecked() {
+        return lastChecked;
+    }
+    public boolean getChecked()
+    {
+        return checked;
+    }
+
 
     //Setter Methods
 
@@ -174,7 +186,13 @@ public class Goal implements Comparable<Goal>
         return "Name: " + name ;
     }
 
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
 
+    public void setLastChecked(String lastChecked) {
+        this.lastChecked = lastChecked;
+    }
 
     public boolean equals(Goal goal) {
         return this.getName().equals(goal.getName());
@@ -204,6 +222,8 @@ public class Goal implements Comparable<Goal>
         }
         return -1;
     }
+
+
 
     public int getDaysBetween(int year, int month, int day)
     {

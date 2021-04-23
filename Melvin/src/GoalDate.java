@@ -1,5 +1,4 @@
-import javax.crypto.AEADBadTagException;
-import java.text.ParseException;
+
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
@@ -77,6 +76,12 @@ public class GoalDate {
         return goals1;
     }
 
+    public void checkIn(Goal goal)
+    {
+        LocalDate today = LocalDate.now();
+        goal.setChecked(true);
+        goal.setLastChecked(today.toString());
+    }
 
 
 
