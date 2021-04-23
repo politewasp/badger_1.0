@@ -1,5 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -27,8 +29,9 @@ public class Box {
     String goalKey = "Goals";
     String categoryKey = "Categories";
     String [] goalAttributes = new String [] {
-            "name", "category", "description", "date",
-            "completed", "message"
+            "name", "category", "description",
+            "last completed", "message",
+            "days of week", "logged"
     };
     String [] categoryAttributes = new String [] {
             "name", "description", "image link"
@@ -261,8 +264,10 @@ public class Box {
             case "description" -> goal.getDescription();
             case "completed" -> Boolean.toString(goal.getCompleted());
             case "category" -> goal.getCategoryName();
-            case "date" -> "";
+            case "last completed" -> goal.getLastCompleted();
             case "message" -> goal.getMessage();
+            case "days of week" -> Arrays.toString(goal.getDaysOfWeek());
+            case "logged" -> goal.getLogged();
             default -> throw new IllegalStateException("Unexpected value: " + key);
         };
     }
@@ -294,14 +299,17 @@ public class Box {
         // inputs goal, json object goal, and key
         // calls set method for goal attribute
         String keyValue = (String) o.get(key);
-        switch (key) {
-            case "name" -> goal.setName(keyValue);
-            case "category" -> goal.setCategoryName(keyValue);
-            case "description" -> goal.setDescription(keyValue);
-            case "date" -> {}
-            case "completed" -> goal.setCompleted(Boolean.parseBoolean(keyValue));
-            case "message" -> {}
-            default -> throw new IllegalStateException("Unexpected value: " + key);
+        if(keyValue != null){
+            switch (key) {
+                case "name" -> goal.setName(keyValue);
+                case "category" -> goal.setCategoryName(keyValue);
+                case "description" -> goal.setDescription(keyValue);
+                case "last completed" -> goal.setLastCompleted(keyValue);
+                case "days of week" -> goal.getDaysOfWeek();
+                case "message" -> goal.setMessage(keyValue);
+                case "logged" -> goal.setLogged(keyValue.toString());
+                default -> throw new IllegalStateException("Unexpected value: " + key);
+            }
         }
         return keyValue;
     }

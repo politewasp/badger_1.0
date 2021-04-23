@@ -23,35 +23,32 @@ public class Goal implements Comparable<Goal>
     private String name;
     private String description;
     private String categoryName;
-    private LocalDate start;
-    private LocalDate end;
-    private String lastChecked;
-    private boolean checked;
-    private ArrayList<Integer> daysOfWeek = new ArrayList<>();
+    private String lastCompleted;
+    private boolean [] daysOfWeek;
     private boolean completed;
     private String message;
+    private int logged;
 
     public Goal(){
         name = "";
         description = "";
         categoryName = "";
-        start = LocalDate.now();
-        end = null;
-        lastChecked = "";
-        daysOfWeek = null;
+        lastCompleted = "";
+        daysOfWeek = new boolean[] {false, false, false, false, false, false, false};
         message = "";
         completed = false;
-
+        logged = 0;
     }
     //TODO Temporary for testing, will be removed
     public Goal(String name){
         this.name = name;
         description = "";
         categoryName = "";
-        daysOfWeek = null;
-        lastChecked = "";
-        start = LocalDate.now();
+        lastCompleted = "";
+        daysOfWeek = new boolean[] {false, false, false, false, false, false, false};
+        message = "";
         completed = false;
+        logged = 0;
     }
 
     //Getter methods
@@ -81,23 +78,6 @@ public class Goal implements Comparable<Goal>
     }
 
     /**
-     * Gets the date LocalDate object of the Goal
-     * @return LocalDate object
-     */
-    public LocalDate getStart() {
-        return start;
-    }
-
-    /**
-     * Get whether the goal is completed or not
-     * @return True if complete false if incomplete
-     */
-    public boolean getCompleted()
-    {
-        return completed;
-    }
-
-    /**
      * Get the message attribute of goal
      * @return string message
      */
@@ -106,37 +86,33 @@ public class Goal implements Comparable<Goal>
     }
 
     /**
-     *returns the end date
-     * @return LocalDate End
-     */
-    public LocalDate getEnd() {
-        return end;
-    }
-
-    /**
      * returns the days of the week that goal occurs on
      * @return ArrayList days of week 1-7 1 = Monday 7=Sunday
      */
-    public ArrayList<Integer> getDaysOfWeek() {
-        return daysOfWeek;
-    }
+    public boolean [] getDaysOfWeek() { return daysOfWeek; }
 
     /**
      * Gets date of last checked
-     * @return String lastChecked string version of date
+     * @return String lastCompleted string version of date
      */
-    public String getLastChecked() {
-        return lastChecked;
+    public String getLastCompleted() {
+        return lastCompleted;
     }
 
     /**
      * gets whether the goal has been logged or not
      * @return boolean checked
      */
-    public boolean getChecked()
+    public boolean getCompleted()
     {
-        return checked;
+        return completed;
     }
+
+    /**
+     * gets how many times the goal has been logged
+     * @return String times logged
+     */
+    public String getLogged() { return String.valueOf(logged); }
 
 
     //Setter Methods
@@ -166,35 +142,21 @@ public class Goal implements Comparable<Goal>
     }
 
     /**
-     * Sets the start String of Goal to start
-     * @param date string date formatted "yyyy-mm-dd"
-     */
-    public void setStart(LocalDate date) {
-        date = start;
-    }
-
-    /**
-     * Sets the end date
-     * @param end LocalDate
-     */
-    public void setEnd(LocalDate end) {
-        this.end = end;
-    }
-
-    /**
      * Sets the days of week goal occurs
      * @param daysOfWeek ArrayList<Integer></Integer>
      */
-    public void setDaysOfWeek(ArrayList<Integer> daysOfWeek) {
+    public void setDaysOfWeek(boolean [] daysOfWeek) {
         this.daysOfWeek = daysOfWeek;
     }
 
     /**
      * Sets completed status to true or false
-     * @param completed sets the goal to be complete or not
+     * @param today sets the goal to be complete or not
      */
-    public void setCompleted(GoalDate d) {
-        this.lastChecked = d.toString();
+    public void setCompleted(GoalDate today) {
+        this.completed = true;
+        this.setLastCompleted(today.getDate().toString());
+        this.log();
     }
 
     /**
@@ -207,6 +169,14 @@ public class Goal implements Comparable<Goal>
     }
 
     /**
+     * Sets logged to value
+     * @param logged integer counting how many times goal has been logged
+     */
+    public void setLogged(String logged){
+        this.logged = Integer.parseInt(logged);
+    }
+
+    /**
      * To string method for debugging
      * @return string version of important fields in both goal and habit
      */
@@ -216,21 +186,18 @@ public class Goal implements Comparable<Goal>
     }
 
     /**
-     * Sets boolean for GUI to display Goal as completed for the day or not
-     * @param checked boolean checked
+     * Sets string to record last date completed. This allows for a way to
+     * check if this.checked needs to be reset for the day
+     * @param lastCompleted String lastCompleted
      */
-    public void setChecked(boolean checked) {
-        this.checked = checked;
+    public void setLastCompleted(String lastCompleted) {
+        this.lastCompleted = lastCompleted;
     }
 
     /**
-     * Sets string to record last date checked. This allows for a way to
-     * check if this.checked needs to be reset for the day
-     * @param lastChecked String lastChecked
+     * increments logged attribute
      */
-    public void setLastChecked(String lastChecked) {
-        this.lastChecked = lastChecked;
-    }
+    public void log(){ logged++; }
 
     /**
      * Compares two goals by name to check if they are the same
@@ -260,24 +227,15 @@ public class Goal implements Comparable<Goal>
      */
     public int toIndex(DayOfWeek day)
     {
-        switch (day)
-        {
-            case  MONDAY:
-                return 1;
-            case TUESDAY:
-                return 2;
-            case WEDNESDAY:
-                return 3;
-            case THURSDAY:
-                return 4;
-            case FRIDAY:
-                return 5;
-            case SATURDAY:
-                return 6;
-            case SUNDAY:
-                return 7;
-        }
-        return -1;
+        return switch (day) {
+            case MONDAY -> 0;
+            case TUESDAY -> 1;
+            case WEDNESDAY -> 2;
+            case THURSDAY -> 3;
+            case FRIDAY -> 4;
+            case SATURDAY -> 5;
+            case SUNDAY -> 6;
+        };
     }
 
 
@@ -297,8 +255,8 @@ public class Goal implements Comparable<Goal>
         while(true)
         {
             dates = toIndex(week.getDayOfWeek());
-            for(int days : daysOfWeek) {
-                if (dates == days) {
+            for(boolean days : daysOfWeek) {
+                if (days) {
                     return count;
                 }
 
