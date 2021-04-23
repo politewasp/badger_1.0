@@ -2,7 +2,7 @@
 import java.util.ArrayList;
 import java.time.LocalDate;
 
-
+//TODO ADD JAVADOC in GoalDate
 public class GoalDate {
     Storage storage = Storage.load();
     private ArrayList<Goal> goalsToday;
