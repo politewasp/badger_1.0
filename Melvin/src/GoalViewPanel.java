@@ -1,6 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
-
+/**
+ *  <h1>GoalViewPanel</h1>
+ *  GUI Element
+ *  Written Using Java 15
+ *  @author William Muhlbach
+ *  @version 2.0
+ *  @since 2021-03-16
+ */
 class GoalViewPanel extends JPanel {
     JLabel nameLabel = new JLabel();
     Font nameFont = new Font(new JLabel().getFont().getName(), Font.PLAIN, 20);

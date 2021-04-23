@@ -1,16 +1,18 @@
 import javax.swing.*;
-
+/**
+ *  <h1>HomePanel</h1>
+ *  GUI Element
+ *  Written Using Java 15
+ *  @author William Muhlbach
+ *  @version 2.0
+ *  @since 2021-03-16
+ */
 class HomePanel extends JPanel {
-
-    JPanel goalListPanel = new JPanel();
-    BoxLayout layout = new BoxLayout(goalListPanel, BoxLayout.Y_AXIS);
-    JScrollPane scrollPane = new JScrollPane(goalListPanel);
+    BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
     public HomePanel(){
-        goalListPanel.setLayout(layout);
-        scrollPane.getVerticalScrollBar().setUnitIncrement(10);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        this.setLayout(layout);
     }
-    public void addGoal(GoalViewPanel g){
-        goalListPanel.add(g);
+    public void addGoalPanel(GoalViewPanel g){
+        this.add(g);
     }
 }

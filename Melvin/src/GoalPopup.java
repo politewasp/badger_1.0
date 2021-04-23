@@ -2,8 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- *  <h1>Window</h1>
- *  GUI Basis
+ *  <h1>GoalPopup</h1>
+ *  GUI Element
  *  Written Using Java 15
  *  @author William Muhlbach
  *  @version 2.3

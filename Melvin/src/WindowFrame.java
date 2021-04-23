@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- *  <h1>Window</h1>
+ *  <h1>WindowFrame</h1>
  *  GUI Basis
  *  Written Using Java 15
  *  @author William Muhlbach

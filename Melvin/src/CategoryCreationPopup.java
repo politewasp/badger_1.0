@@ -2,7 +2,7 @@ import javax.swing.*;
 
 /**
  *  <h1>GoalCreationPopup</h1>
- *  GUI Basis
+ *  GUI Element
  *  Written Using Java 15
  *  @author William Muhlbach
  *  @version 1
