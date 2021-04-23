@@ -18,8 +18,6 @@ public class BadgerController {
     HomePanel home = new HomePanel();
 
     JScrollPane homeScrollPane = new JScrollPane(home);
-
-    CalendarPanel cal = new CalendarPanel();
     Debug debug = Debug.getInstance();
     public BadgerController() {
 
@@ -38,7 +36,6 @@ public class BadgerController {
         homeScrollPane.getVerticalScrollBar().setUnitIncrement(10);
         homeScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         window.addTab("Home", homeScrollPane);
-        window.addTab("Calendar", cal);
 
     }
     ActionListener CreateCatButtonListener = e -> createCat();
