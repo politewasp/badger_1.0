@@ -5,7 +5,7 @@ import java.time.*;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.TreeMap;
-
+//TODO complete JAVADOCS in Goal
 /**
  *  Goal class
  *  Written Using Java 15

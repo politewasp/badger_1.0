@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *  @since 2021-04-01
  */
 
-
+//TODO complete JAVADOCS in Storage
 public class Storage {
     // debugger
     Debug debug = Debug.getInstance();
