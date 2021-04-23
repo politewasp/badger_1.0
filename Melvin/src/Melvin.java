@@ -6,7 +6,7 @@ import java.io.IOException;
  *  Driver class
  *  Written Using Java 15
  *  @author Maraiah Matson, William Muhlbach
- *  @version 1.1
+ *  @version 2.1
  *  @since 2021-03-16
  */
 final class Melvin{
@@ -15,9 +15,10 @@ final class Melvin{
     HomePanel home = new HomePanel();
     CalendarPanel cal = new CalendarPanel();
     private Melvin(){
-        window.centerView.addTab("Home", home);
-        window.centerView.addTab("Calendar", cal);
+        window.addTab("Home", home);
+        window.addTab("Calendar", cal);
         //do stuff to calendar if needed
+        window.setVisible(true);
     }
 
     public void main(String[] args) throws IOException {
@@ -37,7 +38,7 @@ final class Melvin{
             v.nameLabel.setText(g.getName());
             v.catLabel.setText(g.getCategoryName());
             //logic to ascertain if a goal is logged and the apply the proper message to status.
-            home.goalList.add(v);
+            home.goalListPanel.add(v);
             v.addMouseListener();
         }
 

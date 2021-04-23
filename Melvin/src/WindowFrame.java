@@ -15,17 +15,12 @@ public class WindowFrame extends JFrame {
     Debug debug = Debug.getInstance();
     JLabel title = new JLabel("", SwingConstants.CENTER);
     JTabbedPane centerView = new JTabbedPane();
-    JPanel bottomButtons = new JPanel();
 
+    JPanel bottomButtons = new JPanel();
     JButton createGoalButton = new JButton("+ Goal");
     JButton createCatButton = new JButton("+ Category");
 
-
-
-    //GridLayout layout = new GridLayout(0,1,5,5);
     BorderLayout layout = new BorderLayout();
-    Storage storage;
-    String currentState;
 
     Font buttonFont = new Font(new JLabel().getFont().getName(), Font.PLAIN, 20);
     Font titleFont = new Font(new JLabel().getFont().getName(), Font.BOLD, 30);
@@ -35,7 +30,6 @@ public class WindowFrame extends JFrame {
         setSize(500,500);
         setLocationRelativeTo(null);
         setTitle("Badger");
-        storage=Storage.load();
 
         setLayout(layout);
         add(title, BorderLayout.PAGE_START);
@@ -48,30 +42,20 @@ public class WindowFrame extends JFrame {
         createCatButton.setFont(buttonFont);
 
         add(bottomButtons, BorderLayout.PAGE_END);
-
-//        setVisible(true);
-//        add(new JPanel());
-        //default behavior is to open to home page
-//        openHome();
+    }
+    public JButton getCreateGoalButton(){
+        return createGoalButton;
+    }
+    public JButton getCreateCatButton(){
+        return createCatButton;
+    }
+    public void addTab(String t, Component c){
+        centerView.addTab(t, c);
+    }
+    public void setTitle(String t){
+        title.setText(t);
     }
 
-//    public void openHome(){
-//        remove(layout.getLayoutComponent(BorderLayout.CENTER));
-//        Collections.sort(storage.goals);
-//        currentState = "home";
-//        JScrollPane scrollPane = new JScrollPane(new HomePage());
-//        scrollPane.getVerticalScrollBar().setUnitIncrement(10);
-//        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-//        add(scrollPane, BorderLayout.CENTER);
-//        title.setText("Home");
-//    }
-//
-//    public void openCalendar(){
-//        remove(layout.getLayoutComponent(BorderLayout.CENTER));
-//        currentState = "cal";
-//        add(new CalendarPage(), BorderLayout.CENTER);
-//        title.setText("Calendar");
-//    }
 //
 //    public void refresh(){
 //        invalidate();

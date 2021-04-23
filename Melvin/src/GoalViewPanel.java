@@ -1,43 +1,16 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.ArrayList;
 
-public abstract class Page extends JPanel {
-    Storage storage = Storage.load();
-}
-
-class HomePanel extends JPanel{
-    BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
-    JPanel goalList = new JPanel(layout);
-    JScrollPane scrollPane = new JScrollPane(goalList);
-    public HomePanel(){
-        setLayout(layout);
-        scrollPane.getVerticalScrollBar().setUnitIncrement(10);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-    }
-}
-
-class CalendarPanel extends JPanel{
-    JLabel labelM, labelY;
-    JButton prevMonth, nextMonth;
-    JTable calendarTable;
-
-
-    public CalendarPanel(){
-        //uh, y'know... make a calendar i guess
-    }
-}
-
-
-class GoalViewPanel extends JPanel{
+class GoalViewPanel extends JPanel {
     JLabel nameLabel = new JLabel();
     Font nameFont = new Font(new JLabel().getFont().getName(), Font.PLAIN, 20);
 
     JLabel catLabel = new JLabel();
     Font catFont = new Font(new JLabel().getFont().getName(), Font.BOLD, 14);
     JLabel status = new JLabel();
+
+    JLabel totalDaysLabel = new JLabel();
+    JLabel currentDaysLabel = new JLabel();
 
     public GoalViewPanel(){
         setMaximumSize(new Dimension(1000,100));
@@ -58,6 +31,12 @@ class GoalViewPanel extends JPanel{
 
     public void setStatus(String statusMessage){
         status.setText(statusMessage);
+    }
+    public void setCurrentDays(Integer days){
+        currentDaysLabel.setText("Day "+days);
+    }
+    public void setTotalDays(Integer days){
+        totalDaysLabel.setText("/"+days);
     }
 
 }

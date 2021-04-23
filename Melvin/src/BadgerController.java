@@ -29,7 +29,7 @@ public class BadgerController {
         debug.print("\nbuttonChoice: ");
         debug.print(popup.buttonChoice);
         debug.print("\n");
-        windowFrame.refresh();
+        //windowFrame.refresh();
     }
     ActionListener CreateGoalButtonListener = e -> createGoal();
 //    public void modifyGoal(Goal goal){
