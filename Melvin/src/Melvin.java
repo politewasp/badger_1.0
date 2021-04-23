@@ -3,7 +3,7 @@ import java.io.IOException;
 
 /**
  *  <h1>Melvin</h1>
- *  Driver class
+ *  Driver class and controller
  *  Written Using Java 15
  *  @author Maraiah Matson, William Muhlbach
  *  @version 2.1
@@ -14,6 +14,8 @@ final class Melvin{
     Storage storage = Storage.load();
     HomePanel home = new HomePanel();
     CalendarPanel cal = new CalendarPanel();
+    Debug debug = Debug.getInstance();
+
     private Melvin(){
         window.addTab("Home", home);
         window.addTab("Calendar", cal);
@@ -22,7 +24,7 @@ final class Melvin{
     }
 
     public void main(String[] args) throws IOException {
-        Debug debug = Debug.getInstance();
+
         // CHANGE THIS VARIABLE TO TOGGLE DEBUGGING MODE
         debug.active = true;
 
@@ -61,6 +63,45 @@ final class Melvin{
         //storage.test();
         storage.close();
 
+
     }
+
+    public void createCat(){
+        CategoryCreationPopup popup = new CategoryCreationPopup();
+        if(popup.buttonChoice==JOptionPane.OK_OPTION){
+            storage.add(new Category(popup.catNameField.getText()));
+        }
+        debug.print("\nbuttonChoice: ");
+        debug.print(popup.buttonChoice);
+        debug.print("\n");
+    }
+
+    public void createGoal(){
+        GoalCreationPopup popup = new GoalCreationPopup();
+        if(popup.buttonChoice==JOptionPane.OK_OPTION){
+            storage.add(popup.newGoal);
+        }
+        debug.print("\nbuttonChoice: ");
+        debug.print(popup.buttonChoice);
+        debug.print("\n");
+        //windowFrame.refresh();
+    }
+
+    public void modifyGoal(Goal goal){
+        GoalModifyPopup popup = new GoalModifyPopup(goal);
+        if(popup.buttonChoice==JOptionPane.OK_OPTION){
+            goal.setName(popup.goalNameField.getText());
+            goal.setDescription(popup.goalDescField.getText());
+            goal.setCategoryName(storage.getCategoryNames().get(popup.categoryPicker.getSelectedIndex()));
+            //set isShort
+            //set isGood
+            //set start
+            //set end
+            //goal.setDayOfWeek(daySelector.getSelectedIndex());
+        } else if(popup.buttonChoice==JOptionPane.CANCEL_OPTION){
+            storage.delete(goal);
+        }
+    }
+
 }
 
