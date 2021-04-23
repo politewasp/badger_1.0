@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  *  <h1>GoalPopup</h1>
- *  GUI Element
+ *  Controller Element
  *  Written Using Java 15
  *  @author William Muhlbach
  *  @version 2.3
@@ -121,10 +121,40 @@ public abstract class GoalPopup extends JOptionPane{
         con.gridx = 3;
         paramDump.add(daySelector, con);
     }
-    public boolean[] dayArray(){
+
+    /**
+     * Retrieves array of days of the week
+     * @return boolean[] array containing info about which days the goal is to be logged on
+     */
+    public boolean[] getFieldDays(){
         boolean[] bArray = {checkMon.isSelected(), checkTue.isSelected(), checkWed.isSelected(), checkThu.isSelected(), checkFri.isSelected(), checkSat.isSelected(), checkSun.isSelected()};
         return bArray;
     }
+
+    /**
+     * Returns the text entered in the Name field
+     * @return String name text
+     */
+    public String getFieldName(){
+        return goalNameField.getText();
+    }
+
+    /**
+     * Returns the category selected by the user
+     * @return String category name
+     */
+    public String getFieldCat(){
+        return storage.getCategoryNames().get(categoryPicker.getSelectedIndex());
+    }
+
+    /**
+     * Returns the text entered in the Description field
+     * @return String description text
+     */
+    public String getFieldDesc(){
+        return goalDescField.getText();
+    }
+
 }
 
 /**
@@ -134,17 +164,35 @@ class GoalModifyPopup extends GoalPopup{
     /**
      * populates the fields of a standard GoalPopup with the
      * data from the supplied Goal object
-     * @param goal Goal to be modified
+     * @param goalName String name of goal to be modified
      */
-    public GoalModifyPopup(Goal goal){
-        Object[] options = {"Save Goal", "Cancel", "Delete Goal"};
+    String goalTitleName;
+    Object[] options = {"Save Goal", "Cancel", "Delete Goal"};
+    public GoalModifyPopup(String goalName){
+        goalTitleName=goalName;
         //inputGoal = goal;
 
-        goalNameField.setText(goal.getName());
-        goalDescField.setText(goal.getDescription());
-        categoryPicker.setSelectedItem(goal.getCategoryName());
-        buttonChoice = showOptionDialog(null, paramDump, "Editing goal: "+goal.getName(), JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, "Save Goal");
-
+    }
+    public void launch(){
+        buttonChoice = showOptionDialog(null, paramDump, "Editing goal: "+goalTitleName, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, "Save Goal");
+    }
+    public void setFieldName(String goalName){
+        goalNameField.setText(goalName);
+    }
+    public void setFieldDesc(String goalDesc){
+        goalDescField.setText(goalDesc);
+    }
+    public void setFieldCat(String goalCat){
+        categoryPicker.setSelectedItem(goalCat);
+    }
+    public void setFieldDays(boolean[] bArray){
+        checkMon.setSelected(bArray[0]);
+        checkTue.setSelected(bArray[1]);
+        checkWed.setSelected(bArray[2]);
+        checkThu.setSelected(bArray[3]);
+        checkFri.setSelected(bArray[4]);
+        checkSat.setSelected(bArray[5]);
+        checkSun.setSelected(bArray[6]);
     }
 }
 

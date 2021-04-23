@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 
 /**
@@ -114,17 +113,20 @@ public class BadgerController {
      * @param goal Goal to be edited
      */
     public void modifyGoal(Goal goal){
-        GoalModifyPopup popup = new GoalModifyPopup(goal);
         Storage storage = Storage.load();
+
+        GoalModifyPopup popup = new GoalModifyPopup(goal.getName());
+        popup.setFieldName(goal.getName());
+        popup.setFieldCat(goal.getCategoryName());
+        popup.setFieldDesc(goal.getDescription());
+        popup.setFieldDays(goal.getDaysOfWeek());
+        popup.launch();
+
         if(popup.buttonChoice==JOptionPane.OK_OPTION){
-            goal.setName(popup.goalNameField.getText());
-            goal.setDescription(popup.goalDescField.getText());
-            goal.setCategoryName(storage.getCategoryNames().get(popup.categoryPicker.getSelectedIndex()));
-            //set isGood
-            //set start
-            //set end
-            //goal.setDayOfWeek(daySelector.getSelectedIndex());
-            goal.setDaysOfWeek(popup.dayArray());
+            goal.setName(popup.getFieldName());
+            goal.setDescription(popup.getFieldDesc());
+            goal.setCategoryName(popup.getFieldCat());
+            goal.setDaysOfWeek(popup.getFieldDays());
         } else if(popup.buttonChoice==JOptionPane.CANCEL_OPTION){
             storage.delete(goal);
         }
