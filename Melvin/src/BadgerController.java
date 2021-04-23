@@ -17,7 +17,7 @@ public class BadgerController {
     Storage storage = Storage.load();
     HomePanel home = new HomePanel();
 
-    JScrollPane homeScrollPane = new JScrollPane(home);
+    JScrollPane homeScrollPane = new JScrollPane();
 
     CalendarPanel cal = new CalendarPanel();
     Debug debug = Debug.getInstance();
@@ -31,14 +31,14 @@ public class BadgerController {
         debug.active = true;
 
         populateHomePanel(home);
-
-
-//        home.add(new JLabel("I'm Here!!!!"));
+        homeScrollPane.add(home);
 
         homeScrollPane.getVerticalScrollBar().setUnitIncrement(10);
         homeScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        window.addTab("Home", homeScrollPane);
-        window.addTab("Calendar", cal);
+        homeScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+        window.addCenter(homeScrollPane);
+        window.addCenter(new JLabel("I exist!!!"));
 
     }
     ActionListener CreateCatButtonListener = e -> createCat();
@@ -97,10 +97,12 @@ public class BadgerController {
     public void refreshHome(){
         debug.print("Refresh called\n");
         window.invalidate();
+        window.removeCenter();
         homeScrollPane.remove(home);
         home = new HomePanel();
         populateHomePanel(home);
         homeScrollPane.add(home);
+        window.addCenter(homeScrollPane);
         window.validate();
 //        window.repaint();
     }
