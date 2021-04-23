@@ -1,10 +1,4 @@
-import org.json.simple.parser.ParseException;
-
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.IOException;
 
 /**
@@ -16,25 +10,39 @@ import java.io.IOException;
  *  @since 2021-03-16
  */
 final class Melvin{
+    WindowFrame window = new WindowFrame();
+    Storage storage = Storage.load();
+    HomePanel home = new HomePanel();
+    CalendarPanel cal = new CalendarPanel();
     private Melvin(){
-        // adding this method prevents instantiation of Melvin elsewhere as a safeguard
+        window.centerView.addTab("Home", home);
+        window.centerView.addTab("Calendar", cal);
+        //do stuff to calendar if needed
     }
 
-    public static void main(String[] args) throws IOException {
-        // debug example
+    public void main(String[] args) throws IOException {
         Debug debug = Debug.getInstance();
         // CHANGE THIS VARIABLE TO TOGGLE DEBUGGING MODE
         debug.active = true;
 
+        //Make Swing UI match the system UI if possible
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
 
+        for(Goal g:storage.goals){
+            GoalView v = new GoalView();
+            v.nameLabel.setText(g.getName());
+            v.catLabel.setText(g.getCategoryName());
+            //logic to ascertain if a goal is logged and the apply the proper message to status.
+            home.goalList.add(v);
+            v.addMouseListener();
+        }
+
         //StoragePlaceholder storage = new StoragePlaceholder(5);
         Storage storage = Storage.load();
-        Window.load();
         Goal test = new Goal();
         test.setName("test");
         //test.setStart("2021-03-24");

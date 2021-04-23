@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -15,11 +14,11 @@ import java.awt.event.MouseListener;
 public class BadgerController {
     Debug debug = Debug.getInstance();
     Storage storage = Storage.load();
-    Window window = new Window();
+    WindowFrame windowFrame = new WindowFrame();
 
     public BadgerController(){
-        window.createCatButton.addActionListener(CreateCatButtonListener);
-        window.createGoalButton.addActionListener(CreateGoalButtonListener);
+        windowFrame.createCatButton.addActionListener(CreateCatButtonListener);
+        windowFrame.createGoalButton.addActionListener(CreateGoalButtonListener);
     }
 
     public void createGoal(){
@@ -30,7 +29,7 @@ public class BadgerController {
         debug.print("\nbuttonChoice: ");
         debug.print(popup.buttonChoice);
         debug.print("\n");
-        window.refresh();
+        windowFrame.refresh();
     }
     ActionListener CreateGoalButtonListener = e -> createGoal();
 //    public void modifyGoal(Goal goal){
@@ -95,7 +94,7 @@ public class BadgerController {
             } else if(popup.buttonChoice==JOptionPane.CANCEL_OPTION){
                 storage.delete(goal);
             }
-            BadgerController.window.refresh();
+            BadgerController.windowFrame.refresh();
         }
 
         @Override

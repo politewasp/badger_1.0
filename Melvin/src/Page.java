@@ -8,37 +8,38 @@ public abstract class Page extends JPanel {
     Storage storage = Storage.load();
 }
 
-class HomePage extends Page{
+class HomePanel extends JPanel{
     BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
-    public HomePage(){
+    JPanel goalList = new JPanel(layout);
+    JScrollPane scrollPane = new JScrollPane(goalList);
+    public HomePanel(){
         setLayout(layout);
-        ArrayList<Goal> goals = storage.goals;
-        for(Goal g:goals){
-            add(new GoalView(g));
-        }
+        scrollPane.getVerticalScrollBar().setUnitIncrement(10);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
     }
 }
 
-class CalendarPage extends Page{
+class CalendarPanel extends Page{
     JLabel labelM, labelY;
     JButton prevMonth, nextMonth;
     JTable calendarTable;
 
 
-    public CalendarPage(){
+    public CalendarPanel(){
         //uh, y'know... make a calendar i guess
     }
 }
 
 
-class GoalView extends Page{
-    JLabel goalName = new JLabel();
-    JLabel goalCat = new JLabel();
-    JLabel status = new JLabel();
-    Goal sourceGoal;
+class GoalView extends JPanel{
+    JLabel nameLabel = new JLabel();
+    Font nameFont = new Font(new JLabel().getFont().getName(), Font.PLAIN, 20);
 
-    public GoalView(Goal goal){
-        sourceGoal = goal;
+    JLabel catLabel = new JLabel();
+    Font catFont = new Font(new JLabel().getFont().getName(), Font.BOLD, 14);
+    JLabel status = new JLabel();
+
+    public GoalView(){
         setMaximumSize(new Dimension(1000,100));
         setPreferredSize(new Dimension(200,100));
         setBorder(BorderFactory.createCompoundBorder(
@@ -46,21 +47,17 @@ class GoalView extends Page{
                 BorderFactory.createLineBorder(Color.black)
         ));
 
-        add(goalName);
-        goalName.setText(goal.getName());
-        goalName.setFont(new Font(new JLabel().getFont().getName(), Font.PLAIN, 20));
-
+        add(nameLabel);
+        nameLabel.setFont(nameFont);
         add(new JLabel(" in "));
-
-        add(goalCat);
-        goalCat.setText(goal.getCategoryName());
-        goalCat.setFont(new Font(new JLabel().getFont().getName(), Font.BOLD, 14));
-
-
-
-//        add(status);
-//        //Need a function that determines if a goal has been logged for the day
-//        status.setText("Not yet logged!");
+        add(catLabel);
+        catLabel.setFont(catFont);
+        add(status);
         addMouseListener(new BadgerController.GoalSelectedListener());
     }
+
+    public void setStatus(String statusMessage){
+        status.setText(statusMessage);
+    }
+
 }
