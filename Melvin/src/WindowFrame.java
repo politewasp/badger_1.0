@@ -1,5 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
 
 /**
  *  <h1>WindowFrame</h1>
@@ -36,6 +39,7 @@ public class WindowFrame extends JFrame {
         createCatButton.setFont(buttonFont);
 
         add(bottomButtons, BorderLayout.PAGE_END);
+
     }
     public JButton getCreateGoalButton(){
         return createGoalButton;

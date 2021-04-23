@@ -41,7 +41,7 @@ final class Melvin{
 
         // storage test
         //Storage storage = new Storage();
-        //storage.test();
+        storage.test();
         storage.close();
     }
 }
