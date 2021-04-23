@@ -96,12 +96,13 @@ public class BadgerController {
 
     public void refreshHome(){
         debug.print("Refresh called\n");
+        window.invalidate();
         homeScrollPane.remove(home);
         home = new HomePanel();
         populateHomePanel(home);
-//        homeScrollPane.add(home);
-        window.revalidate();
-        window.repaint();
+        homeScrollPane.add(home);
+        window.validate();
+//        window.repaint();
     }
     class GoalClickedListener implements MouseListener {
         Goal sourceGoal;
