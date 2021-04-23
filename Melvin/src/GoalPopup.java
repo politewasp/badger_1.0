@@ -1,6 +1,15 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ *  <h1>Window</h1>
+ *  GUI Basis
+ *  Written Using Java 15
+ *  @author William Muhlbach
+ *  @version 2.3
+ *  @since 2021-04-04
+ */
+
 public abstract class GoalPopup extends JOptionPane{
     //Poltergeist. Scary.
     Goal inputGoal;
@@ -19,41 +28,45 @@ public abstract class GoalPopup extends JOptionPane{
     */
 
     JPanel paramDump = new JPanel(new GridBagLayout());
+
     JLabel nameLabel = new JLabel("Name: ");
     JLabel descLabel = new JLabel("Description: ");
-    JLabel daysLabel = new JLabel("Days of the Week:");
     JLabel catLabel = new JLabel("Category: ");
+
     JLabel startLabel = new JLabel("Start Date: ");
     JLabel endLabel = new JLabel("End Date: ");
-    JCheckBox checkSun = new JCheckBox();
+    JLabel daysLabel = new JLabel("Days of the Week:");
+
     JCheckBox checkMon = new JCheckBox();
     JCheckBox checkTue = new JCheckBox();
     JCheckBox checkWed = new JCheckBox();
     JCheckBox checkThu = new JCheckBox();
     JCheckBox checkFri = new JCheckBox();
     JCheckBox checkSat = new JCheckBox();
+    JCheckBox checkSun = new JCheckBox();
+    JCheckBox[] daysOfTheWeek = {checkMon, checkTue, checkWed, checkThu, checkFri, checkSat, checkSun};
 
+    JPanel daySelector = new JPanel();
+//    String[] daysOfTheWeek = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
     JTextField goalNameField = new JTextField(15);
     JTextArea goalDescField = new JTextArea(5, 15);
     JScrollPane descPane = new JScrollPane(goalDescField);
-    String[] daysOfTheWeek = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
-    JPanel daySelector = new JPanel();
 
-//    JComboBox daySelector = new JComboBox(daysOfTheWeek);
+
     JComboBox categoryPicker = new JComboBox(storage.getCategoryNames().toArray());
 
     public GoalPopup(){
         daySelector.setLayout(new GridLayout(2, 7));
-        for(Character c:"SMTWTFS".toCharArray()){
+        for(Character c:"MTWTFSS".toCharArray()){
             daySelector.add(new JLabel(c.toString()));
         }
-        daySelector.add(checkSun);
         daySelector.add(checkMon);
         daySelector.add(checkTue);
         daySelector.add(checkWed);
         daySelector.add(checkThu);
         daySelector.add(checkFri);
         daySelector.add(checkSat);
+        daySelector.add(checkSun);
 
         goalDescField.setFont(new JLabel().getFont());
         goalDescField.setLineWrap(true);
@@ -75,33 +88,35 @@ public abstract class GoalPopup extends JOptionPane{
 
         con.gridx = 0;
         con.gridy = 1;
+        paramDump.add(catLabel, con);
+        con.gridx = 1;
+
+        paramDump.add(categoryPicker, con);
+        con.gridx = 0;
+        con.gridy = 2;
         paramDump.add(descLabel, con);
         con.gridx = 1;
         paramDump.add(new JScrollPane(goalDescField), con);
 
-        con.gridx = 0;
+
+
+        con.gridx = 2;
         con.gridy = 0;
-        paramDump.add(catLabel, con);
-        con.gridx = 1;
-        paramDump.add(categoryPicker);
+        paramDump.add(startLabel, con);
+        con.gridx = 3;
+        paramDump.add(new JLabel("Placeholder"), con);
 
         con.gridx = 2;
         con.gridy = 1;
-        paramDump.add(startLabel, con);
+        paramDump.add(endLabel, con);
         con.gridx = 3;
-        paramDump.add(new JLabel("Placeholder"));
+        paramDump.add(new JLabel("Placeholder"), con);
 
         con.gridx = 2;
         con.gridy = 2;
-        paramDump.add(endLabel, con);
+        paramDump.add(daysLabel, con);
         con.gridx = 3;
-        paramDump.add(new JLabel("Placeholder"));
-
-        con.gridx = 2;
-        con.gridy = 4;
-        paramDump.add(daysLabel);
-        con.gridx = 3;
-        paramDump.add(daySelector);
+        paramDump.add(daySelector, con);
     }
 }
 
@@ -112,51 +127,23 @@ class GoalModifyPopup extends GoalPopup{
 
         goalNameField.setText(goal.getName());
         goalDescField.setText(goal.getDescription());
+        categoryPicker.setSelectedItem(goal.getCategoryName());
+        buttonChoice = showOptionDialog(null, paramDump, "Editing goal: "+goal.getName(), JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, "Save Goal");
 
-//        paramDump.add(new JLabel("Name: "));
-//        paramDump.add(goalNameField);
-//        paramDump.add(new JLabel("Description: "));
-//        paramDump.add(goalDescField);
-//        paramDump.add(new JLabel("Reminder Day: "));
-//        paramDump.add(daySelector);
-//        paramDump.add(new JLabel("Category: "));
-//        paramDump.add(categoryPicker);
-
-        int saved = showOptionDialog(null, paramDump, "Edit a Goal", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, "Cancel");
-        if(saved==JOptionPane.OK_OPTION){
-            goal.setName(goalNameField.getText());
-            goal.setDescription(goalDescField.getText());
-            goal.setCategoryName(storage.getCategoryNames().get(categoryPicker.getSelectedIndex()));
-            //set isShort
-            //set isGood
-            //set start
-            //set end
-            //goal.setDayOfWeek(daySelector.getSelectedIndex());
-        }
     }
 }
 
-class GoalCreatePopup extends GoalPopup{
+class GoalCreationPopup extends GoalPopup{
     Goal newGoal = new Goal();
     Object[] options = {"Save Goal", "Cancel"};
-    public GoalCreatePopup(){
-//        paramDump.add(new JLabel("Name: "));
-//        paramDump.add(goalNameField);
-//        paramDump.add(new JLabel("Description: "));
-//        paramDump.add(goalDescField);
-//        paramDump.add(new JLabel("Reminder Day: "));
-//        paramDump.add(daySelector);
-//        paramDump.add(new JLabel("Category: "));
-//        paramDump.add(categoryPicker);
-    }
-    int launch(){
-        int buttonOption = showOptionDialog(null, paramDump, "Goal Creation", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, "Cancel");
+    public GoalCreationPopup(){
+        buttonChoice = showOptionDialog(null, paramDump, "Goal Creation", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, "Save Goal");
         newGoal.setName(goalNameField.getText());
         newGoal.setDescription(goalDescField.getText());
         newGoal.setCategoryName(storage.getCategoryNames().get(categoryPicker.getSelectedIndex()));
         //set start
         //set end
         //goal.setDayOfWeek(daySelector.getSelectedIndex());
-        return buttonOption;
+
     }
 }

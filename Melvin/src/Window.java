@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collections;
 
@@ -14,7 +13,8 @@ import java.util.Collections;
  */
 public class Window extends JFrame {
     Debug debug = Debug.getInstance();
-    JButton createButton = new JButton("Create Goal");
+    JButton createGoalButton = new JButton("+ Goal");
+    JButton createCatButton = new JButton("+ Category");
     JButton homeButton = new JButton("Home");
     JButton calendarButton = new JButton("Calendar");
     JLabel title = new JLabel("", SwingConstants.CENTER);
@@ -30,9 +30,7 @@ public class Window extends JFrame {
 
     ActionListener homeClicked = e -> openHome();
 
-    private static Window single_instance = null;
-
-    private Window(){
+    public Window(){
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(500,500);
         setLocationRelativeTo(null);
@@ -54,9 +52,11 @@ public class Window extends JFrame {
         homeButton.setFont(buttonFont);
         homeButton.addActionListener(homeClicked);
 
-        bottomButtons.add(createButton);
-        createButton.setFont(buttonFont);
-        createButton.addActionListener(new BadgerController.CreateButtonListener());
+        bottomButtons.add(createGoalButton);
+        createGoalButton.setFont(buttonFont);
+
+        bottomButtons.add(createCatButton);
+        createCatButton.setFont(buttonFont);
 
         setVisible(true);
         add(new JPanel());
@@ -92,9 +92,4 @@ public class Window extends JFrame {
         validate();
     }
 
-    public static Window load(){
-        if(single_instance==null)
-            single_instance=new Window();
-        return single_instance;
-    }
 }
