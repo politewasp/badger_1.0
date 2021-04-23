@@ -26,7 +26,6 @@ class GoalViewPanel extends JPanel {
         add(catLabel);
         catLabel.setFont(catFont);
         add(status);
-        addMouseListener(new BadgerController.GoalSelectedListener());
     }
 
     public void setStatus(String statusMessage){

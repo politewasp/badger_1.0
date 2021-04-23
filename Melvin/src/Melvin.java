@@ -1,4 +1,8 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 
 /**
@@ -10,21 +14,19 @@ import java.io.IOException;
  *  @since 2021-03-16
  */
 final class Melvin{
-    WindowFrame window = new WindowFrame();
     Storage storage = Storage.load();
-    HomePanel home = new HomePanel();
-    CalendarPanel cal = new CalendarPanel();
     Debug debug = Debug.getInstance();
+    public static void main(String[] args) throws IOException {
+        WindowFrame window = new WindowFrame();
+        Storage storage = Storage.load();
+        HomePanel home = new HomePanel();
+        CalendarPanel cal = new CalendarPanel();
+        Debug debug = Debug.getInstance();
 
-    private Melvin(){
         window.addTab("Home", home);
         window.addTab("Calendar", cal);
         //do stuff to calendar if needed
         window.setVisible(true);
-    }
-
-    public void main(String[] args) throws IOException {
-
         // CHANGE THIS VARIABLE TO TOGGLE DEBUGGING MODE
         debug.active = true;
 
@@ -41,11 +43,11 @@ final class Melvin{
             v.catLabel.setText(g.getCategoryName());
             //logic to ascertain if a goal is logged and the apply the proper message to status.
             home.goalListPanel.add(v);
-            v.addMouseListener();
+            v.addMouseListener(new GoalClickedListener(g));
         }
 
         //StoragePlaceholder storage = new StoragePlaceholder(5);
-        Storage storage = Storage.load();
+
         Goal test = new Goal();
         test.setName("test");
         //test.setStart("2021-03-24");
@@ -65,6 +67,9 @@ final class Melvin{
 
 
     }
+
+    ActionListener CreateCatButtonListener = e -> createCat();
+    ActionListener CreateGoalButtonListener = e -> createGoal();
 
     public void createCat(){
         CategoryCreationPopup popup = new CategoryCreationPopup();
@@ -87,8 +92,18 @@ final class Melvin{
         //windowFrame.refresh();
     }
 
+
+}
+
+
+class GoalClickedListener implements MouseListener{
+    Goal sourceGoal;
+    public GoalClickedListener(Goal goal){
+        sourceGoal=goal;
+    }
     public void modifyGoal(Goal goal){
         GoalModifyPopup popup = new GoalModifyPopup(goal);
+        Storage storage = Storage.load();
         if(popup.buttonChoice==JOptionPane.OK_OPTION){
             goal.setName(popup.goalNameField.getText());
             goal.setDescription(popup.goalDescField.getText());
@@ -102,6 +117,18 @@ final class Melvin{
             storage.delete(goal);
         }
     }
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        //goalMenu
+        modifyGoal(sourceGoal);
 
+    }
+    @Override
+    public void mousePressed(MouseEvent e) {}
+    @Override
+    public void mouseReleased(MouseEvent e) {}
+    @Override
+    public void mouseEntered(MouseEvent e) {}
+    @Override
+    public void mouseExited(MouseEvent e) {}
 }
-
