@@ -349,7 +349,7 @@ public class Box {
         boolean [] arr = new boolean[7];
 
         for(int i = 0; i < 7; i++){
-            if(str.charAt(i) == 0){
+            if(str.charAt(i) == '0'){
                 arr[i] = false;
             }
             else{

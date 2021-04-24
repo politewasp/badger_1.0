@@ -28,20 +28,6 @@ final class Melvin{
         new BadgerController();
         //StoragePlaceholder storage = new StoragePlaceholder(5);
 
-        Goal test = new Goal();
-        test.setName("test");
-        //test.setStart("2021-03-24");
-        //test.setEnd("2021-03-31");
-        //test.setFrequency(1);
-        test.setMessage("i exist");
-        test.setDescription("test of data");
-        debug.print(test.toString());
-        storage.add(test);
-
-
-        // storage test
-        //Storage storage = new Storage();
-        storage.test();
         storage.close();
     }
 }
