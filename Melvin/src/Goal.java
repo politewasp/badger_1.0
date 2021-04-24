@@ -15,6 +15,7 @@ import java.util.TreeMap;
  */
 public class Goal implements Comparable<Goal>
 {
+    Debug debug = Debug.getInstance();
     /**
      * Goal class
      * Main class in charge of the Goal object
@@ -156,12 +157,10 @@ public class Goal implements Comparable<Goal>
 
     /**
      * Sets completed status to true or false
-     * @param today sets the goal to be complete or not
+     * @param b sets the goal to be complete or not
      */
-    public void setCompleted(GoalDate today) {
-        this.completed = true;
-        this.setLastCompleted(today.getDate().toString());
-        this.log();
+    public void setCompleted(boolean b) {
+        this.completed = b;
     }
 
     /**
@@ -197,12 +196,21 @@ public class Goal implements Comparable<Goal>
      */
     public void setLastCompleted(String lastCompleted) {
         this.lastCompleted = lastCompleted;
+        debug.print(lastCompleted);
+        debug.print(LocalDate.now().toString());
+        if(lastCompleted.toString().equals(LocalDate.now().toString())){
+            this.completed = true;
+        }
     }
 
     /**
-     * increments logged attribute
+     * increments logged attribute and sets lastCompleted to today
      */
-    public void log(){ logged++; }
+    public void log(){
+        this.completed = true;
+        this.setLastCompleted(LocalDate.now().toString());
+        logged++;
+    }
 
     /**
      * Compares two goals by name to check if they are the same

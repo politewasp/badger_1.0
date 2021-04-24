@@ -86,7 +86,7 @@ public class GoalDate {
      */
     public void checkIn(Goal goal)
     {
-        goal.setCompleted(new GoalDate());
+        goal.setCompleted(true);
     }
 
     /**
